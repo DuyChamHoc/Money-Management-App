@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đăng ký"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="140dp"></TextView>
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="59dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="-40dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
+        style="?android:attr/borderlessButtonStyle"
+        tools:ignore="SpeakableTextPresentCheck"></Button>
+
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:padding="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_round"/>
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:padding="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_round"/>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"></CheckBox>
+    <TextView
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="-40dp"
+
+        android:text="Bạn đồng ý với Điều khoản dịch vụ và chính sách quyền riêng tư">
+
+    </TextView>
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_marginTop="30dp"
+        android:layout_width="300dp"
+        android:layout_marginLeft="50dp"
+        android:background="@drawable/edit_round"
+        android:text="Đăng ký"
+        android:layout_height="wrap_content"></Button>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hoặc"
+        android:layout_marginLeft="180dp"></TextView>
+
+
+    <Button
+        android:id="@+id/registerQn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:text="Bạn đã có tài khoản? Đăng nhập"
+        android:layout_marginLeft="60dp"
+        android:textColor="#808080"
+        style="?android:attr/borderlessButtonStyle"></Button>
+</LinearLayout>

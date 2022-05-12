@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00A86B"
+    android:orientation="vertical"
+    tools:context=".Expense">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:text="Thay đổi thu nhập"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="90dp"
+        android:textAlignment="center"
+        />
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="Số tiền ?"
+        android:textColor="#FCFCFC"
+        android:textSize="20dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="50dp"/>
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="150dp"
+        android:layout_height="65dp"
+        android:text="0$"
+        android:textStyle="bold"
+        android:textColor="#FCFCFC"
+        android:textSize="60dp"
+        android:layout_marginLeft="25dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/edit_round_layout"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="28dp"
+                android:layout_marginTop="-10dp"
+                android:layout_marginLeft="60dp"
+                android:textAlignment="center"
+                android:id="@+id/itemName"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_marginTop="20dp"
+                android:id="@+id/amount"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:hint="   Thu nhập"
+                android:inputType="number"
+                android:textSize="20dp"
+                android:background="@drawable/bo_editext"
+                />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDelete"
+            android:layout_width="140dp"
+            android:layout_height="52dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:text="Xóa"
+            android:backgroundTint="@color/button"
+            android:textSize="17dp"
+            app:cornerRadius="15dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUpdate"
+            android:layout_width="140dp"
+            android:layout_height="52dp"
+            android:layout_marginLeft="175dp"
+            android:layout_marginTop="-52dp"
+            android:layout_marginRight="10dp"
+            android:text="Cập nhật"
+            android:backgroundTint="@color/button"
+            android:textSize="17dp"
+            app:cornerRadius="15dp" />
+    </LinearLayout>
+</LinearLayout>

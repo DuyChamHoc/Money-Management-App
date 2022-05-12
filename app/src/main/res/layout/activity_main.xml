@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpaper"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/circle_indicator"
+        android:layout_width="49dp"
+        android:layout_height="46dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:layout_marginTop="-15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_v1"
+        android:textAlignment="center"
+        android:text="Được toàn quyền kiểm soát tiền của bạn"
+        android:layout_marginHorizontal="40dp"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:layout_marginTop="25dp"
+        android:id="@+id/text_v2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Trở thành người quản lý tiền của bạn và chi tiêu hợp lý"
+        android:layout_marginHorizontal="50dp"
+        android:textAlignment="center"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        android:textColor="#91919F"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogin"
+        android:layout_width="340dp"
+        android:layout_height="65dp"
+        app:cornerRadius="16dp"
+        android:backgroundTint="@color/button"
+        android:text="Đăng Nhập"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="7dp"
+
+        />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRegister"
+        android:layout_width="340dp"
+        android:layout_height="65dp"
+        app:cornerRadius="16dp"
+        android:backgroundTint="@color/button1"
+        android:textColor="@color/button"
+        android:text="Đăng Ký"
+        android:layout_marginBottom="16dp"
+        />
+</LinearLayout>

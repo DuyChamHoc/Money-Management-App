@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="30dp"
+        android:text="Đăng nhập"
+        android:textColor="@color/black"
+        android:textSize="20dp"></TextView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_back"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="59dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="-40dp"
+        android:backgroundTint="@color/white"
+        android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/email"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_round"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:padding="20dp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/password"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_round"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:padding="20dp" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/loginBtn"
+        android:layout_width="300dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/button"
+        android:text="Đăng nhập"
+        app:cornerRadius="20dp" />
+
+
+    <Button
+        android:id="@+id/btn_forgotpass"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="130dp"
+        android:backgroundTint="@color/white"
+        android:text="Quên mật khẩu"
+        android:textColor="@color/button"></Button>
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="130dp" />
+
+    <Button
+        android:id="@+id/LoginQn"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:backgroundTint="@color/white"
+        android:text="Bạn chưa có tài khoản? Đăng ký"
+        android:textColor="#808080">
+
+    </Button>
+</LinearLayout>
