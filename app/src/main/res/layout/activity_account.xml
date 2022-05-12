@@ -51,55 +51,135 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        >
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:textAlignment="center"
+            android:text="Thông tin cá nhân"
+            android:textStyle="bold"
+            android:textSize="17dp"
+            android:textColor="@color/black"
+            />
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="vertical">
+        <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Name"
+                android:layout_marginLeft="57dp"
+                android:text="Tên người dùng "
                 android:textColor="@color/black"
                 android:textSize="17dp" />
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/iconname"
+            android:layout_marginLeft="10dp"
+            />
 
-            <EditText
-                android:id="@+id/edtFullName"
-                android:layout_width="370dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/layout_edittext"
-                android:paddingLeft="15dp"
-                android:textColor="@color/black" />
-        </RelativeLayout>
-        <RelativeLayout
+         <com.google.android.material.textfield.TextInputEditText
+             android:id="@+id/edtFullName"
+             android:layout_width="330dp"
+             android:layout_height="40dp"
+             android:layout_marginLeft="57dp"
+             android:layout_marginTop="-22dp"
+             android:background="@drawable/layout_bg_setting"
+             android:paddingLeft="15dp"
+             android:textColor="@color/black" />
+     </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
             >
-
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Email"
+                android:layout_marginLeft="57dp"
+                android:text="Số điện thoại"
                 android:textColor="@color/black"
                 android:textSize="17dp" />
 
-            <TextView
-                android:id="@+id/tv_email"
-                android:layout_width="370dp"
-                android:layout_height="40dp"
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/iconphone"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/layout_edittext"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtFullName"
+                android:layout_width="330dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="57dp"
+                android:layout_marginTop="-22dp"
+                android:background="@drawable/layout_bg_setting"
                 android:paddingLeft="15dp"
-                android:paddingTop="5dp"
+                android:textColor="@color/black" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            >
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="57dp"
+                android:text="Ngày sinh "
                 android:textColor="@color/black"
-                android:textSize="18sp" />
-        </RelativeLayout>
+                android:textSize="17dp" />
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/iconbirthday"
+                android:layout_marginLeft="10dp"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtFullName"
+                android:layout_width="330dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="57dp"
+                android:layout_marginTop="-22dp"
+                android:background="@drawable/layout_bg_setting"
+                android:paddingLeft="15dp"
+                android:textColor="@color/black" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="57dp"
+                android:text="Email "
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/iconname"
+                android:layout_marginLeft="10dp"
+                />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtFullName"
+                android:layout_width="330dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="57dp"
+                android:layout_marginTop="-20dp"
+                android:background="@drawable/layout_bg_setting"
+                android:paddingLeft="15dp"
+                android:textColor="@color/black" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_marginLeft="180dp"
