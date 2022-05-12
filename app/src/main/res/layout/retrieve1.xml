@@ -15,12 +15,6 @@
         android:layout_height="70dp"
         android:background="@drawable/botron_item1"
         >
-
-        <LinearLayout
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:background="@drawable/botron_item">
-
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="50dp"
@@ -29,8 +23,6 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/house" />
-        </LinearLayout>
-
         <LinearLayout
             android:id="@+id/linerLayout"
             android:layout_width="match_parent"
