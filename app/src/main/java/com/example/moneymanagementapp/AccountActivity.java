@@ -80,7 +80,7 @@ public class AccountActivity extends AppCompatActivity {
         img_avatar = findViewById(R.id.img_avatar);
         img_camera = findViewById(R.id.img_camera);
         edtFullName = findViewById(R.id.edtFullName);
-        tv_email = findViewById(R.id.tv_email);
+        //tv_email = findViewById(R.id.tv_email);
 
 
         btn_update = findViewById(R.id.button_update);
