@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -48,7 +49,7 @@ import java.util.Map;
 
 public class BudgetActivity extends AppCompatActivity {
 
-    private TextView totalBudgetAmountTextView;
+    private TextView totalBudgetAmountTextView,This_month;
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
     private DatabaseReference budgetRef, personalRef;
@@ -71,6 +72,7 @@ public class BudgetActivity extends AppCompatActivity {
         loader = new ProgressDialog(this);
 
         totalBudgetAmountTextView = findViewById(R.id.totalBudgetAmountTextView);
+        This_month = findViewById(R.id.tv_this_month);
         recyclerView = findViewById(R.id.recyclerView);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -78,6 +80,24 @@ public class BudgetActivity extends AppCompatActivity {
         linearLayoutManager.setReverseLayout(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        ImageView icon_arrow_back = findViewById(R.id.arrow_back);
+        TextView title = findViewById(R.id.txv_title);
+        icon_arrow_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(BudgetActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }}
+        );
+        title.setText("Budget");
+
+        Calendar c = Calendar.getInstance();
+        String[]monthName={"January","February","March", "April", "May", "June", "July",
+                "August", "September", "October", "November",
+                "December"};
+        String month=monthName[c.get(Calendar.MONTH)];
+        This_month.setText(month);
 
         budgetRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -89,13 +109,13 @@ public class BudgetActivity extends AppCompatActivity {
 
                         totalamount += data.getAmount();
 
-                        String sttotal = String.valueOf("Tổng ngân sách: " + totalamount);
+                        String sttotal = String.valueOf("$ " + totalamount);
 
                         totalBudgetAmountTextView.setText(sttotal);
                     }
                 }
                 else {
-                    String sttotal = String.valueOf("Tổng ngân sách: " + 0);
+                    String sttotal = String.valueOf("$ " + 0);
                     totalBudgetAmountTextView.setText(sttotal);
                 }
             }

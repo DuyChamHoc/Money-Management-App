@@ -38,9 +38,11 @@ import org.joda.time.MutableDateTime;
 import org.joda.time.Weeks;
 
 import java.text.DateFormat;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +51,7 @@ public class TodaySpendingActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
-    private TextView totalAmountSpentOn;
+    private TextView totalAmountSpentOn,this_day;
     private ProgressDialog loader;
 
     private FirebaseAuth mAuth;
@@ -66,6 +68,7 @@ public class TodaySpendingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_today_spending);
 
         totalAmountSpentOn=findViewById(R.id.totalAmountSpentOn);
+        this_day=findViewById(R.id.tv_this_day);
         progressBar=findViewById(R.id.progressBar);
 
         ImageView icon_arrow_back = findViewById(R.id.arrow_back);
@@ -98,6 +101,13 @@ public class TodaySpendingActivity extends AppCompatActivity {
             }}
         );
         title.setText("Today's Spending");
+
+
+        Format f = new SimpleDateFormat("HH.mm.ss Z");
+        f = new SimpleDateFormat("EEEE");
+        String str = f.format(new Date());
+        this_day.setText(str);
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,17 +142,14 @@ public class TodaySpendingActivity extends AppCompatActivity {
                         Object total = map.get("amount");
                         int pTotal = Integer.parseInt(String.valueOf(total));
                         totalAmount += pTotal;
-
-                        totalAmountSpentOn.setText("Chi phí hôm nay: $" + totalAmount);
+                        totalAmountSpentOn.setText("$ " + totalAmount);
                     }
                 }
                 else {
                     totalAmount=0;
-                    totalAmountSpentOn.setText("Chi phí hôm nay: $" + totalAmount);
+                    totalAmountSpentOn.setText("$ " + totalAmount);
                 }
             }
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
