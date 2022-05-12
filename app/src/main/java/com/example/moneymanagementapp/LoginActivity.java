@@ -86,12 +86,11 @@ public class LoginActivity extends AppCompatActivity  {
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
-
-// Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(LoginActivity.this, gso);
         sign_in_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,6 +100,7 @@ public class LoginActivity extends AppCompatActivity  {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                signOut();
             }
         });
 
@@ -140,9 +140,6 @@ public class LoginActivity extends AppCompatActivity  {
                     progressDialog.setMessage("login in progress");
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.show();
-
-
-
                     mAuth.signInWithEmailAndPassword(emailString,passwordString).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -180,29 +177,44 @@ public class LoginActivity extends AppCompatActivity  {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account.getIdToken());
+            } catch (ApiException e) {
+            }
         }
     }
 
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-
-            // Signed in successfully, show authenticated UI.
-            updateUI(account);
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
-            updateUI(null);
-        }
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("Waiting for loading...");
+        progressDialog.show();
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                            progressDialog.hide();
+                        } else {
+                            updateUI(null);
+                        }
+                    }
+                });
     }
 
-    private void updateUI(GoogleSignInAccount account) {
 
+    private void updateUI(FirebaseUser currentUser) {
+        if(currentUser.isEmailVerified()){
+            Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+            startActivity(intent);
+        }
+        else {
+            return;
+        }
     }
 
 
@@ -223,18 +235,24 @@ public class LoginActivity extends AppCompatActivity  {
                 });
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        mAuth.addAuthStateListener(authStateListener);
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(authStateListener);
+    }
 
     @Override
     protected void onStop() {
         super.onStop();
         mAuth.removeAuthStateListener(authStateListener);
     }
-
-
-
+    private void signOut() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(LoginActivity.this,"Out",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 }

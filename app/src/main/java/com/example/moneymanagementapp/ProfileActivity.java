@@ -26,6 +26,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -40,7 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView tv_name,logoutBtn,tv_account,tv_changepass;
     private ImageView img_avatar;
     private BottomNavigationView bottomNavigationView;
-
+    GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,5 +137,17 @@ public class ProfileActivity extends AppCompatActivity {
         tv_name.setText(name);
         //tv_name.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);
+    }
+
+    @Override
+    protected void onStart() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        mGoogleApiClient.connect();
+        super.onStart();
     }
 }
