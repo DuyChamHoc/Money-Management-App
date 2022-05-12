@@ -155,7 +155,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            >
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -166,7 +168,7 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:background="@drawable/iconname"
+                android:background="@drawable/email_icon"
                 android:layout_marginLeft="10dp"
                 />
 
@@ -175,7 +177,7 @@
                 android:layout_width="330dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="57dp"
-                android:layout_marginTop="-20dp"
+                android:layout_marginTop="-22dp"
                 android:background="@drawable/layout_bg_setting"
                 android:paddingLeft="15dp"
                 android:textColor="@color/black" />
@@ -190,7 +192,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/button1"
-                android:text="Cancel"
+                android:text="Hủy"
                 android:textAllCaps="false"
                 android:textColor="@color/button"
                 app:cornerRadius="15dp" />
@@ -200,7 +202,7 @@
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/button"
                 android:layout_marginLeft="15dp"
-                android:text="Update"
+                android:text="Cập nhật"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 app:cornerRadius="15dp" />
