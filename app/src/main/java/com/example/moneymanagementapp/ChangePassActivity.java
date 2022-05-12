@@ -30,8 +30,12 @@ public class ChangePassActivity extends AppCompatActivity {
     private EditText edt_new_password, edt_old_password, edt_confirm_new_password;
     private Button btn_change_password;
     private ProgressDialog progressDialog;
-    private TextView tv_show;
+    private ImageView tv_show;
+    private ImageView tv_show1;
+    private ImageView tv_show2;
     private Boolean test = false;
+    private Boolean test1 = false;
+    private Boolean test2 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,8 @@ public class ChangePassActivity extends AppCompatActivity {
         setContentView(R.layout.activity_change_pass);
 
         tv_show = findViewById(R.id.tv_show);
-
+        tv_show1 = findViewById(R.id.tv_show1);
+        tv_show2 = findViewById(R.id.tv_show2);
         edt_new_password = findViewById(R.id.edt_new_password);
         edt_old_password = findViewById(R.id.edt_old_password);
         edt_confirm_new_password = findViewById(R.id.edt_confirm_new_password);
@@ -50,19 +55,41 @@ public class ChangePassActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (test) {
-                    edt_new_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    edt_confirm_new_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    edt_old_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-
-
-                    tv_show.setText("Show");
+                        edt_old_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        tv_show.setBackground(getDrawable(R.drawable.hidepass));
                     test = false;
                 } else {
-                    edt_new_password.setInputType(InputType.TYPE_CLASS_TEXT);
-                    edt_confirm_new_password.setInputType(InputType.TYPE_CLASS_TEXT);
                     edt_old_password.setInputType(InputType.TYPE_CLASS_TEXT);
-                    tv_show.setText("Hide");
+                    tv_show.setBackground(getDrawable(R.drawable.showpass));
                     test = true;
+                }
+            }
+        });
+        tv_show1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (test1) {
+                    edt_new_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    tv_show1.setBackground(getDrawable(R.drawable.hidepass));
+                    test1 = false;
+                } else {
+                    edt_new_password.setInputType(InputType.TYPE_CLASS_TEXT);
+                    tv_show1.setBackground(getDrawable(R.drawable.showpass));
+                    test1 = true;
+                }
+            }
+        });
+        tv_show2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (test2) {
+                    edt_confirm_new_password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    tv_show2.setBackground(getDrawable(R.drawable.hidepass));
+                    test2 = false;
+                } else {
+                    edt_confirm_new_password.setInputType(InputType.TYPE_CLASS_TEXT);
+                    tv_show2.setBackground(getDrawable(R.drawable.showpass));
+                    test2 = true;
                 }
             }
         });
