@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorBackground">#EBEBEB</color>
+    <color name="colorBackground">#F0EEEE</color>
     <color name="colorPrimary">#2BCC6F</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
@@ -20,4 +20,5 @@
     <color name="colorTrend">#96C93D</color>
     <color name="colorDriver">#D6D6D6</color>
     <color name="colorAcent">#D81B60</color>
+    <color name="colorxam">#F0ECEC</color>
 </resources>

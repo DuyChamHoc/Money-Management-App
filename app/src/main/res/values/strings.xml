@@ -13,10 +13,7 @@
         <item>Personal</item>
         <item>Other</item>
     </string-array>
-    <string-array name="month">
-        <item>Tháng 1</item>
-        <item>Tháng 2</item>
-    </string-array>
+
     <string-array name="days">
         <item>1</item>
         <item>2</item>

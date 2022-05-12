@@ -59,11 +59,29 @@
         android:layout_width="300dp"
         android:layout_height="65dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:backgroundTint="@color/button"
         android:text="Đăng nhập"
         app:cornerRadius="20dp" />
 
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="35dp"
+        android:text="Hoặc"
+        android:textAlignment="center"
+        android:layout_marginLeft="172dp"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        />
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:textAlignment="center"
+        />
 
     <Button
         android:id="@+id/btn_forgotpass"
@@ -73,14 +91,9 @@
         android:layout_marginLeft="130dp"
         android:backgroundTint="@color/white"
         android:text="Quên mật khẩu"
-        android:textColor="@color/button"></Button>
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="130dp" />
-
+        android:textColor="@color/button"
+        android:layout_marginTop="10dp"
+        />
     <Button
         android:id="@+id/LoginQn"
         style="?android:attr/borderlessButtonStyle"

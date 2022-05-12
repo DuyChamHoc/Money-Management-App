@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#FFFAF0"
+    android:background="@color/colorBackground"
     android:id="@+id/bigestlayout"
     >
 
@@ -240,7 +240,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:background="#FFFCF6" />
+            android:background="@color/white" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_ngansach"
