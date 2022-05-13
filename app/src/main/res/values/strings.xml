@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Money Management</string>
+
+    <string name="facebook_app_id">565104708298189</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">74e5c94fa747cfd9f15239d8327f17cc</string>
+
+
     <string-array name="items">
         <item>Chọn danh mục:</item>
         <item>Transport</item>

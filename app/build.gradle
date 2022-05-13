@@ -48,5 +48,13 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:8.0.1'
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
     implementation 'com.google.android.gms:play-services-auth:20.2.0'
+    implementation 'com.facebook.android:facebook-applinks:latest.release'
+    implementation 'com.facebook.android:facebook-common:latest.release'
+    implementation 'com.facebook.android:facebook-core:latest.release'
+    implementation 'com.facebook.android:facebook-gamingservices:latest.release'
+    implementation 'com.facebook.android:facebook-login:latest.release'
+    implementation 'com.facebook.android:facebook-messenger:latest.release'
+    implementation 'com.facebook.android:facebook-share:latest.release'
+    implementation 'com.facebook.android:facebook-android-sdk:latest.release'
 
 }
