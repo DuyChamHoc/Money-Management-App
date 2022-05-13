@@ -60,6 +60,7 @@ public class BudgetActivity extends AppCompatActivity {
     private String post_key = "";
     private String item = "";
     private int amount = 0;
+    private String time="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -599,7 +600,8 @@ public class BudgetActivity extends AppCompatActivity {
                         post_key = getRef(holder.getAdapterPosition()).getKey();
                         item = model.getItem();
                         amount = model.getAmount();
-                        updateData();
+                        time=model.getDate();
+                        updateData(model);
                     }
                 });
 
@@ -648,7 +650,7 @@ public class BudgetActivity extends AppCompatActivity {
         }
     }
 
-    private void updateData() {
+    private void updateData(@NonNull Data model) {
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
         View mView = inflater.inflate(R.layout.update_layout, null);
@@ -657,15 +659,59 @@ public class BudgetActivity extends AppCompatActivity {
 
         final TextView mItem = mView.findViewById(R.id.itemName);
         final EditText mAmount = mView.findViewById(R.id.amount);
+        final TextView money = mView.findViewById(R.id.mMoney);
+        final TextView mDate = mView.findViewById(R.id.mDate);
+        final ImageView mImage = mView.findViewById(R.id.mImage);
+        switch (model.getItem()) {
+            case "Transport":
+                mImage.setImageResource(R.drawable.transport);
+                break;
+            case "Food":
+                mImage.setImageResource(R.drawable.food);
+                break;
+            case "House":
+                mImage.setImageResource(R.drawable.house);
+                break;
+            case "Entertainment":
+                mImage.setImageResource(R.drawable.entertainment);
+                break;
+            case "Education":
+                mImage.setImageResource(R.drawable.education);
+                break;
+            case "Charity":
+                mImage.setImageResource(R.drawable.charity);
+                break;
+            case "Apparel":
+                mImage.setImageResource(R.drawable.apparel);
+                break;
+            case "Health":
+                mImage.setImageResource(R.drawable.health);
+                break;
+            case "Personal":
+                mImage.setImageResource(R.drawable.personal);
+                break;
+            case "Other":
+                mImage.setImageResource(R.drawable.other);
+                break;
+        }
 
         mItem.setText(item);
+        money.setText(amount+"$");
+        mDate.setText("On "+time);
 
         mAmount.setText(String.valueOf(amount));
         mAmount.setSelection(String.valueOf(amount).length());
 
         Button delBut = mView.findViewById(R.id.btnDelete);
         Button btnUpdate = mView.findViewById(R.id.btnUpdate);
+        ImageView btn_close = mView.findViewById(R.id.btn_close);
 
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

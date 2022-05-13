@@ -210,7 +210,7 @@ public class HomeActivity extends AppCompatActivity {
         tv_homnay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,DetailActivity.class);
+                Intent intent = new Intent(HomeActivity.this,TodaySpendingActivity.class);
                 startActivity(intent);
             }
         });
