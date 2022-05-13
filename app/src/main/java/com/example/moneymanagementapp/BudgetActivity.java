@@ -490,6 +490,14 @@ public class BudgetActivity extends AppCompatActivity {
         final EditText amount = myView.findViewById(R.id.amount);
         final Button cancel = myView.findViewById(R.id.cancel);
         final Button save = myView.findViewById(R.id.save);
+        final ImageView btn_close = myView.findViewById(R.id.btn_close);
+
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
