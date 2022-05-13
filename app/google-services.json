@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "886918848372-ulg1gjuenb6kad5va1irjntbrm26246r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.moneymanagementapp",
+            "certificate_hash": "21efd513138bb1666511af5a070d1d0d6f10ef37"
+          }
+        },
+        {
           "client_id": "886918848372-p8cg9lp9piq4v4amuv522upfus6m34ak.apps.googleusercontent.com",
           "client_type": 3
         }

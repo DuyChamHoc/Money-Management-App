@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,6 +9,10 @@
     android:id="@+id/bigestlayout"
     >
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="350dp"
@@ -43,13 +47,13 @@
             android:layout_marginLeft="340dp"
             android:background="@drawable/notifiaction"
             />
-<!--        <com.nex3z.notificationbadge.NotificationBadge-->
-<!--            android:layout_width="30dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:layout_marginTop="-45dp"-->
-<!--            app:nbMaxTextLength="2"-->
-<!--            android:layout_marginLeft="360dp">-->
-<!--        </com.nex3z.notificationbadge.NotificationBadge>-->
+        <!--        <com.nex3z.notificationbadge.NotificationBadge-->
+        <!--            android:layout_width="30dp"-->
+        <!--            android:layout_height="30dp"-->
+        <!--            android:layout_marginTop="-45dp"-->
+        <!--            app:nbMaxTextLength="2"-->
+        <!--            android:layout_marginLeft="360dp">-->
+        <!--        </com.nex3z.notificationbadge.NotificationBadge>-->
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -233,13 +237,12 @@
         />
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="285dp"
         >
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="285dp"
             android:background="@color/white" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -248,9 +251,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="180dp"
+            android:layout_marginTop="210dp"
             android:layout_marginEnd="40dp"
-            android:layout_marginBottom="13dp"
+            android:layout_marginBottom="20dp"
             android:layout_toStartOf="@+id/btn_chiphi"
             android:clickable="true"
             android:focusable="true"
@@ -266,9 +269,9 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="182dp"
+            android:layout_marginTop="210dp"
             android:layout_marginEnd="120dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="20dp"
             android:clickable="true"
             android:focusable="true"
             android:tint="@android:color/white"
@@ -276,10 +279,13 @@
             android:src="@drawable/ic_arrow_upward_24"
             app:maxImageSize="30dp" />
     </RelativeLayout>
+</LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp">
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        >
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
@@ -305,4 +311,4 @@
             android:tint="@android:color/white"
             app:layout_anchor="@id/bottomAppBar"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</LinearLayout>
+</RelativeLayout>

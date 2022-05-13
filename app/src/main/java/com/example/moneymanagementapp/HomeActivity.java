@@ -54,7 +54,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private ImageView image_hoso;
 
-    private LinearLayout bigestlayout,linearNgansach;
+    private LinearLayout linearNgansach;
+    private RelativeLayout bigestlayout;
 
     private TextView tv_homnay,tv_thunhap,tv_week,tv_month,tv_chiphi,moneytoday,moneyweek,moneymonth,tv_sodu;
 
