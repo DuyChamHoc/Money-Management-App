@@ -160,7 +160,7 @@ public class TodaySpendingActivity extends AppCompatActivity {
     private void addItemSpentOn() {
         AlertDialog.Builder myDialog=new AlertDialog.Builder(this);
         LayoutInflater inflater=LayoutInflater.from(this);
-        View myView=inflater.inflate(R.layout.input_layout,null);
+        View myView=inflater.inflate(R.layout.input_layout1,null);
         myDialog.setView(myView);
 
         final AlertDialog dialog=myDialog.create();
@@ -171,9 +171,16 @@ public class TodaySpendingActivity extends AppCompatActivity {
         final EditText note=myView.findViewById(R.id.note);
         final Button cancel =myView.findViewById(R.id.cancel);
         final Button save =myView.findViewById(R.id.save);
+        final ImageView btn_close =myView.findViewById(R.id.btn_close);
 
         note.setVisibility(View.VISIBLE);
 
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

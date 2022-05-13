@@ -100,32 +100,77 @@ public class TodayItemAdapter extends RecyclerView.Adapter<TodayItemAdapter.View
                 item=data.getItem();
                 amount=data.getAmount();
                 note=data.getNotes();
-                updateData();
+                updateData(data);
             }
         });
     }
 
-    private void updateData() {
+    private void updateData(Data data) {
         AlertDialog.Builder myDialog=new AlertDialog.Builder(mContext);
         LayoutInflater inflater=LayoutInflater.from(mContext);
         View mView=inflater.inflate(R.layout.update_layout1,null);
         myDialog.setView(mView);
         final AlertDialog dialog=myDialog.create();
-
         final TextView mItem=mView.findViewById(R.id.itemName);
         final EditText mAmount =mView.findViewById(R.id.amount);
         final EditText mNotes=mView.findViewById(R.id.note);
+        final ImageView btn_close=mView.findViewById(R.id.btn_close);
+        final TextView mMoney=mView.findViewById(R.id.mMoney);
+        final ImageView mImage=mView.findViewById(R.id.mImage);
+        final TextView mDate=mView.findViewById(R.id.mDate);
+
+        switch (data.getItem()) {
+            case "Transport":
+                mImage.setImageResource(R.drawable.transport);
+                break;
+            case "Food":
+                mImage.setImageResource(R.drawable.food);
+                break;
+            case "House":
+                mImage.setImageResource(R.drawable.house);
+                break;
+            case "Entertainment":
+                mImage.setImageResource(R.drawable.entertainment);
+                break;
+            case "Education":
+                mImage.setImageResource(R.drawable.education);
+                break;
+            case "Charity":
+                mImage.setImageResource(R.drawable.charity);
+                break;
+            case "Apparel":
+                mImage.setImageResource(R.drawable.apparel);
+                break;
+            case "Health":
+                mImage.setImageResource(R.drawable.health);
+                break;
+            case "Personal":
+                mImage.setImageResource(R.drawable.personal);
+                break;
+            case "Other":
+                mImage.setImageResource(R.drawable.other);
+                break;
+        }
 
         mItem.setText(item);
+        mDate.setText("On "+data.getDate());
 
         mAmount.setText(String.valueOf(amount));
         mAmount.setSelection(String.valueOf(amount).length());
+        mMoney.setText(amount+ "$");
 
         mNotes.setText(note);
         mNotes.setSelection(note.length());
 
         Button delBut=mView.findViewById(R.id.btnDelete);
         Button btnUpdate=mView.findViewById(R.id.btnUpdate);
+
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
