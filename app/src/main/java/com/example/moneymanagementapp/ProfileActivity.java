@@ -26,10 +26,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,21 +43,22 @@ import java.util.BitSet;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView tv_name,logoutBtn,tv_account,tv_changepass;
+    private TextView tv_name, logoutBtn, tv_account, tv_changepass;
     private ImageView img_avatar;
     private BottomNavigationView bottomNavigationView;
     GoogleApiClient mGoogleApiClient;
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        logoutBtn=findViewById(R.id.logoutBtn);
-        tv_name=findViewById(R.id.tv_name);
-        img_avatar=findViewById(R.id.img_avatar);
-        tv_account=findViewById(R.id.tv_account);
-        tv_changepass=findViewById(R.id.tv_changepass);
+        logoutBtn = findViewById(R.id.logoutBtn);
+        tv_name = findViewById(R.id.tv_name);
+        img_avatar = findViewById(R.id.img_avatar);
+        tv_account = findViewById(R.id.tv_account);
+        tv_changepass = findViewById(R.id.tv_changepass);
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -61,25 +66,23 @@ public class ProfileActivity extends AppCompatActivity {
         bottomNavigationView.setBackground(null);
 
 
-
-
-        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.action_history:
-                        startActivity(new Intent(ProfileActivity.this,HistoryActivity.class));
-                        overridePendingTransition(0,0);
+                        startActivity(new Intent(ProfileActivity.this, HistoryActivity.class));
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.action_home:
-                        startActivity(new Intent(ProfileActivity.this,HomeActivity.class));
-                        overridePendingTransition(0,0);
+                        startActivity(new Intent(ProfileActivity.this, HomeActivity.class));
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.action_profile:
                         return true;
                     case R.id.action_chart:
-                        startActivity(new Intent(ProfileActivity.this,ChooseAnalyticActivity.class));
-                        overridePendingTransition(0,0);
+                        startActivity(new Intent(ProfileActivity.this, ChooseAnalyticActivity.class));
+                        overridePendingTransition(0, 0);
                         return true;
                 }
                 return false;
@@ -89,14 +92,14 @@ public class ProfileActivity extends AppCompatActivity {
         tv_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this,AccountActivity.class);
+                Intent intent = new Intent(ProfileActivity.this, AccountActivity.class);
                 startActivity(intent);
             }
         });
         tv_changepass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this,ChangePassActivity.class);
+                Intent intent = new Intent(ProfileActivity.this, ChangePassActivity.class);
                 startActivity(intent);
             }
         });
@@ -112,12 +115,12 @@ public class ProfileActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 FirebaseAuth.getInstance().signOut();
-                                Intent intent=new Intent(ProfileActivity.this,LoginActivity.class);
+                                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
                         })
-                        .setNegativeButton("No",null)
+                        .setNegativeButton("No", null)
                         .show();
             }
         });
@@ -125,10 +128,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-
-    private void showUserInformation(){
-        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-        if(user==null){
+    private void showUserInformation() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
             return;
         }
         String name = user.getDisplayName();
@@ -138,16 +140,5 @@ public class ProfileActivity extends AppCompatActivity {
         //tv_name.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);
     }
-
-    @Override
-    protected void onStart() {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-        mGoogleApiClient.connect();
-        super.onStart();
-    }
 }
+
