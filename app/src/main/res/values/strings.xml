@@ -7,7 +7,6 @@
 
 
     <string-array name="items">
-        <item>Chọn danh mục:</item>
         <item>Transport</item>
         <item>Food</item>
         <item>House</item>

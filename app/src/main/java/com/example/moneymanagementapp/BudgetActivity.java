@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -486,10 +487,51 @@ public class BudgetActivity extends AppCompatActivity {
         final AlertDialog dialog = myDialog.create();
         dialog.setCancelable(false);
 
-        final Spinner itemSpinner = myView.findViewById(R.id.itemsspinner);
+        final ImageView ImgSpinner =myView.findViewById(R.id.mImage);
+        final String Adapter_name[]={"Transport","Food","House","Entertainment","Education","Charity","Apparel","Health","Personal","Other"};
+        final Spinner itemSpinner =myView.findViewById(R.id.itemsspinner);
+        itemSpinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,Adapter_name));
+        itemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(itemSpinner.getSelectedItem().toString().equals("Transport")){
+                    ImgSpinner.setImageResource(R.drawable.transport);
+                }else if(itemSpinner.getSelectedItem().toString().equals("Food")){
+                    ImgSpinner.setImageResource(R.drawable.food);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("House")){
+                    ImgSpinner.setImageResource(R.drawable.house);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Entertainment")){
+                    ImgSpinner.setImageResource(R.drawable.entertainment);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Education")){
+                    ImgSpinner.setImageResource(R.drawable.education);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Charity")){
+                    ImgSpinner.setImageResource(R.drawable.charity);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Apparel")){
+                    ImgSpinner.setImageResource(R.drawable.apparel);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Health")){
+                    ImgSpinner.setImageResource(R.drawable.health);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Personal")){
+                    ImgSpinner.setImageResource(R.drawable.personal);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Other")){
+                    ImgSpinner.setImageResource(R.drawable.other);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         final EditText amount = myView.findViewById(R.id.amount);
-        final Button cancel = myView.findViewById(R.id.cancel);
-        final Button save = myView.findViewById(R.id.save);
+        final ImageView save = myView.findViewById(R.id.save);
         final ImageView btn_close = myView.findViewById(R.id.btn_close);
 
         btn_close.setOnClickListener(new View.OnClickListener() {
@@ -544,12 +586,6 @@ public class BudgetActivity extends AppCompatActivity {
                         }
                     });
                 }
-                dialog.dismiss();
-            }
-        });
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 dialog.dismiss();
             }
         });
@@ -667,7 +703,6 @@ public class BudgetActivity extends AppCompatActivity {
 
         final TextView mItem = mView.findViewById(R.id.itemName);
         final EditText mAmount = mView.findViewById(R.id.amount);
-        final TextView money = mView.findViewById(R.id.mMoney);
         final TextView mDate = mView.findViewById(R.id.mDate);
         final ImageView mImage = mView.findViewById(R.id.mImage);
         switch (model.getItem()) {
@@ -704,14 +739,13 @@ public class BudgetActivity extends AppCompatActivity {
         }
 
         mItem.setText(item);
-        money.setText(amount+"$");
-        mDate.setText("On "+time);
+        mDate.setText(time);
 
         mAmount.setText(String.valueOf(amount));
         mAmount.setSelection(String.valueOf(amount).length());
 
-        Button delBut = mView.findViewById(R.id.btnDelete);
-        Button btnUpdate = mView.findViewById(R.id.btnUpdate);
+        ImageView delBut = mView.findViewById(R.id.btnDelete);
+        ImageView btnUpdate = mView.findViewById(R.id.btnUpdate);
         ImageView btn_close = mView.findViewById(R.id.btn_close);
 
         btn_close.setOnClickListener(new View.OnClickListener() {

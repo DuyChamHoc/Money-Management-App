@@ -323,7 +323,6 @@ public class HomeActivity extends AppCompatActivity {
                     totalAmountBudgetB=0;
                 }else {
                     personalRef.child("budget").setValue(0);
-                    Toast.makeText(HomeActivity.this,"Please Set a BUDGET",Toast.LENGTH_LONG).show();
                 }
             }
 

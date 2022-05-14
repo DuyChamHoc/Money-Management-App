@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -166,14 +168,54 @@ public class TodaySpendingActivity extends AppCompatActivity {
         final AlertDialog dialog=myDialog.create();
         dialog.setCancelable(false);
 
+        final ImageView ImgSpinner =myView.findViewById(R.id.mImage);
+        final String Adapter_name[]={"Transport","Food","House","Entertainment","Education","Charity","Apparel","Health","Personal","Other"};
         final Spinner itemSpinner =myView.findViewById(R.id.itemsspinner);
+        itemSpinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,Adapter_name));
+        itemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(itemSpinner.getSelectedItem().toString().equals("Transport")){
+                    ImgSpinner.setImageResource(R.drawable.transport);
+                }else if(itemSpinner.getSelectedItem().toString().equals("Food")){
+                    ImgSpinner.setImageResource(R.drawable.food);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("House")){
+                    ImgSpinner.setImageResource(R.drawable.house);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Entertainment")){
+                    ImgSpinner.setImageResource(R.drawable.entertainment);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Education")){
+                    ImgSpinner.setImageResource(R.drawable.education);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Charity")){
+                    ImgSpinner.setImageResource(R.drawable.charity);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Apparel")){
+                    ImgSpinner.setImageResource(R.drawable.apparel);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Health")){
+                    ImgSpinner.setImageResource(R.drawable.health);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Personal")){
+                    ImgSpinner.setImageResource(R.drawable.personal);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Other")){
+                    ImgSpinner.setImageResource(R.drawable.other);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         final EditText amount =myView.findViewById(R.id.amount);
         final EditText note=myView.findViewById(R.id.note);
-        final Button cancel =myView.findViewById(R.id.cancel);
-        final Button save =myView.findViewById(R.id.save);
+        final ImageView save =myView.findViewById(R.id.save);
         final ImageView btn_close =myView.findViewById(R.id.btn_close);
-
-        note.setVisibility(View.VISIBLE);
 
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,9 +235,6 @@ public class TodaySpendingActivity extends AppCompatActivity {
                     amount.setError("Amount is required");
                     return;
                 }
-
-                if(Item.equals("Select item"))
-                    Toast.makeText(TodaySpendingActivity.this, "Select a valid item", Toast.LENGTH_SHORT).show();
                 if(TextUtils.isEmpty(notes))
                 {
                     note.setError("Note is required");
@@ -217,8 +256,6 @@ public class TodaySpendingActivity extends AppCompatActivity {
                     DateTime now = new DateTime();
                     Weeks weeks=Weeks.weeksBetween(epoch,now);
                     Months months=Months.monthsBetween(epoch,now);
-
-
                     String itemNday=Item+date;
                     String itemNweek=Item+weeks.getWeeks();
                     String itemNmonth=Item+months.getMonths();
@@ -238,12 +275,6 @@ public class TodaySpendingActivity extends AppCompatActivity {
                         }
                     });
                 }
-                dialog.dismiss();
-            }
-        });
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 dialog.dismiss();
             }
         });
