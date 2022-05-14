@@ -115,7 +115,6 @@ public class TodayItemAdapter extends RecyclerView.Adapter<TodayItemAdapter.View
         final EditText mAmount =mView.findViewById(R.id.amount);
         final EditText mNotes=mView.findViewById(R.id.note);
         final ImageView btn_close=mView.findViewById(R.id.btn_close);
-        final TextView mMoney=mView.findViewById(R.id.mMoney);
         final ImageView mImage=mView.findViewById(R.id.mImage);
         final TextView mDate=mView.findViewById(R.id.mDate);
 
@@ -153,17 +152,16 @@ public class TodayItemAdapter extends RecyclerView.Adapter<TodayItemAdapter.View
         }
 
         mItem.setText(item);
-        mDate.setText("On "+data.getDate());
+        mDate.setText(" "+data.getDate());
 
         mAmount.setText(String.valueOf(amount));
         mAmount.setSelection(String.valueOf(amount).length());
-        mMoney.setText(amount+ "$");
 
         mNotes.setText(note);
         mNotes.setSelection(note.length());
 
-        Button delBut=mView.findViewById(R.id.btnDelete);
-        Button btnUpdate=mView.findViewById(R.id.btnUpdate);
+        ImageView delBut=mView.findViewById(R.id.btnDelete);
+        ImageView btnUpdate=mView.findViewById(R.id.btnUpdate);
 
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override

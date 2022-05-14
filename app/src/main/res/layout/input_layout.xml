@@ -4,119 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00A86B"
     android:orientation="vertical"
     tools:context=".Expense">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginLeft="110dp"
-            android:layout_marginTop="5dp"
-            android:text="Thu nhập"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="28dp"
-            android:textStyle="bold" />
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/btn_close"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_close" />
-    </LinearLayout>
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:text="Số tiền ?"
-        android:textColor="#FCFCFC"
-        android:textSize="20dp"
-        android:layout_marginLeft="22dp"
-        android:layout_marginTop="50dp"/>
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="wrap_content"
-        android:layout_height="65dp"
-        android:id="@+id/mMoney"
-        android:text="0$"
-        android:textStyle="bold"
-        android:textColor="#FCFCFC"
-        android:textSize="60dp"
-        android:layout_marginLeft="25dp" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="95dp"
+            android:textSize="19dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="Add Transaction" />
+        <ImageView
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/ic_save" />
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/edit_round_layout"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <ImageView
+            android:id="@+id/mImage"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical">
-
-            <Spinner
-                android:scrollbarSize="100dp"
-                android:id="@+id/itemsspinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#fff"
-                android:entries="@array/items"
-                android:layout_weight="1"
-                android:gravity="center" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_marginTop="15dp"
-                android:id="@+id/amount"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:hint="   Thêm chi phí"
-                android:inputType="number"
-                android:textSize="20dp"
-                android:background="@drawable/bo_editext"
-                />
-
-            <EditText
-                android:id="@+id/note"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Note..."
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:visibility="gone" />
-        </LinearLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/cancel"
-            android:layout_width="140dp"
-            android:layout_height="52dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp"
-            android:text="Hủy"
-            android:backgroundTint="@color/button"
-            android:textSize="17dp"
-            app:cornerRadius="15dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/save"
-            android:layout_width="140dp"
-            android:layout_height="52dp"
-            android:layout_marginLeft="175dp"
-            android:layout_marginTop="-52dp"
-            android:layout_marginRight="10dp"
-            android:text="Lưu"
-            android:backgroundTint="@color/button"
-            android:textSize="17dp"
-            app:cornerRadius="15dp" />
+            android:src="@drawable/transport"
+            android:layout_marginLeft="15dp"
+            />
+        <Spinner
+            android:scrollbarSize="100dp"
+            android:id="@+id/itemsspinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center" />
     </LinearLayout>
-
-
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="$ 0"
+        android:textSize="30sp"
+        android:layout_marginLeft="83dp"
+        android:textColor="@color/blue"
+        android:inputType="numberDecimal"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
 </LinearLayout>
