@@ -39,7 +39,7 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
     private int totalAmount = 0;
     private String Date="";
     private RecyclerView recyclerView;
-    private TodayItemAdapter todayItemsAdapter;
+    private ItemAdapter ItemsAdapter;
     private List<Data> myDataList;
 
     private FirebaseAuth mAuth;
@@ -98,8 +98,8 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
         recyclerView.setLayoutManager(layoutManager);
 
         myDataList = new ArrayList<>();
-        todayItemsAdapter = new TodayItemAdapter(HistoryActivity.this, myDataList);
-        recyclerView.setAdapter(todayItemsAdapter);
+        ItemsAdapter = new ItemAdapter(HistoryActivity.this, myDataList);
+        recyclerView.setAdapter(ItemsAdapter);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,7 +164,7 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
                     beforeSearchLayout.setVisibility(View.GONE);
                     Toast.makeText(HistoryActivity.this, "Please choose another day", Toast.LENGTH_SHORT).show();
                 }
-                todayItemsAdapter.notifyDataSetChanged();
+                ItemsAdapter.notifyDataSetChanged();
                 recyclerView.setVisibility(View.VISIBLE);
                 for (DataSnapshot ds : datasnapshot.getChildren()) {
                     Map<String, Object> map = (Map<String, Object>) ds.getValue();

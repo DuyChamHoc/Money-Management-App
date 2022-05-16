@@ -162,7 +162,7 @@ public class TodaySpendingActivity extends AppCompatActivity {
     private void addItemSpentOn() {
         AlertDialog.Builder myDialog=new AlertDialog.Builder(this);
         LayoutInflater inflater=LayoutInflater.from(this);
-        View myView=inflater.inflate(R.layout.input_layout1,null);
+        View myView=inflater.inflate(R.layout.input_layout,null);
         myDialog.setView(myView);
 
         final AlertDialog dialog=myDialog.create();
