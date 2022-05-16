@@ -336,7 +336,6 @@ public class LoginActivity extends AppCompatActivity  {
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(LoginActivity.this,"Out",Toast.LENGTH_SHORT).show();
                     }
                 });
     }
