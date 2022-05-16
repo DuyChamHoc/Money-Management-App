@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
 
     private BottomNavigationView bottomNavigationView;
     private int totalAmount = 0;
+    private String Date="";
     private RecyclerView recyclerView;
     private TodayItemAdapter todayItemsAdapter;
     private List<Data> myDataList;
@@ -45,9 +47,10 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
     private DatabaseReference expensesRef, personalRef;
 
     private Button search;
-    private TextView historyTotalAmountSpent;
+    private TextView historyTotalAmountSpent,dateSearch;
 
     private LinearLayout historyLayout;
+    private RelativeLayout beforeSearchLayout,noResultLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +86,7 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
 
         search = findViewById(R.id.search);
         historyTotalAmountSpent = findViewById(R.id.historyTotalAmountSpent);
+        dateSearch = findViewById(R.id.date);
 
         mAuth = FirebaseAuth.getInstance();
         onlineUserId = mAuth.getCurrentUser().getUid();
@@ -103,6 +107,8 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
             }
         });
         historyLayout = findViewById(R.id.historyList);
+        beforeSearchLayout = findViewById(R.id.before_search_results);
+        noResultLayout = findViewById(R.id.no_results_found);
     }
 
     private void showDatePickerDialog() {
@@ -115,6 +121,7 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
         );
         datePickerDialog.show();
         historyTotalAmountSpent.setText("");
+        dateSearch.setText("");
         totalAmount=0;
     }
 
@@ -139,7 +146,7 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
                 }
             }
         }
-        Toast.makeText(this, date, Toast.LENGTH_SHORT).show();
+        Date=date;
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
         Query query = reference.orderByChild("date").equalTo(date);
@@ -151,10 +158,14 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
                     Data data = snapshot.getValue(Data.class);
                     myDataList.add(data);
                 }
+                if(myDataList.size()==0){
+                    noResultLayout.setVisibility(View.VISIBLE);
+                    historyLayout.setVisibility(View.GONE);
+                    beforeSearchLayout.setVisibility(View.GONE);
+                    Toast.makeText(HistoryActivity.this, "Please choose another day", Toast.LENGTH_SHORT).show();
+                }
                 todayItemsAdapter.notifyDataSetChanged();
                 recyclerView.setVisibility(View.VISIBLE);
-
-
                 for (DataSnapshot ds : datasnapshot.getChildren()) {
                     Map<String, Object> map = (Map<String, Object>) ds.getValue();
                     Object total = map.get("amount");
@@ -162,7 +173,14 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
                     totalAmount+=pTotal;
                     if(totalAmount>0){
                         historyTotalAmountSpent.setVisibility(View.VISIBLE);
-                        historyTotalAmountSpent.setText("This day you spent: "+totalAmount+" $");
+                        dateSearch.setVisibility(View.VISIBLE);
+
+                        historyLayout.setVisibility(View.VISIBLE);
+                        noResultLayout.setVisibility(View.GONE);
+                        beforeSearchLayout.setVisibility(View.GONE);
+
+                        historyTotalAmountSpent.setText("Total spent : "+totalAmount+" $");
+                        dateSearch.setText("On : "+Date);
                     }
                 }
             }
