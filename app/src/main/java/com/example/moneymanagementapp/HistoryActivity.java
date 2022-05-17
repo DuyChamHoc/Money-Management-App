@@ -179,8 +179,8 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
                         noResultLayout.setVisibility(View.GONE);
                         beforeSearchLayout.setVisibility(View.GONE);
 
-                        historyTotalAmountSpent.setText("Total spent : "+totalAmount+" $");
-                        dateSearch.setText("On : "+Date);
+                        historyTotalAmountSpent.setText(totalAmount+"$");
+                        dateSearch.setText(" "+Date);
                     }
                 }
             }

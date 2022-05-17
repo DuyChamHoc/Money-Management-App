@@ -146,7 +146,6 @@ public class WeeklyAnalyticActivity extends AppCompatActivity {
                 startActivity(intent);
             }}
         );
-        title.setText("Weekly Analytics");
     }
     private void getTotalDaySpending() {
         MutableDateTime epoch=new MutableDateTime();
@@ -168,7 +167,7 @@ public class WeeklyAnalyticActivity extends AppCompatActivity {
                         int pTotal=Integer.parseInt(String.valueOf(total));
                         totalAmount +=pTotal;
                     }
-                    totalBudgetAmountTextView.setText("Total: "+totalAmount+"$");
+                    totalBudgetAmountTextView.setText(totalAmount+"$");
                 }
                 else {
                     anyChartView.setVisibility(View.GONE);

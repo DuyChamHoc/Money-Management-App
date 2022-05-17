@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/text_v1"
         android:textAlignment="center"
-        android:text="Được toàn quyền kiểm soát tiền của bạn"
+        android:text="@string/title"
         android:layout_marginHorizontal="40dp"
         android:textSize="35dp"
         android:textStyle="bold"
@@ -39,8 +39,8 @@
         android:id="@+id/text_v2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Trở thành người quản lý tiền của bạn và chi tiêu hợp lý"
         android:layout_marginHorizontal="50dp"
+        android:text="@string/title1"
         android:textAlignment="center"
         android:textSize="17dp"
         android:textStyle="bold"
@@ -53,7 +53,7 @@
         android:layout_height="65dp"
         app:cornerRadius="16dp"
         android:backgroundTint="@color/button"
-        android:text="Đăng Nhập"
+        android:text="@string/login"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="7dp"
 
@@ -65,7 +65,7 @@
         app:cornerRadius="16dp"
         android:backgroundTint="@color/button1"
         android:textColor="@color/button"
-        android:text="Đăng Ký"
+        android:text="@string/register"
         android:layout_marginBottom="16dp"
         />
 </LinearLayout>

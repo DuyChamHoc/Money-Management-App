@@ -299,23 +299,26 @@ public class LoginActivity extends AppCompatActivity  {
         }
     }
 
-     
-
     private void ocClickForgotPassword() {
-        progressDialog.show();
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        String emailAddress = email.getText().toString().trim();
-
-        auth.sendPasswordResetEmail(emailAddress)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        progressDialog.dismiss();
-                        if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Email sent.", Toast.LENGTH_SHORT).show();
+        try {
+            progressDialog.show();
+            FirebaseAuth auth = FirebaseAuth.getInstance();
+            String emailAddress = email.getText().toString().trim();
+            auth.sendPasswordResetEmail(emailAddress)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            progressDialog.dismiss();
+                            if (task.isSuccessful()) {
+                                Toast.makeText(LoginActivity.this, "Email sent.", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
+        catch (Exception e){
+            Toast.makeText(LoginActivity.this, "Error: You are logging in with google account", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override

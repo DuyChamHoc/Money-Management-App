@@ -76,7 +76,6 @@ public class MonthSpendingActivity extends AppCompatActivity {
                 startActivity(intent);
             }}
         );
-        title.setText("Month's Spending");
 
         if(getIntent().getExtras()!=null){
             type=getIntent().getStringExtra("type");

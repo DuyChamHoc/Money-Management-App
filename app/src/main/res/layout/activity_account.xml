@@ -9,14 +9,11 @@
     tools:context=".AccountActivity">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        >
-
+        android:layout_height="200dp">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="150dp"
             android:background="@drawable/iku" />
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,9 +55,10 @@
             android:layout_width="150dp"
             android:layout_height="35dp"
             android:textAlignment="center"
-            android:text="Thông tin cá nhân"
+            android:text="@string/Person_info"
             android:textStyle="bold"
             android:textSize="17dp"
+            android:layout_marginLeft="10dp"
             android:textColor="@color/black"
             />
      <LinearLayout
@@ -71,8 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="57dp"
-                android:text="Tên người dùng "
-                android:textColor="@color/black"
+                android:text="@string/User_name"
                 android:textSize="17dp" />
         <ImageView
             android:layout_width="32dp"
@@ -87,8 +84,6 @@
              android:layout_height="40dp"
              android:layout_marginLeft="57dp"
              android:layout_marginTop="-22dp"
-             android:background="@drawable/layout_bg_setting"
-             android:paddingLeft="15dp"
              android:textColor="@color/black" />
      </LinearLayout>
         <LinearLayout
@@ -101,8 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="57dp"
-                android:text="Số điện thoại"
-                android:textColor="@color/black"
+                android:text="@string/Phone_number"
                 android:textSize="17dp" />
 
             <ImageView
@@ -118,8 +112,6 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="57dp"
                 android:layout_marginTop="-22dp"
-                android:background="@drawable/layout_bg_setting"
-                android:paddingLeft="15dp"
                 android:textColor="@color/black" />
         </LinearLayout>
         <LinearLayout
@@ -132,8 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="57dp"
-                android:text="Ngày sinh "
-                android:textColor="@color/black"
+                android:text="@string/date"
                 android:textSize="17dp" />
             <ImageView
                 android:layout_width="32dp"
@@ -148,8 +139,6 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="57dp"
                 android:layout_marginTop="-22dp"
-                android:background="@drawable/layout_bg_setting"
-                android:paddingLeft="15dp"
                 android:textColor="@color/black" />
         </LinearLayout>
         <LinearLayout
@@ -163,7 +152,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="57dp"
                 android:text="Email "
-                android:textColor="@color/black"
                 android:textSize="17dp" />
             <ImageView
                 android:layout_width="32dp"
@@ -178,8 +166,6 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="57dp"
                 android:layout_marginTop="-22dp"
-                android:background="@drawable/layout_bg_setting"
-                android:paddingLeft="15dp"
                 android:textColor="@color/black" />
         </LinearLayout>
         <LinearLayout
@@ -192,7 +178,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/button1"
-                android:text="Hủy"
+                android:text="@string/cancel"
                 android:textAllCaps="false"
                 android:textColor="@color/button"
                 app:cornerRadius="15dp" />
@@ -202,7 +188,7 @@
                 android:layout_height="match_parent"
                 android:backgroundTint="@color/button"
                 android:layout_marginLeft="15dp"
-                android:text="Cập nhật"
+                android:text="@string/update"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 app:cornerRadius="15dp" />

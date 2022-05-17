@@ -154,7 +154,6 @@ public class DailyAnalyticsActivity extends AppCompatActivity {
                 startActivity(intent);
             }}
         );
-        title.setText("Daily Analytics");
     }
 
     private void getTotalDaySpending() {
@@ -175,7 +174,7 @@ public class DailyAnalyticsActivity extends AppCompatActivity {
                         int pTotal = Integer.parseInt(String.valueOf(total));
                         totalAmount += pTotal;
                     }
-                    totalBudgetAmountTextView.setText("Total: $" + totalAmount);
+                    totalBudgetAmountTextView.setText(totalAmount+"$");
                     daily_analytics_container.setVisibility(View.GONE);
                 } else {
                     totalBudgetAmountTextView.setVisibility(View.GONE);

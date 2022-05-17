@@ -145,7 +145,6 @@ public class MonthlyAnalyticActivity extends AppCompatActivity {
                 startActivity(intent);
             }}
         );
-        title.setText("Month Analytics");
     }
     private void getTotalWeekSpending() {
         MutableDateTime epoch=new MutableDateTime();
@@ -167,7 +166,7 @@ public class MonthlyAnalyticActivity extends AppCompatActivity {
                         int pTotal=Integer.parseInt(String.valueOf(total));
                         totalAmount +=pTotal;
                     }
-                    totalBudgetAmountTextView.setText("Total: "+totalAmount+"$");
+                    totalBudgetAmountTextView.setText(totalAmount+"$");
                 }
                 else {
                     anyChartView.setVisibility(View.GONE);

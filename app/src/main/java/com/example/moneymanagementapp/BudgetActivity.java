@@ -92,7 +92,6 @@ public class BudgetActivity extends AppCompatActivity {
                 startActivity(intent);
             }}
         );
-        title.setText("Budget");
 
         Calendar c = Calendar.getInstance();
         String[]monthName={"January","February","March", "April", "May", "June", "July",

@@ -60,7 +60,6 @@ public class TodayItemAdapter extends RecyclerView.Adapter<TodayItemAdapter.View
         holder.amount.setText(data.getAmount()+"$");
         holder.date.setText("On "+data.getDate());
         holder.notes.setText("Notes: "+data.getNotes());
-
         switch (data.getItem()){
             case "Transport":
                 holder.imageView.setImageResource(R.drawable.transport);

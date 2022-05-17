@@ -102,7 +102,6 @@ public class TodaySpendingActivity extends AppCompatActivity {
                 startActivity(intent);
             }}
         );
-        title.setText("Today's Spending");
 
 
         Format f = new SimpleDateFormat("HH.mm.ss Z");

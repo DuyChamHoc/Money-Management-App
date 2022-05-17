@@ -109,7 +109,6 @@ public class ChangePassActivity extends AppCompatActivity {
                 startActivity(intent);
             }}
         );
-        title.setText("Change Password");
     }
 
     private void onClickChangePassword() {

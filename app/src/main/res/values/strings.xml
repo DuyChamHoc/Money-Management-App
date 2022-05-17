@@ -1,9 +1,63 @@
 <resources>
     <string name="app_name">Money Management</string>
+    <string name="Balance">Balance</string>
+    <string name="Budget">Budget</string>
+    <string name="Expense">Expense</string>
+    <string name="Spending_frequency">Spending frequency</string>
+    <string name="Today">Today</string>
+    <string name="Week">Week</string>
+    <string name="Month">Month</string>
+    <string name="Recent_transactions">Recent transactions</string>
+    <string name="History">History</string>
+    <string name="See_">Review your expend</string>
+    <string name="Date">Date</string>
+    <string name="Choose_">Choose the day you want to search for</string>
+    <string name="Chart">Chart</string>
+    <string name="See_Y">See your analytic chart</string>
+    <string name="Today_Analytics">Today Analytics</string>
+    <string name="Week_Analytics">Week Analytics</string>
+    <string name="Month_Analytics">Month Analytics</string>
+    <string name="User_name">User name</string>
+    <string name="My_Account">My Account</string>
+    <string name="Setting">Setting</string>
+    <string name="Change_Pass">Change password</string>
+    <string name="Log_out">Log out</string>
+    <string name="Version">Version: 1.0</string>
+    <string name="title">Full control of your money</string>
+    <string name="title1">Become a manager of your money and spend wisely</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="Password">Password</string>
+    <string name="or">Or</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="login_with">Do not have an account? Registration</string>
+    <string name="Full_name">Full name</string>
+    <string name="Phone_number">Phone number</string>
+    <string name="date">Date of birth</string>
+    <string name="log_with_acc">Do you already have an account? Log in</string>
+    <string name="service">You agree to the Terms of Service and Privacy Policy</string>
+    <string name="budget">Buget for this month</string>
+    <string name="budget_list">Budget list: </string>
+    <string name="Today_spending">Today</string>
+    <string name="Today_title">Today you has spend</string>
+    <string name="transaction">Transactions: </string>
+    <string name="total">Total: </string>
+    <string name="On">On: </string>
+    <string name="Person_info">Person information</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="update">Update</string>
+    <string name="change_pass">Change password</string>
+    <string name="old_pass">Old password</string>
+    <string name="new_pass">New password</string>
+    <string name="confirm_pass">Confirm password</string>
+    <string name="current_pass">Current password:</string>
+    <string name="new_pass_confirm">New password:</string>
 
-    <string name="facebook_app_id">565104708298189</string>
-    <string name="fb_login_protocol_scheme">fb1234</string>
-    <string name="facebook_client_token">74e5c94fa747cfd9f15239d8327f17cc</string>
+
+    <string name="facebook_app_id" translatable="false">565104708298189</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>
+    <string name="facebook_client_token" translatable="false">74e5c94fa747cfd9f15239d8327f17cc</string>
 
 
     <string-array name="items">

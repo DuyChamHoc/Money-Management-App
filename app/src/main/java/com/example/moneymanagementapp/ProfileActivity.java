@@ -43,7 +43,7 @@ import java.util.BitSet;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView tv_name, logoutBtn, tv_account, tv_changepass;
+    private TextView tv_name, logoutBtn, tv_account, tv_changepass,tv_setting;
     private ImageView img_avatar;
     private BottomNavigationView bottomNavigationView;
     GoogleApiClient mGoogleApiClient;
@@ -59,7 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
         img_avatar = findViewById(R.id.img_avatar);
         tv_account = findViewById(R.id.tv_account);
         tv_changepass = findViewById(R.id.tv_changepass);
-
+        tv_setting = findViewById(R.id.tv_setting);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.action_profile);
@@ -93,6 +93,13 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this, AccountActivity.class);
+                startActivity(intent);
+            }
+        });
+        tv_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, ChangeLanguageActivity.class);
                 startActivity(intent);
             }
         });

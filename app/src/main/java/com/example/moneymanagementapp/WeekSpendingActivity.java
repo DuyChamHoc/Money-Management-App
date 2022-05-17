@@ -76,7 +76,6 @@ public class WeekSpendingActivity extends AppCompatActivity {
                 startActivity(intent);
             }}
         );
-        title.setText("Week's Spending");
 
         if(getIntent().getExtras()!=null){
             type=getIntent().getStringExtra("type");
