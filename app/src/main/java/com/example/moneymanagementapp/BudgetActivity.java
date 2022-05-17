@@ -602,7 +602,7 @@ public class BudgetActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Data model) {
                 holder.setItemAmount(model.getAmount() + "$");
-                holder.setDate("On: " + model.getDate());
+                holder.setDate(" " + model.getDate());
                 holder.setItemName(model.getItem());
                 switch (model.getItem()) {
                     case "Transport":

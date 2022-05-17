@@ -99,7 +99,7 @@ public class ProfileActivity extends AppCompatActivity {
         tv_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, ChangeLanguageActivity.class);
+                Intent intent = new Intent(ProfileActivity.this, SettingActivity.class);
                 startActivity(intent);
             }
         });

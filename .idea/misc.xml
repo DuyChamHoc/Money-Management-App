@@ -59,8 +59,41 @@
         <entry key="..\:/MoneyManagementApp/app/src/main/res/layout/update_layout1.xml" value="0.2" />
         <entry key="..\:/MoneyManagementApp/app/src/main/res/menu/bottom_bar_nav.xml" value="0.2" />
         <entry key="..\:/MoneyManagementApp/app/src/main/res/menu/menu.xml" value="0.2" />
+<<<<<<< HEAD
         <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_history.xml" value="0.1" />
         <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_home.xml" value="0.1398148148148148" />
+=======
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/drawable-v24/layout_bg_budget.xml" value="0.135" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/drawable/ic_arrow_right.xml" value="0.2565" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_account.xml" value="0.26851851851851855" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_budget.xml" value="0.2657407407407407" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_change_language.xml" value="0.4381679389312977" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_change_pass.xml" value="0.3098958333333333" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_choose_analytic.xml" value="0.3098958333333333" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_daily_analytics.xml" value="0.3098958333333333" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_detail.xml" value="0.22962962962962963" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_expense.xml" value="0.3098958333333333" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_history.xml" value="0.2988679352838745" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_home.xml" value="0.2988679352838745" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_login.xml" value="0.262037037037037" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_main.xml" value="0.3098958333333333" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_month_spending.xml" value="0.3098958333333333" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_monthly_analytic.xml" value="0.3098958333333333" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_profile.xml" value="0.2988679352838745" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_registration.xml" value="0.3098958333333333" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_setting.xml" value="0.2988679352838745" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_today_spending.xml" value="0.2988679352838745" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_week_spending.xml" value="0.22962962962962963" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/activity_weekly_analytic.xml" value="0.3098958333333333" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/input_layout.xml" value="0.22962962962962963" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/input_layout1.xml" value="0.22962962962962963" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/retrieve1.xml" value="0.2988679352838745" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/retrieve2.xml" value="0.22962962962962963" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/retrieve_layout.xml" value="0.2074074074074074" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/toolbar.xml" value="0.3098958333333333" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/update_layout.xml" value="0.22962962962962963" />
+        <entry key="..\:/Project/Money-Management-App/app/src/main/res/layout/update_layout1.xml" value="0.22962962962962963" />
+>>>>>>> 096661f845f0d93526fda096371dab1b86cf35d7
         <entry key="..\:/Project/Test/Money-Management-App/app/src/main/res/drawable-v24/layout_bg_budget.xml" value="0.2515" />
         <entry key="..\:/Project/Test/Money-Management-App/app/src/main/res/drawable-v24/layout_bolinearcolor.xml" value="0.181" />
         <entry key="..\:/Project/Test/Money-Management-App/app/src/main/res/layout/activity_account.xml" value="0.15070921985815602" />

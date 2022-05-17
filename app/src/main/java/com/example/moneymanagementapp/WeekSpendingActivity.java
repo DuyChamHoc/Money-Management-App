@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class WeekSpendingActivity extends AppCompatActivity {
 
@@ -90,11 +91,15 @@ public class WeekSpendingActivity extends AppCompatActivity {
                 readMonthSpendingItems();
             }
         }
-//        Calendar ca1 = Calendar.getInstance();
-//        ca1.set(2022, 5, 18);
-//        ca1.setMinimalDaysInFirstWeek(1);
-//        int wk = ca1.get(Calendar.WEEK_OF_MONTH);
-////        tv_this_week.setText(wk);
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH)+1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        Calendar ca1 = Calendar.getInstance();
+        ca1.set(year, month, day);
+        ca1.setMinimalDaysInFirstWeek(1);
+        int wk = ca1.get(Calendar.WEEK_OF_MONTH);
+        tv_this_week.setText("Week: "+String.valueOf(wk));
     }
 
     private void readMonthSpendingItems() {

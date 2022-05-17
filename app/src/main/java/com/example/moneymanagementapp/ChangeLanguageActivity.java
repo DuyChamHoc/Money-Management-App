@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.Locale;
 
 public class ChangeLanguageActivity extends AppCompatActivity {
     Locale Mylocale;
-    private Button vn, en,home;
+    private LinearLayout vn, en;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,14 +23,6 @@ public class ChangeLanguageActivity extends AppCompatActivity {
         vn.setOnClickListener(v -> OnChangeLanguageVN());
         en= findViewById(R.id.btn_change_language_en);
         en.setOnClickListener(v -> OnChangeLanguage());
-        home= findViewById(R.id.btn_home);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ChangeLanguageActivity.this, HomeActivity.class);
-                startActivity(intent);
-            }
-        });
     }
     private void OnChangeLanguage(){
         Mylocale = new Locale("en");
@@ -35,6 +30,8 @@ public class ChangeLanguageActivity extends AppCompatActivity {
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = Mylocale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        Intent intent = new Intent(ChangeLanguageActivity.this, SettingActivity.class);
+        startActivity(intent);
     }
     private void OnChangeLanguageVN(){
         Mylocale = new Locale("vi");
@@ -42,5 +39,7 @@ public class ChangeLanguageActivity extends AppCompatActivity {
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = Mylocale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        Intent intent = new Intent(ChangeLanguageActivity.this, SettingActivity.class);
+        startActivity(intent);
     }
 }
