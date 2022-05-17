@@ -54,4 +54,11 @@
     <string name="confirm_pass">Xác nhận mật khẩu</string>
     <string name="current_pass">Mật khẩu hiện tại</string>
     <string name="new_pass_confirm">Mật khẩu mới:</string>
+    <string name="setting_title">Cài đặt</string>
+    <string name="display">Hiển thị</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="language_choose">Việt Nam</string>
+    <string name="select_language">Chọn ngôn ngữ</string>
+    <string name="Note">Ghi chú: </string>
+    <string name="date_1">Ngày: </string>
 </resources>

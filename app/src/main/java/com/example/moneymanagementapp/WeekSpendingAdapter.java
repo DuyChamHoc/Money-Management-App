@@ -35,8 +35,8 @@ public class WeekSpendingAdapter extends RecyclerView.Adapter<WeekSpendingAdapte
 
         holder.item.setText(data.getItem());
         holder.amount.setText(data.getAmount()+"$");
-        holder.date.setText("On "+data.getDate());
-        holder.notes.setText("Notes: "+data.getNotes());
+        holder.date.setText(" "+data.getDate());
+        holder.notes.setText(" "+data.getNotes());
 
         switch (data.getItem()){
             case "Transport":

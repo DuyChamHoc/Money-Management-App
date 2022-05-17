@@ -58,7 +58,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
         holder.item.setText(data.getItem());
         holder.amount.setText(data.getAmount()+"$");
-        holder.notes.setText("Notes: "+data.getNotes());
+        holder.notes.setText(" "+data.getNotes());
 
         switch (data.getItem()){
             case "Transport":
