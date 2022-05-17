@@ -22,17 +22,23 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.joda.time.DateTime;
+import org.joda.time.MonthDay;
 import org.joda.time.Months;
 import org.joda.time.MutableDateTime;
 import org.joda.time.Weeks;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class MonthSpendingActivity extends AppCompatActivity {
 
-    private TextView totalWeekAmountTextView;
+    private TextView totalWeekAmountTextView,tv_this_month;
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
 
@@ -51,6 +57,7 @@ public class MonthSpendingActivity extends AppCompatActivity {
 
         totalWeekAmountTextView = findViewById(R.id.totalWeekAmountTextView);
         progressBar = findViewById(R.id.progressBar);
+        tv_this_month = findViewById(R.id.tv_this_month);
 
         recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -85,6 +92,12 @@ public class MonthSpendingActivity extends AppCompatActivity {
                 readMonthSpendingItems();
             }
         }
+        Calendar c = Calendar.getInstance();
+        String[]monthName={"January","February","March", "April", "May", "June", "July",
+                "August", "September", "October", "November",
+                "December"};
+        String month=monthName[c.get(Calendar.MONTH)];
+        tv_this_month.setText(month);
     }
 
     private void readMonthSpendingItems() {
@@ -115,7 +128,7 @@ public class MonthSpendingActivity extends AppCompatActivity {
                     int pTotal = Integer.parseInt(String.valueOf(total));
                     totalAmount += pTotal;
 
-                    totalWeekAmountTextView.setText("Chi tiêu trong tháng: $" + totalAmount);
+                    totalWeekAmountTextView.setText("$ " + totalAmount);
                 }
             }
 

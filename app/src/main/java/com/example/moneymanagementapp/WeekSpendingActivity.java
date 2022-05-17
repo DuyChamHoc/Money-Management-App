@@ -27,13 +27,17 @@ import org.joda.time.Months;
 import org.joda.time.MutableDateTime;
 import org.joda.time.Weeks;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
 public class WeekSpendingActivity extends AppCompatActivity {
 
-    private TextView totalWeekAmountTextView;
+    private TextView totalWeekAmountTextView,tv_this_week;
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
 
@@ -53,6 +57,7 @@ public class WeekSpendingActivity extends AppCompatActivity {
         totalWeekAmountTextView = findViewById(R.id.totalWeekAmountTextView);
         progressBar = findViewById(R.id.progressBar);
 
+        tv_this_week = findViewById(R.id.tv_this_week);
         recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setStackFromEnd(true);
@@ -85,6 +90,11 @@ public class WeekSpendingActivity extends AppCompatActivity {
                 readMonthSpendingItems();
             }
         }
+//        Calendar ca1 = Calendar.getInstance();
+//        ca1.set(2022, 5, 18);
+//        ca1.setMinimalDaysInFirstWeek(1);
+//        int wk = ca1.get(Calendar.WEEK_OF_MONTH);
+////        tv_this_week.setText(wk);
     }
 
     private void readMonthSpendingItems() {
@@ -115,7 +125,7 @@ public class WeekSpendingActivity extends AppCompatActivity {
                     int pTotal = Integer.parseInt(String.valueOf(total));
                     totalAmount += pTotal;
 
-                    totalWeekAmountTextView.setText("Chi tiêu trong tháng: $" + totalAmount);
+                    totalWeekAmountTextView.setText("$ " + totalAmount);
                 }
             }
 
@@ -153,7 +163,7 @@ public class WeekSpendingActivity extends AppCompatActivity {
                     int pTotal = Integer.parseInt(String.valueOf(total));
                     totalAmount += pTotal;
 
-                    totalWeekAmountTextView.setText("Chi phí trong tuần: $" + totalAmount);
+                    totalWeekAmountTextView.setText("$ " + totalAmount);
                 }
             }
 
