@@ -2,6 +2,7 @@ package com.example.moneymanagementapp;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -9,10 +10,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +44,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
@@ -54,9 +58,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import java.util.Arrays;
 
 
-public class LoginActivity extends AppCompatActivity  {
-    private Button LoginQn,loginBtn,btn_back,btn_forgotpass;
-    private EditText email,password;
+public class LoginActivity extends AppCompatActivity {
+    private Button LoginQn, loginBtn, btn_back, btn_forgotpass;
+    private EditText email, password;
     private SignInButton sign_in_button;
 
     private FirebaseAuth mAuth;
@@ -86,16 +90,16 @@ public class LoginActivity extends AppCompatActivity  {
         callbackManager = CallbackManager.Factory.create();
         mAuth = FirebaseAuth.getInstance();
         FacebookSdk.sdkInitialize(getApplicationContext());
-        loginButton =findViewById(R.id.login_button);
+        loginButton = findViewById(R.id.login_button);
         loginButton.setReadPermissions("email", "public_profile");
         callbackManager = CallbackManager.Factory.create();
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-               Log.d(TAGFB,"facebook:onSuccess:" + loginResult);
+                Log.d(TAGFB, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
-               startActivity(new Intent(LoginActivity.this,HomeActivity.class));
-               finish();
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                finish();
             }
 
             @Override
@@ -112,26 +116,26 @@ public class LoginActivity extends AppCompatActivity  {
             }
         });
 
-        authStateListener=new FirebaseAuth.AuthStateListener() {
+        authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user=mAuth.getCurrentUser();
-                if(user!=null){
-                    Intent intent=new Intent(   LoginActivity.this,HomeActivity.class);
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (user != null) {
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 }
             }
         };
 
-        tv=findViewById(R.id.tv);
-        sign_in_button=findViewById(R.id.sign_in_button);
-        LoginQn=findViewById(R.id.LoginQn);
-        loginBtn=findViewById(R.id.loginBtn);
-        email=findViewById(R.id.email);
-        password=findViewById(R.id.password);
-        btn_back=findViewById(R.id.btn_back);
-        btn_forgotpass=findViewById(R.id.btn_forgotpass);
+        tv = findViewById(R.id.tv);
+        sign_in_button = findViewById(R.id.sign_in_button);
+        LoginQn = findViewById(R.id.LoginQn);
+        loginBtn = findViewById(R.id.loginBtn);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        btn_back = findViewById(R.id.btn_back);
+        btn_forgotpass = findViewById(R.id.btn_forgotpass);
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -164,42 +168,39 @@ public class LoginActivity extends AppCompatActivity  {
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(LoginActivity.this,MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
 
-        mAuth=FirebaseAuth.getInstance();
-        progressDialog=new ProgressDialog(this);
+        mAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(this);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String emailString =email.getText().toString();
-                String passwordString=password.getText().toString();
+                String emailString = email.getText().toString();
+                String passwordString = password.getText().toString();
 
-                if(TextUtils.isEmpty(emailString)){
+                if (TextUtils.isEmpty(emailString)) {
                     email.setError("Email is required");
                 }
-                if(TextUtils.isEmpty(passwordString)){
+                if (TextUtils.isEmpty(passwordString)) {
                     password.setError("Password is required");
-                }
-                else
-                {
+                } else {
                     progressDialog.setMessage("login in progress");
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.show();
-                    mAuth.signInWithEmailAndPassword(emailString,passwordString).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    mAuth.signInWithEmailAndPassword(emailString, passwordString).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+                            if (task.isSuccessful()) {
+                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 startActivity(intent);
                                 finish();
                                 progressDialog.dismiss();
-                            }
-                            else {
-                                Toast.makeText(LoginActivity.this,task.getException().toString(),Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(LoginActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
                             }
                         }
@@ -211,7 +212,7 @@ public class LoginActivity extends AppCompatActivity  {
         LoginQn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(LoginActivity.this,RegistrationActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
                 startActivity(intent);
             }
         });
@@ -242,7 +243,7 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
     private void updateUIFB(FirebaseUser user) {
-        if(user !=null){
+        if (user != null) {
 
         }
     }
@@ -253,6 +254,7 @@ public class LoginActivity extends AppCompatActivity  {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
@@ -290,34 +292,60 @@ public class LoginActivity extends AppCompatActivity  {
 
 
     private void updateUI(FirebaseUser currentUser) {
-        if(currentUser.isEmailVerified()){
-            Intent intent=new Intent(LoginActivity.this,HomeActivity.class);
+        if (currentUser.isEmailVerified()) {
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
-        }
-        else {
+        } else {
             return;
         }
     }
 
     private void ocClickForgotPassword() {
-        try {
-            progressDialog.show();
-            FirebaseAuth auth = FirebaseAuth.getInstance();
-            String emailAddress = email.getText().toString().trim();
-            auth.sendPasswordResetEmail(emailAddress)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            progressDialog.dismiss();
-                            if (task.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, "Email sent.", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-        }
-        catch (Exception e){
-            Toast.makeText(LoginActivity.this, "Error: You are logging in with google account", Toast.LENGTH_SHORT).show();
-        }
+        AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View myView = inflater.inflate(R.layout.forgotpass, null);
+        myDialog.setView(myView);
+        final AlertDialog dialog = myDialog.create();
+        dialog.setCancelable(false);
+        final ImageView btn_close = myView.findViewById(R.id.btn_close);
+        final EditText emailforgot = myView.findViewById(R.id.emailforgot);
+        final Button Btnsend = myView.findViewById(R.id.Btnsend);
+
+
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        Btnsend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    String emailAddress = emailforgot.getText().toString().trim();
+                    if (TextUtils.isEmpty(emailAddress)) {
+                        emailforgot.setError("Email is required");
+                        return;
+                    }
+                    progressDialog.show();
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    auth.sendPasswordResetEmail(emailAddress)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    progressDialog.dismiss();
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(LoginActivity.this, "Email sent.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                } catch (Exception e) {
+                    Toast.makeText(LoginActivity.this, "Error: You are logging in with google account", Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
 
     }
 
@@ -334,6 +362,7 @@ public class LoginActivity extends AppCompatActivity  {
         super.onStop();
         mAuth.removeAuthStateListener(authStateListener);
     }
+
     private void signOut() {
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {

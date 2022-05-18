@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Expense"
+    >
+    <ImageView
+        android:id="@+id/btn_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_close" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Forgot Password?"
+        android:textColor="@color/black"
+        android:textSize="25dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Enter your e-mail address and we'll send you a link to reset your password."
+        android:textColor="@color/black"
+        android:layout_margin="5dp"
+        android:textSize="20dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Email"
+        android:textColor="@color/black"
+        android:layout_margin="5dp"
+        android:textSize="20dp" />
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/emailforgot"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_round"
+        android:ems="10"
+        android:hint="example@gmail.com"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:padding="20dp" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/Btnsend"
+        android:layout_width="300dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="25dp"
+        android:backgroundTint="@color/button"
+        android:text="Send Mail"
+        app:cornerRadius="20dp" />
+
+</LinearLayout>
