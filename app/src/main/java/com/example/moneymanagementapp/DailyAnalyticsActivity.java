@@ -47,7 +47,7 @@ public class DailyAnalyticsActivity extends AppCompatActivity {
     private String onlineUserId = "";
     private DatabaseReference expensesRef, personalRef;
 
-    private Button btnback;
+    private Button btn_back;
 
     private LinearLayout detail_color;
 
@@ -59,7 +59,7 @@ public class DailyAnalyticsActivity extends AppCompatActivity {
 
     private TextView progress_ratio_transport, progress_ratio_food, progress_ratio_house, progress_ratio_ent, progress_ratio_edu, progress_ratio_cha, progress_ratio_app, progress_ratio_hea, progress_ratio_per, progress_ratio_oth;
 
-    private ImageView btn_back, status_Image_transport, status_Image_food, status_Image_house, status_Image_ent, status_Image_edu, status_Image_cha, status_Image_app, status_Image_hea, status_Image_per, status_Image_oth;
+    private ImageView status_Image_transport, status_Image_food, status_Image_house, status_Image_ent, status_Image_edu, status_Image_cha, status_Image_app, status_Image_hea, status_Image_per, status_Image_oth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,8 @@ public class DailyAnalyticsActivity extends AppCompatActivity {
         personalRef = FirebaseDatabase.getInstance().getReference("personal").child(onlineUserId);
 
         totalBudgetAmountTextView = findViewById(R.id.totalBudgetAmountTextView);
+        btn_back = findViewById(R.id.btn_back);
+
 
 
         analyticsTransportAmount = findViewById(R.id.analyticsTransportAmount);
@@ -154,6 +156,13 @@ public class DailyAnalyticsActivity extends AppCompatActivity {
                 startActivity(intent);
             }}
         );
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(DailyAnalyticsActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }}
+        );
     }
 
     private void getTotalDaySpending() {
@@ -181,7 +190,6 @@ public class DailyAnalyticsActivity extends AppCompatActivity {
                     anyChartView.setVisibility(View.GONE);
                     detail_color.setVisibility(View.GONE);
                     daily_analytics_container.setVisibility(View.VISIBLE);
-                    daily_analytics_header.setVisibility(View.GONE);
                 }
             }
 
