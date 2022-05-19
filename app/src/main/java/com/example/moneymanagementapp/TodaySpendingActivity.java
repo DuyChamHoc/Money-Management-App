@@ -69,6 +69,7 @@ public class TodaySpendingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_spending);
 
+        mAuth=FirebaseAuth.getInstance();
         totalAmountSpentOn=findViewById(R.id.totalAmountSpentOn);
         this_day=findViewById(R.id.tv_this_day);
         progressBar=findViewById(R.id.progressBar);
@@ -79,7 +80,7 @@ public class TodaySpendingActivity extends AppCompatActivity {
         fab=findViewById(R.id.fab);
         loader=new ProgressDialog(this);
 
-        mAuth=FirebaseAuth.getInstance();
+
         onlineUserId=mAuth.getCurrentUser().getUid();
         expensesRef= FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
 
@@ -279,9 +280,11 @@ public class TodaySpendingActivity extends AppCompatActivity {
         });
         dialog.show();
     }
+
     //////////////////////////////////
     /////////////////////////////////
     ///////////////////////////////
+
     public int totalAmount=0;
     private Boolean getTotalWeekOtherExpenses() {
         MutableDateTime epoch=new MutableDateTime();
