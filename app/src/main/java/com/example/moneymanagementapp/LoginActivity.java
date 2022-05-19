@@ -98,8 +98,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAGFB, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                finish();
+
             }
 
             @Override
@@ -244,6 +243,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUIFB(FirebaseUser user) {
         if (user != null) {
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
 
         }
     }
@@ -354,6 +355,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         mAuth.addAuthStateListener(authStateListener);
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUIFB(currentUser);
 
     }
 
@@ -370,5 +372,6 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                     }
                 });
+        FirebaseAuth.getInstance().signOut();
     }
 }
