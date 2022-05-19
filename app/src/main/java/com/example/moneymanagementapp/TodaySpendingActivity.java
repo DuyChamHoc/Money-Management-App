@@ -59,7 +59,7 @@ public class TodaySpendingActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String onlineUserId="";
     private DatabaseReference expensesRef;
-
+    private DatabaseReference budgetRef;
     private TodayItemAdapter todayItemsAdapter;
     private List<Data> myDataList;
 
@@ -69,17 +69,18 @@ public class TodaySpendingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_spending);
 
+        mAuth=FirebaseAuth.getInstance();
         totalAmountSpentOn=findViewById(R.id.totalAmountSpentOn);
         this_day=findViewById(R.id.tv_this_day);
         progressBar=findViewById(R.id.progressBar);
-
+        budgetRef = FirebaseDatabase.getInstance().getReference().child("budget").child(mAuth.getCurrentUser().getUid());
         ImageView icon_arrow_back = findViewById(R.id.arrow_back);
         TextView title = findViewById(R.id.txv_title);
 
         fab=findViewById(R.id.fab);
         loader=new ProgressDialog(this);
 
-        mAuth=FirebaseAuth.getInstance();
+
         onlineUserId=mAuth.getCurrentUser().getUid();
         expensesRef= FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
 
@@ -279,4 +280,639 @@ public class TodaySpendingActivity extends AppCompatActivity {
         });
         dialog.show();
     }
+
+    //////////////////////////////////
+    /////////////////////////////////
+    ///////////////////////////////
+
+    public int totalAmount=0;
+    private Boolean getTotalWeekOtherExpenses() {
+        MutableDateTime epoch=new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now=new DateTime();
+        Months months=Months.monthsBetween(epoch,now);
+
+        String itemNmonth="Other"+months.getMonths();
+
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot ds:snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        totalAmount += pTotal;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        if(totalAmount>getMonthOtherBudgetRatio()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public int total;
+    private int getMonthOtherBudgetRatio() {
+        Query query = budgetRef.orderByChild("item").equalTo("Other");
+        query.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int pTotal = 0;
+                if (snapshot.exists()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        pTotal = Integer.parseInt(String.valueOf(total));
+                    }
+                }
+                total=pTotal;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return total;
+    }
+    public int totalAmount1=0;
+    private Boolean getTotalWeekPersonalExpenses() {
+        MutableDateTime epoch=new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now=new DateTime();
+        Months months=Months.monthsBetween(epoch,now);
+
+        String itemNmonth="Personal"+months.getMonths();
+
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot ds:snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        totalAmount1 += pTotal;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        if(totalAmount1>getMonthPersonalBudgetRatio()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public int total1;
+    private int getMonthPersonalBudgetRatio() {
+        Query query = budgetRef.orderByChild("item").equalTo("Personal");
+        query.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int pTotal = 0;
+                if (snapshot.exists()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        pTotal = Integer.parseInt(String.valueOf(total));
+                    }
+                }
+                total1=pTotal;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return total1;
+    }
+    public int totalAmount2=0;
+    private Boolean getTotalWeekHealthExpenses() {
+        MutableDateTime epoch=new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now=new DateTime();
+        Months months=Months.monthsBetween(epoch,now);
+
+        String itemNmonth="Health"+months.getMonths();
+
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot ds:snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        totalAmount2 += pTotal;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        if(totalAmount2>getMonthHealthBudgetRatio()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public int total2;
+    private int getMonthHealthBudgetRatio() {
+        Query query = budgetRef.orderByChild("item").equalTo("Health");
+        query.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int pTotal = 0;
+                if (snapshot.exists()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        pTotal = Integer.parseInt(String.valueOf(total));
+                    }
+                }
+                total2=pTotal;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return total2;
+    }
+    public int totalAmount3=0;
+    private Boolean getTotalWeekApparelExpenses() {
+        MutableDateTime epoch=new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now=new DateTime();
+        Months months=Months.monthsBetween(epoch,now);
+
+        String itemNmonth="Apparel"+months.getMonths();
+
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot ds:snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        totalAmount3 += pTotal;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        if(totalAmount3>getMonthApparelBudgetRatio()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public int total3;
+    private int getMonthApparelBudgetRatio() {
+        Query query = budgetRef.orderByChild("item").equalTo("Apparel");
+        query.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int pTotal = 0;
+                if (snapshot.exists()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        pTotal = Integer.parseInt(String.valueOf(total));
+                    }
+                }
+                total3=pTotal;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return total3;
+    }
+    public int totalAmount4=0;
+    private Boolean getTotalWeekCharityExpenses() {
+        MutableDateTime epoch=new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now=new DateTime();
+        Months months=Months.monthsBetween(epoch,now);
+
+        String itemNmonth="Charity"+months.getMonths();
+
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot ds:snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        totalAmount4 += pTotal;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        if(totalAmount4>getMonthCharityBudgetRatio()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public int total4;
+    private int getMonthCharityBudgetRatio() {
+        Query query = budgetRef.orderByChild("item").equalTo("Charity");
+        query.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int pTotal = 0;
+                if (snapshot.exists()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        pTotal = Integer.parseInt(String.valueOf(total));
+                    }
+                }
+                total4=pTotal;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return total4;
+    }
+    public int totalAmount5=0;
+    private Boolean getTotalWeekEducationExpenses() {
+        MutableDateTime epoch=new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now=new DateTime();
+        Months months=Months.monthsBetween(epoch,now);
+
+        String itemNmonth="Education"+months.getMonths();
+
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot ds:snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        totalAmount5 += pTotal;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        if(totalAmount5>getMonthEducationBudgetRatio()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public int total5;
+    private int getMonthEducationBudgetRatio() {
+        Query query = budgetRef.orderByChild("item").equalTo("Education");
+        query.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int pTotal = 0;
+                if (snapshot.exists()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        pTotal = Integer.parseInt(String.valueOf(total));
+                    }
+                }
+                total5=pTotal;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return total5;
+    }
+    public int totalAmount6=0;
+    private Boolean getTotalWeekEntertainmentExpenses() {
+        MutableDateTime epoch=new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now=new DateTime();
+        Months months=Months.monthsBetween(epoch,now);
+
+        String itemNmonth="Entertainment"+months.getMonths();
+
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot ds:snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        totalAmount6 += pTotal;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        if(totalAmount6>getMonthEntertainmentBudgetRatio()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public int total6;
+    private int getMonthEntertainmentBudgetRatio() {
+        Query query = budgetRef.orderByChild("item").equalTo("Entertainment");
+        query.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int pTotal = 0;
+                if (snapshot.exists()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        pTotal = Integer.parseInt(String.valueOf(total));
+                    }
+                }
+                total6=pTotal;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return total6;
+    }
+    public int totalAmount7=0;
+    private Boolean getTotalWeekHouseExpenses() {
+        MutableDateTime epoch=new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now=new DateTime();
+        Months months=Months.monthsBetween(epoch,now);
+
+        String itemNmonth="House"+months.getMonths();
+
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot ds:snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        totalAmount7 += pTotal;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        if(totalAmount6>getMonthHouseBudgetRatio()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public int total7;
+    private int getMonthHouseBudgetRatio() {
+        Query query = budgetRef.orderByChild("item").equalTo("House");
+        query.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int pTotal = 0;
+                if (snapshot.exists()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        pTotal = Integer.parseInt(String.valueOf(total));
+                    }
+                }
+                total7=pTotal;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return total7;
+    }
+    public int totalAmount8=0;
+    private Boolean getTotalWeekFoodExpenses() {
+        MutableDateTime epoch=new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now=new DateTime();
+        Months months=Months.monthsBetween(epoch,now);
+
+        String itemNmonth="Food"+months.getMonths();
+
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot ds:snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        totalAmount8 += pTotal;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        if(totalAmount8>getMonthFoodBudgetRatio()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public int total8;
+    private int getMonthFoodBudgetRatio() {
+        Query query = budgetRef.orderByChild("item").equalTo("Food");
+        query.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int pTotal = 0;
+                if (snapshot.exists()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        pTotal = Integer.parseInt(String.valueOf(total));
+                    }
+                }
+                total8=pTotal;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return total8;
+    }
+    public int totalAmount9=0;
+    private Boolean getTotalTransportFoodExpenses() {
+        MutableDateTime epoch=new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now=new DateTime();
+        Months months=Months.monthsBetween(epoch,now);
+
+        String itemNmonth="Transport"+months.getMonths();
+
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot ds:snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        totalAmount9 += pTotal;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+        if(totalAmount9>getMonthTransportBudgetRatio()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public int total9;
+    private int getMonthTransportBudgetRatio() {
+        Query query = budgetRef.orderByChild("item").equalTo("Transport");
+        query.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int pTotal = 0;
+                if (snapshot.exists()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        pTotal = Integer.parseInt(String.valueOf(total));
+                    }
+                }
+                total9=pTotal;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return total9;
+    }
+
 }
