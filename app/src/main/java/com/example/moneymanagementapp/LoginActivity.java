@@ -306,7 +306,7 @@ public class LoginActivity extends AppCompatActivity {
         View myView = inflater.inflate(R.layout.forgotpass, null);
         myDialog.setView(myView);
         final AlertDialog dialog = myDialog.create();
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
         final ImageView btn_close = myView.findViewById(R.id.btn_close);
         final EditText emailforgot = myView.findViewById(R.id.emailforgot);
         final Button Btnsend = myView.findViewById(R.id.Btnsend);

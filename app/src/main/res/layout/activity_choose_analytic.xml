@@ -61,8 +61,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="120dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="269dp"
-
+            android:layout_marginBottom="299dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp">
 
@@ -86,7 +85,7 @@
                     android:text="@string/Today_Analytics"
                     android:textAlignment="center"
                     android:textColor="#000"
-                    android:textStyle="bold"></TextView>
+                    android:textStyle="bold"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -101,7 +100,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="220dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="100dp"
             android:background="#fff"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp">
@@ -126,7 +125,7 @@
                     android:text="@string/Week_Analytics"
                     android:textAlignment="center"
                     android:textColor="#000"
-                    android:textStyle="bold"></TextView>
+                    android:textStyle="bold"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -141,7 +140,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="100dp"
             android:background="#fff"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp">

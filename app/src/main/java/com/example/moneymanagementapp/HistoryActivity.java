@@ -49,7 +49,7 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
     private Button search;
     private TextView historyTotalAmountSpent,dateSearch;
 
-    private LinearLayout historyLayout;
+    private LinearLayout historyLayout,results,results_day;
     private RelativeLayout beforeSearchLayout,noResultLayout;
 
     @Override
@@ -87,6 +87,8 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
         search = findViewById(R.id.search);
         historyTotalAmountSpent = findViewById(R.id.historyTotalAmountSpent);
         dateSearch = findViewById(R.id.date);
+        results = findViewById(R.id.results);
+        results_day = findViewById(R.id.results_day);
 
         mAuth = FirebaseAuth.getInstance();
         onlineUserId = mAuth.getCurrentUser().getUid();
@@ -162,6 +164,8 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
                     noResultLayout.setVisibility(View.VISIBLE);
                     historyLayout.setVisibility(View.GONE);
                     beforeSearchLayout.setVisibility(View.GONE);
+                    results.setVisibility(View.GONE);
+                    results_day.setVisibility(View.GONE);
                     Toast.makeText(HistoryActivity.this, "Please choose another day", Toast.LENGTH_SHORT).show();
                 }
                 ItemsAdapter.notifyDataSetChanged();
@@ -174,12 +178,13 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
                     if(totalAmount>0){
                         historyTotalAmountSpent.setVisibility(View.VISIBLE);
                         dateSearch.setVisibility(View.VISIBLE);
-
+                        results.setVisibility(View.VISIBLE);
+                        results_day.setVisibility(View.VISIBLE);
                         historyLayout.setVisibility(View.VISIBLE);
                         noResultLayout.setVisibility(View.GONE);
                         beforeSearchLayout.setVisibility(View.GONE);
 
-                        historyTotalAmountSpent.setText(totalAmount+"$");
+                        historyTotalAmountSpent.setText(" "+totalAmount+"$");
                         dateSearch.setText(" "+Date);
                     }
                 }

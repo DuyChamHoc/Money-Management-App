@@ -17,7 +17,7 @@
     <string name="Today_Analytics">Today Analytics</string>
     <string name="Week_Analytics">Week Analytics</string>
     <string name="Month_Analytics">Month Analytics</string>
-    <string name="User_name">User name</string>
+    <string name="User_name">Display name</string>
     <string name="My_Account">My Account</string>
     <string name="Setting">Setting</string>
     <string name="Change_Pass">Change password</string>
@@ -60,6 +60,9 @@
     <string name="select_language">Select language</string>
     <string name="Note">Note: </string>
     <string name="date_1">Date: </string>
+    <string name="title_forgot">Enter the email address you used to register, and we will send you an email recover your password in no time.</string>
+    <string name="email">E-mail</string>
+    <string name="send">SUBMIT</string>
 
 
     <string name="facebook_app_id" translatable="false">565104708298189</string>

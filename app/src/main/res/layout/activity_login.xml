@@ -77,15 +77,14 @@
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_width="305dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         />
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp" />
@@ -99,18 +98,18 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="130dp"
             android:backgroundTint="@color/white"
             android:text="@string/forgot_password"
             android:textColor="@color/button"
             android:layout_marginTop="10dp"
+            android:layout_gravity="center"
             />
         <Button
             android:id="@+id/LoginQn"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_gravity="center"
             android:backgroundTint="@color/white"
             android:text="@string/login_with"
             android:textColor="#808080"/>

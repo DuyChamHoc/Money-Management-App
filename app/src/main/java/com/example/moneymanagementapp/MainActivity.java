@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Locale Mylocale;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         SharedPreferences mypref = getSharedPreferences("language",MODE_PRIVATE);
         lang = mypref.getString("language","");
         Mylocale = new Locale(lang);

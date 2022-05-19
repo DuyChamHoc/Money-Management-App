@@ -61,4 +61,7 @@
     <string name="select_language">Chọn ngôn ngữ</string>
     <string name="Note">Ghi chú: </string>
     <string name="date_1">Ngày: </string>
+    <string name="title_forgot">Nhập địa chỉ email bạn đã sử dụng để đăng ký và chúng tôi sẽ gửi cho bạn một email khôi phục mật khẩu của bạn ngay lập tức.</string>
+    <string name="email">E-mail</string>
+    <string name="send">Xác nhận</string>
 </resources>
