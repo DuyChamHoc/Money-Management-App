@@ -24,7 +24,7 @@
     <string name="Change_Pass">Đổi mật khẩu</string>
     <string name="Log_out">Đăng xuất</string>
     <string name="Version">Phiên bản: 1.0</string>
-    <string name="title">Được toàn quyền kiểm soát tiền của bạn</string>
+    <string name="title">Giúp bạn lựa chọn tài chính thông minh</string>
     <string name="title1">Trở thành người quản lý tiền của bạn và chi tiêu hợp lý</string>
     <string name="login">Đăng nhập</string>
     <string name="register">Đăng ký</string>
@@ -66,4 +66,6 @@
     <string name="send">Xác nhận</string>
     <string name="week_title">Tuần này bạn đã chi</string>
     <string name="month_title">Tháng này bạn đã chi</string>
+    <string name="sign_gg">Tiếp tục với Google</string>
+    <string name="sign_fb">Tiếp tục với Facebook</string>
 </resources>

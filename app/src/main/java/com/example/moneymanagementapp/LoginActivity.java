@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,8 +62,7 @@ import java.util.Arrays;
 public class LoginActivity extends AppCompatActivity {
     private Button LoginQn, loginBtn, btn_back, btn_forgotpass;
     private EditText email, password;
-    private SignInButton sign_in_button;
-
+    private LinearLayout sign_in_button,login_button;
     private FirebaseAuth mAuth;
 
     private ProgressDialog progressDialog;

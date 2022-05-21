@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#F6F6F6"
     tools:context=".HistoryActivity">
 
     <LinearLayout
@@ -114,7 +115,6 @@
                         android:layout_height="30dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:background="@color/white"
                         android:text="@string/total"
                         android:textColor="#000"
                         android:textSize="17dp"
@@ -125,7 +125,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_marginTop="10dp"
-                        android:background="@color/white"
                         android:text="$0"
                         android:textColor="#000"
                         android:textSize="17dp"

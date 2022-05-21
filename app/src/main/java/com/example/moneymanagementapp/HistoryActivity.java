@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,7 +50,10 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
     private String Date="";
     private ImageView ImgSpinner;
     private RecyclerView recyclerView;
+    private String lang="";
 
+    private String dataEN[]={"Search", "Transport", "Food", "House", "Entertainment", "Education", "Charity", "Apparel", "Health", "Personal", "Other"};
+    private String dataVI[]={"Tìm kiếm", "Phương tiện", "Thức ăn", "Nhà ở", "Giải trí", "Giáo dục", "Từ thiện", "Mua sắm", "Sức khỏe", "Cá nhân", "Khác"};
     private Spinner itemSpinner;
 
     private ItemAdapter ItemsAdapter;
@@ -111,43 +115,43 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
             }
         });
         ImgSpinner = findViewById(R.id.mImage);
-        final String Adapter_name[]={"Search","Transport","Food","House","Entertainment","Education","Charity","Apparel","Health","Personal","Other"};
+        final String Adapter_name[]=dataEN;
         itemSpinner =findViewById(R.id.itemsspinner);
         itemSpinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,Adapter_name));
         itemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(itemSpinner.getSelectedItem().toString().equals("Search")){
+                if(itemSpinner.getSelectedItem().toString().equals(Adapter_name[0].toString())){
                     ImgSpinner.setImageResource(R.drawable.searchh);
                 }
-                else if(itemSpinner.getSelectedItem().toString().equals("Transport")){
+                else if(itemSpinner.getSelectedItem().toString().equals(Adapter_name[1].toString())){
                     ImgSpinner.setImageResource(R.drawable.transport);
                 }
-                else if(itemSpinner.getSelectedItem().toString().equals("Food")){
+                else if(itemSpinner.getSelectedItem().toString().equals(Adapter_name[2].toString())){
                     ImgSpinner.setImageResource(R.drawable.food);
                 }
-                else if(itemSpinner.getSelectedItem().toString().equals("House")){
+                else if(itemSpinner.getSelectedItem().toString().equals(Adapter_name[3].toString())){
                     ImgSpinner.setImageResource(R.drawable.house);
                 }
-                else if(itemSpinner.getSelectedItem().toString().equals("Entertainment")){
+                else if(itemSpinner.getSelectedItem().toString().equals(Adapter_name[4].toString())){
                     ImgSpinner.setImageResource(R.drawable.entertainment);
                 }
-                else if(itemSpinner.getSelectedItem().toString().equals("Education")){
+                else if(itemSpinner.getSelectedItem().toString().equals(Adapter_name[5].toString())){
                     ImgSpinner.setImageResource(R.drawable.education);
                 }
-                else if(itemSpinner.getSelectedItem().toString().equals("Charity")){
+                else if(itemSpinner.getSelectedItem().toString().equals(Adapter_name[6].toString())){
                     ImgSpinner.setImageResource(R.drawable.charity);
                 }
-                else if(itemSpinner.getSelectedItem().toString().equals("Apparel")){
+                else if(itemSpinner.getSelectedItem().toString().equals(Adapter_name[7].toString())){
                     ImgSpinner.setImageResource(R.drawable.apparel);
                 }
-                else if(itemSpinner.getSelectedItem().toString().equals("Health")){
+                else if(itemSpinner.getSelectedItem().toString().equals(Adapter_name[8].toString())){
                     ImgSpinner.setImageResource(R.drawable.health);
                 }
-                else if(itemSpinner.getSelectedItem().toString().equals("Personal")){
+                else if(itemSpinner.getSelectedItem().toString().equals(Adapter_name[9].toString())){
                     ImgSpinner.setImageResource(R.drawable.personal);
                 }
-                else if(itemSpinner.getSelectedItem().toString().equals("Other")){
+                else if(itemSpinner.getSelectedItem().toString().equals(Adapter_name[10].toString())){
                     ImgSpinner.setImageResource(R.drawable.other);
                 }
                 values = itemSpinner.getSelectedItem().toString();
@@ -183,7 +187,8 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDatePickerDialog();
+               showDatePickerDialog();
+
             }
         });
         historyLayout = findViewById(R.id.historyList);

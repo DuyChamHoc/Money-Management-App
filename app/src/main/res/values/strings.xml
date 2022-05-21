@@ -23,14 +23,14 @@
     <string name="Change_Pass">Change password</string>
     <string name="Log_out">Log out</string>
     <string name="Version">Version: 1.0</string>
-    <string name="title">Full control of your money</string>
+    <string name="title">Helping You Make Smart Financial Choices</string>
     <string name="title1">Become a manager of your money and spend wisely</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="Password">Password</string>
     <string name="or">Or</string>
-    <string name="forgot_password">Forgot password?</string>
-    <string name="login_with">Do not have an account? Registration</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="login_with">Don’t have an account ? Sign Up</string>
     <string name="Full_name">Full name</string>
     <string name="Phone_number">Phone number</string>
     <string name="date">Date of birth</string>
@@ -65,6 +65,8 @@
     <string name="send">SUBMIT</string>
     <string name="week_title">This week you have spend</string>
     <string name="month_title">This month you have spend</string>
+    <string name="sign_gg">Sign in with Google</string>
+    <string name="sign_fb">Sign in with Facebook</string>
 
     <string name="facebook_app_id" translatable="false">565104708298189</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>

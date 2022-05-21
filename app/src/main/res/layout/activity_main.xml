@@ -5,14 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:background="#F6F6F6"
     tools:context=".MainActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shape"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="127dp"
+    android:gravity="center"
+    >
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpaper"
-        android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
         tools:ignore="SpeakableTextPresentCheck" />
+</LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/circle_indicator"
@@ -21,18 +41,18 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp" />
 
-    <TextView
-        android:layout_marginTop="-15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/text_v1"
-        android:textAlignment="center"
-        android:text="@string/title"
-        android:layout_marginHorizontal="40dp"
-        android:textSize="35dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        />
+        <TextView
+            android:id="@+id/text_v1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="-25dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/title"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="26dp"
+            android:textStyle="bold" />
 
     <TextView
         android:layout_marginTop="25dp"
@@ -42,6 +62,7 @@
         android:layout_marginHorizontal="50dp"
         android:text="@string/title1"
         android:textAlignment="center"
+        android:fontFamily="@font/poppins_light"
         android:textSize="17dp"
         android:textStyle="bold"
         android:textColor="#91919F"
@@ -52,9 +73,9 @@
         android:layout_width="340dp"
         android:layout_height="65dp"
         app:cornerRadius="16dp"
-        android:backgroundTint="@color/button"
+        android:backgroundTint="#50C2C9"
         android:text="@string/login"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="7dp"
 
         />
@@ -63,9 +84,10 @@
         android:layout_width="340dp"
         android:layout_height="65dp"
         app:cornerRadius="16dp"
-        android:backgroundTint="@color/button1"
-        android:textColor="@color/button"
+        android:backgroundTint="@color/white"
+        android:textColor="#50C2C9"
         android:text="@string/register"
         android:layout_marginBottom="16dp"
         />
+    </LinearLayout>
 </LinearLayout>
