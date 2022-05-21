@@ -99,7 +99,7 @@ public class WeekSpendingActivity extends AppCompatActivity {
         ca1.set(year, month, day);
         ca1.setMinimalDaysInFirstWeek(1);
         int wk = ca1.get(Calendar.WEEK_OF_MONTH);
-        tv_this_week.setText("Week: "+String.valueOf(wk));
+        tv_this_week.setText(": "+String.valueOf(wk));
     }
 
     private void readMonthSpendingItems() {

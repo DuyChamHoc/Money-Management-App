@@ -51,7 +51,7 @@ public class DailyAnalyticsActivity extends AppCompatActivity {
 
     private LinearLayout detail_color;
 
-    private TextView totalBudgetAmountTextView, analyticsTransportAmount, analyticsFoodAmount, analyticsHouseExpensesAmount, analyticsEntertainmentAmount, analyticsEducationAmount, analyticsCharityAmount, analyticsApparelAmount, analyticsHealthAmount, analyticsPersonalExpensesAmount, analyticsOtherAmount;
+    private TextView txt_total,totalBudgetAmountTextView, analyticsTransportAmount, analyticsFoodAmount, analyticsHouseExpensesAmount, analyticsEntertainmentAmount, analyticsEducationAmount, analyticsCharityAmount, analyticsApparelAmount, analyticsHealthAmount, analyticsPersonalExpensesAmount, analyticsOtherAmount;
 
     private RelativeLayout daily_analytics_header, daily_analytics_container, linearLayoutTransport, linearLayoutFood, linearLayoutFoodHouse, linearLayoutEntertainment, linearLayoutEducation, linearLayoutCharity, linearLayoutApparel, linearLayoutHealth, linearLayoutPersonalExp, linearLayoutOther;
 
@@ -72,10 +72,8 @@ public class DailyAnalyticsActivity extends AppCompatActivity {
         personalRef = FirebaseDatabase.getInstance().getReference("personal").child(onlineUserId);
 
         totalBudgetAmountTextView = findViewById(R.id.totalBudgetAmountTextView);
+        txt_total = findViewById(R.id.txt_total);
         btn_back = findViewById(R.id.btn_back);
-
-
-
         analyticsTransportAmount = findViewById(R.id.analyticsTransportAmount);
         analyticsFoodAmount = findViewById(R.id.analyticsFoodAmount);
         analyticsHouseExpensesAmount = findViewById(R.id.analyticsHouseExpensesAmount);
@@ -183,6 +181,7 @@ public class DailyAnalyticsActivity extends AppCompatActivity {
                         int pTotal = Integer.parseInt(String.valueOf(total));
                         totalAmount += pTotal;
                     }
+                    txt_total.setVisibility(View.VISIBLE);
                     totalBudgetAmountTextView.setText(totalAmount+"$");
                     daily_analytics_container.setVisibility(View.GONE);
                 } else {

@@ -39,9 +39,9 @@
     <string name="budget">Buget for this month</string>
     <string name="budget_list">Budget list: </string>
     <string name="Today_spending">Today</string>
-    <string name="Today_title">Today you has spend</string>
+    <string name="Today_title">Today you have spend</string>
     <string name="transaction">Transactions: </string>
-    <string name="total">Total: </string>
+    <string name="total">Total spent: </string>
     <string name="On">On: </string>
     <string name="Person_info">Person information</string>
     <string name="cancel">Cancel</string>
@@ -63,7 +63,8 @@
     <string name="title_forgot">Enter the email address you used to register, and we will send you an email recover your password in no time.</string>
     <string name="email">E-mail</string>
     <string name="send">SUBMIT</string>
-
+    <string name="week_title">This week you have spend</string>
+    <string name="month_title">This month you have spend</string>
 
     <string name="facebook_app_id" translatable="false">565104708298189</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>

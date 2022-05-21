@@ -12,10 +12,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +32,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import org.joda.time.DateTime;
+import org.joda.time.Months;
+import org.joda.time.MutableDateTime;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -37,10 +45,19 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
 
     private BottomNavigationView bottomNavigationView;
     private int totalAmount = 0;
+    private String values ="";
     private String Date="";
+    private ImageView ImgSpinner;
     private RecyclerView recyclerView;
+
+    private Spinner itemSpinner;
+
     private ItemAdapter ItemsAdapter;
     private List<Data> myDataList;
+
+    private RecyclerView recyclerView1;
+    private WeekSpendingAdapter weekSpendingAdapter;
+    private List<Data> myDataList1;
 
     private FirebaseAuth mAuth;
     private String onlineUserId = "";
@@ -49,13 +66,24 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
     private Button search;
     private TextView historyTotalAmountSpent,dateSearch;
 
-    private LinearLayout historyLayout,results,results_day;
+    private LinearLayout historyLayout,results,results_day,historyList_Values,detail;
     private RelativeLayout beforeSearchLayout,noResultLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+        historyList_Values = findViewById(R.id.historyList_Values);
+        recyclerView1 = findViewById(R.id.recyclerView1);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        recyclerView1.setHasFixedSize(true);
+        recyclerView1.setLayoutManager(linearLayoutManager);
+        myDataList1 = new ArrayList<>();
+        weekSpendingAdapter = new WeekSpendingAdapter(HistoryActivity.this, myDataList1);
+        recyclerView1.setAdapter(weekSpendingAdapter);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.action_history);
@@ -78,9 +106,56 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
                         startActivity(new Intent(HistoryActivity.this,ChooseAnalyticActivity.class));
                         overridePendingTransition(0,0);
                         return true;
-
                 }
                 return false;
+            }
+        });
+        ImgSpinner = findViewById(R.id.mImage);
+        final String Adapter_name[]={"Search","Transport","Food","House","Entertainment","Education","Charity","Apparel","Health","Personal","Other"};
+        itemSpinner =findViewById(R.id.itemsspinner);
+        itemSpinner.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,Adapter_name));
+        itemSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(itemSpinner.getSelectedItem().toString().equals("Search")){
+                    ImgSpinner.setImageResource(R.drawable.searchh);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Transport")){
+                    ImgSpinner.setImageResource(R.drawable.transport);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Food")){
+                    ImgSpinner.setImageResource(R.drawable.food);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("House")){
+                    ImgSpinner.setImageResource(R.drawable.house);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Entertainment")){
+                    ImgSpinner.setImageResource(R.drawable.entertainment);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Education")){
+                    ImgSpinner.setImageResource(R.drawable.education);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Charity")){
+                    ImgSpinner.setImageResource(R.drawable.charity);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Apparel")){
+                    ImgSpinner.setImageResource(R.drawable.apparel);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Health")){
+                    ImgSpinner.setImageResource(R.drawable.health);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Personal")){
+                    ImgSpinner.setImageResource(R.drawable.personal);
+                }
+                else if(itemSpinner.getSelectedItem().toString().equals("Other")){
+                    ImgSpinner.setImageResource(R.drawable.other);
+                }
+                values = itemSpinner.getSelectedItem().toString();
+                readMonthSpendingItems();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
@@ -89,11 +164,13 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
         dateSearch = findViewById(R.id.date);
         results = findViewById(R.id.results);
         results_day = findViewById(R.id.results_day);
+        detail = findViewById(R.id.detail);
 
         mAuth = FirebaseAuth.getInstance();
         onlineUserId = mAuth.getCurrentUser().getUid();
 
         recyclerView = findViewById(R.id.recycler_View_Id_feed);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
@@ -102,6 +179,7 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
         myDataList = new ArrayList<>();
         ItemsAdapter = new ItemAdapter(HistoryActivity.this, myDataList);
         recyclerView.setAdapter(ItemsAdapter);
+
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,10 +187,57 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
             }
         });
         historyLayout = findViewById(R.id.historyList);
+        ImgSpinner.setImageResource(R.drawable.searchh);
+
         beforeSearchLayout = findViewById(R.id.before_search_results);
         noResultLayout = findViewById(R.id.no_results_found);
     }
+    private void readMonthSpendingItems() {
+        MutableDateTime epoch = new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
+        expensesRef = FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query = expensesRef.orderByChild("month").equalTo(months.getMonths());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                myDataList1.clear();
+                int totalAmount = 0;
+                int i=0;
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Data data = dataSnapshot.getValue(Data.class);
+                    if(data.getItem().toString().equals(values)) {
+                        myDataList1.add(data);
+                        totalAmount +=data.getAmount();
+                        i++;
+                    }
+                }
+                weekSpendingAdapter.notifyDataSetChanged();
+                if(i!=0)
+                {
+                    historyList_Values.setVisibility(View.VISIBLE);
+                    historyTotalAmountSpent.setVisibility(View.VISIBLE);
 
+                    noResultLayout.setVisibility(View.GONE);
+                    historyLayout.setVisibility(View.GONE);
+                    beforeSearchLayout.setVisibility(View.GONE);
+                    results.setVisibility(View.GONE);
+                    results_day.setVisibility(View.GONE);
+                    detail.setVisibility(View.GONE);
+                    historyTotalAmountSpent.setText("$ " + totalAmount);
+                }
+                else{
+                    historyList_Values.setVisibility(View.GONE);
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void showDatePickerDialog() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
@@ -124,9 +249,9 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
         datePickerDialog.show();
         historyTotalAmountSpent.setText("");
         dateSearch.setText("");
+        ImgSpinner.setImageResource(R.drawable.searchh);
         totalAmount=0;
     }
-
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         int months = month + 1;
@@ -149,7 +274,6 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
             }
         }
         Date=date;
-
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
         Query query = reference.orderByChild("date").equalTo(date);
         query.addValueEventListener(new ValueEventListener() {
@@ -166,6 +290,7 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
                     beforeSearchLayout.setVisibility(View.GONE);
                     results.setVisibility(View.GONE);
                     results_day.setVisibility(View.GONE);
+                    historyList_Values.setVisibility(View.GONE);
                     Toast.makeText(HistoryActivity.this, "Please choose another day", Toast.LENGTH_SHORT).show();
                 }
                 ItemsAdapter.notifyDataSetChanged();
@@ -178,12 +303,14 @@ public class HistoryActivity extends AppCompatActivity implements DatePickerDial
                     if(totalAmount>0){
                         historyTotalAmountSpent.setVisibility(View.VISIBLE);
                         dateSearch.setVisibility(View.VISIBLE);
+
+                        detail.setVisibility(View.VISIBLE);
                         results.setVisibility(View.VISIBLE);
                         results_day.setVisibility(View.VISIBLE);
                         historyLayout.setVisibility(View.VISIBLE);
                         noResultLayout.setVisibility(View.GONE);
                         beforeSearchLayout.setVisibility(View.GONE);
-
+                        historyList_Values.setVisibility(View.GONE);
                         historyTotalAmountSpent.setText(" "+totalAmount+"$");
                         dateSearch.setText(" "+Date);
                     }

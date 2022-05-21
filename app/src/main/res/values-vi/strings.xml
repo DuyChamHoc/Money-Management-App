@@ -42,7 +42,7 @@
     <string name="Today_spending">Hôm nay</string>
     <string name="Today_title">Hôm nay bạn đã chi</string>
     <string name="transaction">Giao dịch: </string>
-    <string name="total">Tổng: </string>
+    <string name="total">Tổng chi tiêu: </string>
     <string name="On">Vào: </string>
     <string name="Person_info">Thông tin cá nhân</string>
     <string name="cancel">Hủy</string>
@@ -64,4 +64,6 @@
     <string name="title_forgot">Nhập địa chỉ email bạn đã sử dụng để đăng ký và chúng tôi sẽ gửi cho bạn một email khôi phục mật khẩu của bạn ngay lập tức.</string>
     <string name="email">E-mail</string>
     <string name="send">Xác nhận</string>
+    <string name="week_title">Tuần này bạn đã chi</string>
+    <string name="month_title">Tháng này bạn đã chi</string>
 </resources>

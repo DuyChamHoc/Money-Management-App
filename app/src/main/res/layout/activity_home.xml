@@ -16,48 +16,54 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="365dp"
             android:background="@drawable/layout_bolinearcolor"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="200dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:text="Money Management"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                android:layout_width="200dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="105dp"
-                android:layout_marginTop="10dp">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_hoso"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="-39dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/layout_bolinearcolor"
+                    android:src="@drawable/layout_avt" />
 
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/image_hoso"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="-39dp"
-                android:background="@drawable/layout_bolinearcolor"
-                android:src="@drawable/layout_avt" />
-
-            <ImageButton
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginLeft="350dp"
-                android:layout_marginTop="-50dp"
-                android:background="@drawable/notifiaction" />
-            <!--        <com.nex3z.notificationbadge.NotificationBadge-->
-            <!--            android:layout_width="30dp"-->
-            <!--            android:layout_height="30dp"-->
-            <!--            android:layout_marginTop="-45dp"-->
-            <!--            app:nbMaxTextLength="2"-->
-            <!--            android:layout_marginLeft="360dp">-->
-            <!--        </com.nex3z.notificationbadge.NotificationBadge>-->
+                <ImageButton
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="-50dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/notifiaction" />
+                <!--        <com.nex3z.notificationbadge.NotificationBadge-->
+                <!--            android:layout_width="30dp"-->
+                <!--            android:layout_height="30dp"-->
+                <!--            android:layout_marginTop="-45dp"-->
+                <!--            app:nbMaxTextLength="2"-->
+                <!--            android:layout_marginLeft="360dp">-->
+                <!--        </com.nex3z.notificationbadge.NotificationBadge>-->
+            </LinearLayout>
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:text="@string/Balance"
                 android:textAlignment="center"
                 android:textColor="#000"
@@ -161,7 +167,8 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            >
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

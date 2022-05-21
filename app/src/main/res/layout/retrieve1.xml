@@ -48,9 +48,9 @@
 
                 <TextView
                     android:id="@+id/amount"
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="60dp"
+                    android:gravity="center"
                     android:text="$0"
                     android:layout_gravity="center"
                     android:textColor="#FD3C4A"
@@ -72,7 +72,7 @@
                         android:text="@string/Note"/>
                     <TextView
                         android:id="@+id/note"
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="note"
                         android:textColor="#91919F"
@@ -80,8 +80,9 @@
                         android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="110dp"
+                    android:layout_width="150dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_width="wrap_content"

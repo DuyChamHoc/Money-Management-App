@@ -117,17 +117,14 @@ public class MonthSpendingActivity extends AppCompatActivity {
                     Data data = dataSnapshot.getValue(Data.class);
                     myDataList.add(data);
                 }
-
                 weekSpendingAdapter.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
-
                 int totalAmount = 0;
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     Map<String, Object> map = (Map<String, Object>) ds.getValue();
                     Object total = map.get("amount");
                     int pTotal = Integer.parseInt(String.valueOf(total));
                     totalAmount += pTotal;
-
                     totalWeekAmountTextView.setText("$ " + totalAmount);
                 }
             }
@@ -169,7 +166,6 @@ public class MonthSpendingActivity extends AppCompatActivity {
                     totalWeekAmountTextView.setText("Chi phí trong tuần: $" + totalAmount);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
