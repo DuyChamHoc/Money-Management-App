@@ -36,17 +36,20 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 
 public class AccountActivity extends AppCompatActivity {
 
     private ImageView img_avatar,img_camera;
-    private TextInputEditText edtFullName;
-    private TextInputEditText tv_email;
+    private TextInputEditText edtFullName,phonenumber,birthday,tv_email;
     private String a[];
     private Uri muri;
-
+    private FirebaseAuth mAuth;
+    private DatabaseReference budgetRef;
     private Button btn_update,btn_cancel;
     private ProgressDialog progressDialog;
 
@@ -82,10 +85,34 @@ public class AccountActivity extends AppCompatActivity {
         img_camera = findViewById(R.id.img_camera);
         edtFullName = findViewById(R.id.edtFullName);
         tv_email = findViewById(R.id.tv_email);
-
-
+        phonenumber=findViewById(R.id.phonenumber);
+        birthday=findViewById(R.id.date);
         btn_update = findViewById(R.id.button_update);
         btn_cancel = findViewById(R.id.button_cancel);
+        mAuth=FirebaseAuth.getInstance();
+        budgetRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        budgetRef.child("birthday").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    birthday.setText(String.valueOf(task.getResult().getValue()));
+                }
+                else {
+                    Toast.makeText(AccountActivity.this, "return data false", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        budgetRef.child("phone").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                   phonenumber.setText(String.valueOf(task.getResult().getValue()));
+                }
+                else {
+                    Toast.makeText(AccountActivity.this, "return data false", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
 
         progressDialog=new ProgressDialog(this);
@@ -95,15 +122,26 @@ public class AccountActivity extends AppCompatActivity {
         }
         String email=user.getEmail();
         String name = user.getDisplayName();
+        if(name.equals("")){
+        budgetRef.child("fullname").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    edtFullName.setText(String.valueOf(task.getResult().getValue()));
+                }
+                else {
+                    Toast.makeText(AccountActivity.this, "return data false", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });}
+        else{
         tv_email.setText(email);
-        edtFullName.setText(name);
-        Uri photoUrl = user.getPhotoUrl();
-        Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);
-        muri=photoUrl;
-
-        initListener();
-        showUserInformation();
-
+            edtFullName.setText(name);
+            Uri photoUrl = user.getPhotoUrl();
+            Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);
+            muri = photoUrl;
+            initListener();
+            showUserInformation();
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,7 +150,7 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }}
 
     private void initListener() {
         img_camera.setOnClickListener(new View.OnClickListener() {
@@ -185,7 +223,6 @@ public class AccountActivity extends AppCompatActivity {
         }
         String name = user.getDisplayName();
         Uri photoUrl = user.getPhotoUrl();
-
         edtFullName.setText(name);
         Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);
     }

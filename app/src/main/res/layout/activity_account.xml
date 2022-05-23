@@ -107,7 +107,7 @@
                 />
 
             <com.google.android.material.textfield.TextInputEditText
-
+                android:id="@+id/phonenumber"
                 android:layout_width="330dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="57dp"
@@ -134,7 +134,7 @@
                 />
 
             <com.google.android.material.textfield.TextInputEditText
-
+                android:id="@+id/date"
                 android:layout_width="330dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="57dp"

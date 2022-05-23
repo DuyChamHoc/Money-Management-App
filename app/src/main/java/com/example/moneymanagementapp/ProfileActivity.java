@@ -37,6 +37,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.BitSet;
@@ -48,6 +51,8 @@ public class ProfileActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     GoogleApiClient mGoogleApiClient;
     private GoogleSignInClient mGoogleSignInClient;
+    private FirebaseAuth mAuth;
+    private DatabaseReference budgetRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +70,8 @@ public class ProfileActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.action_profile);
         bottomNavigationView.setBackground(null);
 
+        mAuth=FirebaseAuth.getInstance();
+        budgetRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
 
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -111,6 +118,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,9 +139,9 @@ public class ProfileActivity extends AppCompatActivity {
                         .show();
             }
         });
+
         showUserInformation();
     }
-
 
     private void showUserInformation() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -141,11 +149,25 @@ public class ProfileActivity extends AppCompatActivity {
             return;
         }
         String name = user.getDisplayName();
+        if(name.equals("")){
+            budgetRef.child("fullname").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        tv_name.setText(String.valueOf(task.getResult().getValue()));
+                    }
+                    else {
+                        Toast.makeText(ProfileActivity.this, "return data false", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+        else{
         Uri photoUrl = user.getPhotoUrl();
 
         tv_name.setText(name);
         //tv_name.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);
+        Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);}
     }
 }
 
