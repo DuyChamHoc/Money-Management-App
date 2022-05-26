@@ -53,7 +53,7 @@ import java.util.Objects;
 public class HomeActivity extends AppCompatActivity {
 
     private ImageView image_hoso;
-
+private ImageButton bell;
     private LinearLayout linearNgansach;
     private RelativeLayout bigestlayout;
 
@@ -84,6 +84,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        bell=findViewById(R.id.bell);
         tv_homnay = findViewById(R.id.tv_homnay);
         tv_week = findViewById(R.id.tv_week);
         tv_month = findViewById(R.id.tv_month);
@@ -168,7 +169,13 @@ public class HomeActivity extends AppCompatActivity {
                 handleFab();
             }
         });
-
+bell.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent intent=new Intent(HomeActivity.this,NotificationActivity.class);
+        startActivity(intent);
+    }
+});
         bigestlayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {

@@ -4,11 +4,19 @@ package com.example.moneymanagementapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -47,6 +55,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class TodaySpendingActivity extends AppCompatActivity {
 
@@ -62,7 +71,16 @@ public class TodaySpendingActivity extends AppCompatActivity {
     private DatabaseReference budgetRef;
     private TodayItemAdapter todayItemsAdapter;
     private List<Data> myDataList;
-
+    String idApparel="channel_Apparel";
+    String idCharity="channel_Charity";
+    String idEducation="channel_Education";
+    String idEntertainment="channel_Entertainment";
+    String idFood="channel_Food";
+    String idHealth="channel_Health";
+    String idHouse="channel_House";
+    String idPersonal="channel_Personal";
+    String idTransport="channel_Transport";
+    String idOther="channel_Other";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,8 +127,6 @@ public class TodaySpendingActivity extends AppCompatActivity {
         f = new SimpleDateFormat("EEEE");
         String str = f.format(new Date());
         this_day.setText(str);
-
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -211,7 +227,6 @@ public class TodaySpendingActivity extends AppCompatActivity {
 
             }
         });
-
         final EditText amount =myView.findViewById(R.id.amount);
         final EditText note=myView.findViewById(R.id.note);
         final ImageView save =myView.findViewById(R.id.save);
@@ -230,7 +245,7 @@ public class TodaySpendingActivity extends AppCompatActivity {
                 String Amount=amount.getText().toString();
                 String Item =itemSpinner.getSelectedItem().toString();
                 String notes=note.getText().toString();
-
+                checkIn();
                 if(TextUtils.isEmpty(Amount)){
                     amount.setError("Amount is required");
                     return;
@@ -266,6 +281,7 @@ public class TodaySpendingActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(TodaySpendingActivity.this, "Budget item added successful", Toast.LENGTH_SHORT).show();
+                                check(Item);
                             }
                             else {
                                 Toast.makeText(TodaySpendingActivity.this,task.getException().toString(), Toast.LENGTH_SHORT).show();
@@ -285,634 +301,1168 @@ public class TodaySpendingActivity extends AppCompatActivity {
     /////////////////////////////////
     ///////////////////////////////
 
-    public int totalAmount=0;
-    private Boolean getTotalWeekOtherExpenses() {
-        MutableDateTime epoch=new MutableDateTime();
+    int totalAmount;
+
+    private int getTotalWeekOtherExpenses() {
+        MutableDateTime epoch = new MutableDateTime();
         epoch.setDate(0);
-        DateTime now=new DateTime();
-        Months months=Months.monthsBetween(epoch,now);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
 
-        String itemNmonth="Other"+months.getMonths();
+        String itemNmonth = "Other" + months.getMonths();
 
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
-        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot ds:snapshot.getChildren()) {
-                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
-                        Object total = map.get("amount");
-                        int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount += pTotal;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        if(totalAmount>getMonthOtherBudgetRatio()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    public int total;
-    private int getMonthOtherBudgetRatio() {
-        Query query = budgetRef.orderByChild("item").equalTo("Other");
-        query.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int pTotal = 0;
+                int total1 = 0;
                 if (snapshot.exists()) {
+
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
-                        pTotal = Integer.parseInt(String.valueOf(total));
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
                     }
+                    totalAmount = total1;
                 }
-                total=pTotal;
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        return totalAmount;
+    }
+
+    public int total;
+
+    private int getMonthOtherBudgetRatio() {
+        MutableDateTime epoch = new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
+
+        String itemNmonth = "Other" + months.getMonths();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("budget").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int total1 = 0;
+                if (snapshot.exists()) {
+
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
+                    }
+                    totalAmount = total1;
+                }
 
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
         });
         return total;
     }
-    public int totalAmount1=0;
-    private Boolean getTotalWeekPersonalExpenses() {
-        MutableDateTime epoch=new MutableDateTime();
+
+    public int totalAmount1;
+
+    private int getTotalWeekPersonalExpenses() {
+        MutableDateTime epoch = new MutableDateTime();
         epoch.setDate(0);
-        DateTime now=new DateTime();
-        Months months=Months.monthsBetween(epoch,now);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
 
-        String itemNmonth="Personal"+months.getMonths();
+        String itemNmonth = "Personal" + months.getMonths();
 
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
-        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot ds:snapshot.getChildren()) {
-                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
-                        Object total = map.get("amount");
-                        int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount1 += pTotal;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        if(totalAmount1>getMonthPersonalBudgetRatio()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    public int total1;
-    private int getMonthPersonalBudgetRatio() {
-        Query query = budgetRef.orderByChild("item").equalTo("Personal");
-        query.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int pTotal = 0;
+                int total1 = 0;
                 if (snapshot.exists()) {
+
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
-                        pTotal = Integer.parseInt(String.valueOf(total));
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
                     }
+                    totalAmount1 = total1;
                 }
-                total1=pTotal;
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        return totalAmount1;
+    }
+
+    public int total1;
+
+    private int getMonthPersonalBudgetRatio() {
+        MutableDateTime epoch = new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
+
+        String itemNmonth = "Personal" + months.getMonths();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("budget").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int total1 = 0;
+                if (snapshot.exists()) {
+
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
+                    }
+                    total1 = total1;
+                }
 
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
         });
         return total1;
     }
-    public int totalAmount2=0;
-    private Boolean getTotalWeekHealthExpenses() {
-        MutableDateTime epoch=new MutableDateTime();
+
+    public int totalAmount2;
+
+    private int getTotalWeekHealthExpenses() {
+        MutableDateTime epoch = new MutableDateTime();
         epoch.setDate(0);
-        DateTime now=new DateTime();
-        Months months=Months.monthsBetween(epoch,now);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
 
-        String itemNmonth="Health"+months.getMonths();
+        String itemNmonth = "Health" + months.getMonths();
 
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
-        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot ds:snapshot.getChildren()) {
-                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
-                        Object total = map.get("amount");
-                        int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount2 += pTotal;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        if(totalAmount2>getMonthHealthBudgetRatio()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    public int total2;
-    private int getMonthHealthBudgetRatio() {
-        Query query = budgetRef.orderByChild("item").equalTo("Health");
-        query.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int pTotal = 0;
+                int total1 = 0;
                 if (snapshot.exists()) {
+
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
-                        pTotal = Integer.parseInt(String.valueOf(total));
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
                     }
+                    totalAmount2 = total1;
                 }
-                total2=pTotal;
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        return totalAmount2;
+    }
+
+    public int total2;
+
+    private int getMonthHealthBudgetRatio() {
+        MutableDateTime epoch = new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
+
+        String itemNmonth = "Health" + months.getMonths();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("budget").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int total1 = 0;
+                if (snapshot.exists()) {
+
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
+                    }
+                    total2 = total1;
+                }
 
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
         });
         return total2;
     }
-    public int totalAmount3=0;
-    private Boolean getTotalWeekApparelExpenses() {
-        MutableDateTime epoch=new MutableDateTime();
+
+    public int totalAmount3;
+
+    private int getTotalWeekApparelExpenses() {
+        MutableDateTime epoch = new MutableDateTime();
         epoch.setDate(0);
-        DateTime now=new DateTime();
-        Months months=Months.monthsBetween(epoch,now);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
 
-        String itemNmonth="Apparel"+months.getMonths();
+        String itemNmonth = "Apparel" + months.getMonths();
 
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
-        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot ds:snapshot.getChildren()) {
-                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
-                        Object total = map.get("amount");
-                        int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount3 += pTotal;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        if(totalAmount3>getMonthApparelBudgetRatio()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    public int total3;
-    private int getMonthApparelBudgetRatio() {
-        Query query = budgetRef.orderByChild("item").equalTo("Apparel");
-        query.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int pTotal = 0;
+                int total1 = 0;
                 if (snapshot.exists()) {
+
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
-                        pTotal = Integer.parseInt(String.valueOf(total));
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
                     }
+                    totalAmount3 = total1;
                 }
-                total3=pTotal;
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        return totalAmount3;
+    }
+
+    public int total3;
+
+    private int getMonthApparelBudgetRatio() {
+        MutableDateTime epoch = new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
+
+        String itemNmonth = "Apparel" + months.getMonths();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("budget").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int total1 = 0;
+                if (snapshot.exists()) {
+
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
+                    }
+                    total3 = total1;
+                }
 
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
         });
         return total3;
     }
-    public int totalAmount4=0;
-    private Boolean getTotalWeekCharityExpenses() {
-        MutableDateTime epoch=new MutableDateTime();
+
+    public int totalAmount4;
+
+    private int getTotalWeekCharityExpenses() {
+        MutableDateTime epoch = new MutableDateTime();
         epoch.setDate(0);
-        DateTime now=new DateTime();
-        Months months=Months.monthsBetween(epoch,now);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
 
-        String itemNmonth="Charity"+months.getMonths();
+        String itemNmonth = "Charity" + months.getMonths();
 
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
-        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot ds:snapshot.getChildren()) {
-                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
-                        Object total = map.get("amount");
-                        int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount4 += pTotal;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        if(totalAmount4>getMonthCharityBudgetRatio()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    public int total4;
-    private int getMonthCharityBudgetRatio() {
-        Query query = budgetRef.orderByChild("item").equalTo("Charity");
-        query.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int pTotal = 0;
+                int total1 = 0;
                 if (snapshot.exists()) {
+
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
-                        pTotal = Integer.parseInt(String.valueOf(total));
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
                     }
+                    totalAmount4 = total1;
                 }
-                total4=pTotal;
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        return totalAmount4;
+    }
+
+    public int total4;
+
+    private int getMonthCharityBudgetRatio() {
+        MutableDateTime epoch = new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
+
+        String itemNmonth = "Charity" + months.getMonths();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("budget").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int total1 = 0;
+                if (snapshot.exists()) {
+
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
+                    }
+                    total4 = total1;
+                }
 
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
         });
         return total4;
     }
-    public int totalAmount5=0;
-    private Boolean getTotalWeekEducationExpenses() {
-        MutableDateTime epoch=new MutableDateTime();
+
+    public int totalAmount5;
+
+    private int getTotalWeekEducationExpenses() {
+        MutableDateTime epoch = new MutableDateTime();
         epoch.setDate(0);
-        DateTime now=new DateTime();
-        Months months=Months.monthsBetween(epoch,now);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
 
-        String itemNmonth="Education"+months.getMonths();
+        String itemNmonth = "Education" + months.getMonths();
 
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
-        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot ds:snapshot.getChildren()) {
-                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
-                        Object total = map.get("amount");
-                        int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount5 += pTotal;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        if(totalAmount5>getMonthEducationBudgetRatio()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    public int total5;
-    private int getMonthEducationBudgetRatio() {
-        Query query = budgetRef.orderByChild("item").equalTo("Education");
-        query.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int pTotal = 0;
+                int total1 = 0;
                 if (snapshot.exists()) {
+
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
-                        pTotal = Integer.parseInt(String.valueOf(total));
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
                     }
+                    totalAmount5 = total1;
                 }
-                total5=pTotal;
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        return totalAmount5;
+    }
+
+    public int total5;
+
+    private int getMonthEducationBudgetRatio() {
+        MutableDateTime epoch = new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
+
+        String itemNmonth = "Education" + months.getMonths();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("budget").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int total1 = 0;
+                if (snapshot.exists()) {
+
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
+                    }
+                    total5 = total1;
+                }
 
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
         });
         return total5;
     }
-    public int totalAmount6=0;
-    private Boolean getTotalWeekEntertainmentExpenses() {
-        MutableDateTime epoch=new MutableDateTime();
+
+    public int totalAmount6;
+
+    private int getTotalWeekEntertainmentExpenses() {
+        MutableDateTime epoch = new MutableDateTime();
         epoch.setDate(0);
-        DateTime now=new DateTime();
-        Months months=Months.monthsBetween(epoch,now);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
 
-        String itemNmonth="Entertainment"+months.getMonths();
+        String itemNmonth = "Entertainment" + months.getMonths();
 
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
-        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot ds:snapshot.getChildren()) {
-                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
-                        Object total = map.get("amount");
-                        int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount6 += pTotal;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        if(totalAmount6>getMonthEntertainmentBudgetRatio()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    public int total6;
-    private int getMonthEntertainmentBudgetRatio() {
-        Query query = budgetRef.orderByChild("item").equalTo("Entertainment");
-        query.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int pTotal = 0;
+                int total1 = 0;
                 if (snapshot.exists()) {
+
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
-                        pTotal = Integer.parseInt(String.valueOf(total));
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
                     }
+                    totalAmount6 = total1;
                 }
-                total6=pTotal;
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        return totalAmount6;
+    }
+
+    public int total6;
+
+    private int getMonthEntertainmentBudgetRatio() {
+        MutableDateTime epoch = new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
+
+        String itemNmonth = "Entertainment" + months.getMonths();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("budget").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int total1 = 0;
+                if (snapshot.exists()) {
+
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
+                    }
+                    total6 = total1;
+                }
 
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
         });
         return total6;
     }
-    public int totalAmount7=0;
-    private Boolean getTotalWeekHouseExpenses() {
-        MutableDateTime epoch=new MutableDateTime();
+
+    public int totalAmount7;
+
+    private int getTotalWeekHouseExpenses() {
+        MutableDateTime epoch = new MutableDateTime();
         epoch.setDate(0);
-        DateTime now=new DateTime();
-        Months months=Months.monthsBetween(epoch,now);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
 
-        String itemNmonth="House"+months.getMonths();
+        String itemNmonth = "House" + months.getMonths();
 
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
-        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot ds:snapshot.getChildren()) {
-                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
-                        Object total = map.get("amount");
-                        int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount7 += pTotal;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        if(totalAmount6>getMonthHouseBudgetRatio()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    public int total7;
-    private int getMonthHouseBudgetRatio() {
-        Query query = budgetRef.orderByChild("item").equalTo("House");
-        query.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int pTotal = 0;
+                int total1 = 0;
                 if (snapshot.exists()) {
+
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
-                        pTotal = Integer.parseInt(String.valueOf(total));
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
                     }
+                    totalAmount7 = total1;
                 }
-                total7=pTotal;
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        return totalAmount7;
+    }
+
+    public int total7;
+
+    private int getMonthHouseBudgetRatio() {
+        MutableDateTime epoch = new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
+        String itemNmonth = "House" + months.getMonths();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("budget").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int total1 = 0;
+                if (snapshot.exists()) {
+
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
+                    }
+                    total7 = total1;
+                }
 
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
         });
         return total7;
     }
-    public int totalAmount8=0;
-    private Boolean getTotalWeekFoodExpenses() {
-        MutableDateTime epoch=new MutableDateTime();
+
+    public int totalAmount8;
+    private int getTotalWeekFoodExpenses() {
+        MutableDateTime epoch = new MutableDateTime();
         epoch.setDate(0);
-        DateTime now=new DateTime();
-        Months months=Months.monthsBetween(epoch,now);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
 
-        String itemNmonth="Food"+months.getMonths();
+        String itemNmonth = "Food" + months.getMonths();
 
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
-        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot ds:snapshot.getChildren()) {
-                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
-                        Object total = map.get("amount");
-                        int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount8 += pTotal;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        if(totalAmount8>getMonthFoodBudgetRatio()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    public int total8;
-    private int getMonthFoodBudgetRatio() {
-        Query query = budgetRef.orderByChild("item").equalTo("Food");
-        query.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int pTotal = 0;
+                int total1 = 0;
                 if (snapshot.exists()) {
+
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
-                        pTotal = Integer.parseInt(String.valueOf(total));
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
                     }
+                    totalAmount8 = total1;
                 }
-                total8=pTotal;
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        return totalAmount8;
+    }
+
+    public int total8;
+
+    private int getMonthFoodBudgetRatio() {
+        MutableDateTime epoch = new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
+
+        String itemNmonth = "Food" + months.getMonths();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("budget").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int total1 = 0;
+                if (snapshot.exists()) {
+
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
+                    }
+                    total8 = total1;
+                }
 
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
         });
         return total8;
     }
-    public int totalAmount9=0;
-    private Boolean getTotalTransportFoodExpenses() {
-        MutableDateTime epoch=new MutableDateTime();
+
+    public int totalAmount9;
+
+    private int getTotalWeekTransportExpenses() {
+        MutableDateTime epoch = new MutableDateTime();
         epoch.setDate(0);
-        DateTime now=new DateTime();
-        Months months=Months.monthsBetween(epoch,now);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
 
-        String itemNmonth="Transport"+months.getMonths();
+        String itemNmonth = "Transport" + months.getMonths();
 
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
-        Query query=reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot ds:snapshot.getChildren()) {
-                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
-                        Object total = map.get("amount");
-                        int pTotal = Integer.parseInt(String.valueOf(total));
-                        totalAmount9 += pTotal;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(TodaySpendingActivity.this,error.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        if(totalAmount9>getMonthTransportBudgetRatio()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    public int total9;
-    private int getMonthTransportBudgetRatio() {
-        Query query = budgetRef.orderByChild("item").equalTo("Transport");
-        query.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int pTotal = 0;
+                int total1 = 0;
                 if (snapshot.exists()) {
+
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
-                        pTotal = Integer.parseInt(String.valueOf(total));
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
                     }
+                    totalAmount9 = total1;
                 }
-                total9=pTotal;
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        return totalAmount9;
+    }
+
+    public int total9;
+
+    private int getMonthTransportBudgetRatio() {
+        MutableDateTime epoch = new MutableDateTime();
+        epoch.setDate(0);
+        DateTime now = new DateTime();
+        Months months = Months.monthsBetween(epoch, now);
+
+        String itemNmonth = "Transport" + months.getMonths();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("budget").child(onlineUserId);
+        Query query = reference.orderByChild("itemNmonth").equalTo(itemNmonth);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int total1 = 0;
+                if (snapshot.exists()) {
+
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                        Object total = map.get("amount");
+                        int pTotal = Integer.parseInt(String.valueOf(total));
+                        total1 += pTotal;
+                    }
+                    total9 = total1;
+                }
 
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(TodaySpendingActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
         });
         return total9;
+    }
+  private void  checkIn()
+    {
+        if(getTotalWeekApparelExpenses()>getMonthApparelBudgetRatio())
+        {
+
+        }
+        if(getTotalWeekCharityExpenses()>getMonthCharityBudgetRatio())
+        {
+
+        }
+        if(getTotalWeekEntertainmentExpenses()>getMonthEntertainmentBudgetRatio())
+        {
+
+        }
+        if(getTotalWeekEducationExpenses()>getMonthEducationBudgetRatio())
+        {
+
+        }
+        if(getTotalWeekFoodExpenses()>getMonthFoodBudgetRatio())
+        {
+
+        }
+        if(getTotalWeekHealthExpenses()>getMonthHealthBudgetRatio())
+        {
+
+        }
+        if(getTotalWeekHouseExpenses()>getMonthHouseBudgetRatio())
+        {
+
+        }
+        if(getTotalWeekPersonalExpenses()>getMonthPersonalBudgetRatio())
+        {
+
+        }
+        if(getTotalWeekTransportExpenses()>getMonthTransportBudgetRatio())
+        {
+
+        }
+        if(getTotalWeekOtherExpenses()>getMonthOtherBudgetRatio())
+        {
+
+        }
+    }
+    private void check(String Item)
+    {
+        if(Item.equals("Apparel")&&getTotalWeekApparelExpenses()>getMonthApparelBudgetRatio()&&getMonthApparelBudgetRatio()>0)
+        {
+            createNotificationApparel();
+        }
+        if(Item.equals("Charity")&&getTotalWeekCharityExpenses()>getMonthCharityBudgetRatio()&&getMonthCharityBudgetRatio()>0)
+        {
+            createNotificationCharity();
+        }
+        if(Item.equals("Entertainment")&&getTotalWeekEntertainmentExpenses()>getMonthEntertainmentBudgetRatio()&&getMonthEntertainmentBudgetRatio()>0)
+        {
+             createNotificationEntertainment();
+        }
+        if(Item.equals("Education")&&getTotalWeekEducationExpenses()>getMonthEducationBudgetRatio()&&getMonthEducationBudgetRatio()>0)
+        {
+                  createNotificationEducation();
+        }
+        if(Item.equals("Food")&&getTotalWeekFoodExpenses()>getMonthFoodBudgetRatio()&&getMonthFoodBudgetRatio()>0)
+        {
+                  createNotificationFood();
+        }
+        if(Item.equals("Health")&&getTotalWeekHealthExpenses()>getMonthHealthBudgetRatio()&&getMonthHealthBudgetRatio()>0)
+        {
+                  createNotificationHealth();
+        }
+        if(Item.equals("House")&&getTotalWeekHouseExpenses()>getMonthHouseBudgetRatio()&&getMonthHouseBudgetRatio()>0)
+        {
+                  createNotificationHouse();
+        }
+        if(Item.equals("Personal")&&getTotalWeekPersonalExpenses()>getMonthPersonalBudgetRatio()&&getMonthPersonalBudgetRatio()>0)
+        {
+                 createNotificationPersonal();
+        }
+        if(Item.equals("Transport")&&getTotalWeekTransportExpenses()>getMonthApparelBudgetRatio()&&getMonthTransportBudgetRatio()>0)
+        {
+               createNotificationTransport();
+        }
+        if(Item.equals("Other")&&getTotalWeekOtherExpenses()>getMonthOtherBudgetRatio()&&getMonthOtherBudgetRatio()>0)
+        {
+             createNotificationOther();
+        }
+    }
+private void createNotificationApparel()
+    {
+        NotificationManager manager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            NotificationChannel channel=manager.getNotificationChannel(idApparel);
+            if(channel==null)
+            {
+                channel =new NotificationChannel(idApparel,"Cảnh báo",NotificationManager.IMPORTANCE_HIGH);
+                channel.setDescription("Vượt mức chi tiêu");
+                channel.enableVibration(true);
+                channel.setVibrationPattern(new long[]{100,1000,200,340});
+                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+                manager.createNotificationChannel(channel);
+            }
+        }
+        Intent notificationIntent =new Intent(TodaySpendingActivity.this,NotificationActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent contentIntent =PendingIntent.getActivity(this,0,notificationIntent,0);
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(this,idApparel)
+                .setSmallIcon(R.drawable.apparel)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.apparel))
+                .setContentTitle("Cảnh báo")
+                .setContentText("Vượt mức chi tiêu")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setVibrate(new long[]{100,1000,200,340})
+                .setAutoCancel(true)
+                .setTicker("Notification");
+        builder.setContentIntent(contentIntent);
+        NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
+        m.notify(new Random().nextInt(),builder.build());
+    }
+    private void createNotificationCharity()
+    {
+        NotificationManager manager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            NotificationChannel channel=manager.getNotificationChannel(idCharity);
+            if(channel==null)
+            {
+                channel =new NotificationChannel(idCharity,"Cảnh báo",NotificationManager.IMPORTANCE_HIGH);
+                channel.setDescription("Vượt mức chi tiêu");
+                channel.enableVibration(true);
+                channel.setVibrationPattern(new long[]{100,1000,200,340});
+                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+                manager.createNotificationChannel(channel);
+            }
+        }
+        Intent notificationIntent =new Intent(TodaySpendingActivity.this,NotificationActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent contentIntent =PendingIntent.getActivity(this,0,notificationIntent,0);
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(this,idCharity)
+                .setSmallIcon(R.drawable.charity)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.charity))
+                .setContentTitle("Cảnh báo")
+                .setContentText("Vượt mức chi tiêu")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setVibrate(new long[]{100,1000,200,340})
+                .setAutoCancel(true)
+                .setTicker("Notification");
+        builder.setContentIntent(contentIntent);
+        NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
+        m.notify(new Random().nextInt(),builder.build());
+    }
+    private void createNotificationEducation()
+    {
+        NotificationManager manager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            NotificationChannel channel=manager.getNotificationChannel(idEducation);
+            if(channel==null)
+            {
+                channel =new NotificationChannel(idEducation,"Cảnh báo",NotificationManager.IMPORTANCE_HIGH);
+                channel.setDescription("Vượt mức chi tiêu");
+                channel.enableVibration(true);
+                channel.setVibrationPattern(new long[]{100,1000,200,340});
+                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+                manager.createNotificationChannel(channel);
+            }
+        }
+        Intent notificationIntent =new Intent(TodaySpendingActivity.this,NotificationActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent contentIntent =PendingIntent.getActivity(this,0,notificationIntent,0);
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(this,idEducation)
+                .setSmallIcon(R.drawable.education)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.education))
+                .setContentTitle("Cảnh báo")
+                .setContentText("Vượt mức chi tiêu")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setVibrate(new long[]{100,1000,200,340})
+                .setAutoCancel(true)
+                .setTicker("Notification");
+        builder.setContentIntent(contentIntent);
+        NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
+        m.notify(new Random().nextInt(),builder.build());
+    }
+    private void createNotificationEntertainment()
+    {
+        NotificationManager manager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            NotificationChannel channel=manager.getNotificationChannel(idEntertainment);
+            if(channel==null)
+            {
+                channel =new NotificationChannel(idEntertainment,"Cảnh báo",NotificationManager.IMPORTANCE_HIGH);
+                channel.setDescription("Vượt mức chi tiêu");
+                channel.enableVibration(true);
+                channel.setVibrationPattern(new long[]{100,1000,200,340});
+                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+                manager.createNotificationChannel(channel);
+            }
+        }
+        Intent notificationIntent =new Intent(TodaySpendingActivity.this,NotificationActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent contentIntent =PendingIntent.getActivity(this,0,notificationIntent,0);
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(this,idEntertainment)
+                .setSmallIcon(R.drawable.entertainment)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.entertainment))
+                .setContentTitle("Cảnh báo")
+                .setContentText("Vượt mức chi tiêu")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setVibrate(new long[]{100,1000,200,340})
+                .setAutoCancel(true)
+                .setTicker("Notification");
+        builder.setContentIntent(contentIntent);
+        NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
+        m.notify(new Random().nextInt(),builder.build());
+    }
+    private void createNotificationFood()
+    {
+        NotificationManager manager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            NotificationChannel channel=manager.getNotificationChannel(idFood);
+            if(channel==null)
+            {
+                channel =new NotificationChannel(idFood,"Cảnh báo",NotificationManager.IMPORTANCE_HIGH);
+                channel.setDescription("Vượt mức chi tiêu");
+                channel.enableVibration(true);
+                channel.setVibrationPattern(new long[]{100,1000,200,340});
+                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+                manager.createNotificationChannel(channel);
+            }
+        }
+        Intent notificationIntent =new Intent(TodaySpendingActivity.this,NotificationActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent contentIntent =PendingIntent.getActivity(this,0,notificationIntent,0);
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(this,idFood)
+                .setSmallIcon(R.drawable.food)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.food))
+                .setContentTitle("Cảnh báo")
+                .setContentText("Vượt mức chi tiêu")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setVibrate(new long[]{100,1000,200,340})
+                .setAutoCancel(true)
+                .setTicker("Notification");
+        builder.setContentIntent(contentIntent);
+        NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
+        m.notify(new Random().nextInt(),builder.build());
+    }
+    private void createNotificationHealth()
+    {
+        NotificationManager manager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            NotificationChannel channel=manager.getNotificationChannel(idHealth);
+            if(channel==null)
+            {
+                channel =new NotificationChannel(idHealth,"Cảnh báo",NotificationManager.IMPORTANCE_HIGH);
+                channel.setDescription("Vượt mức chi tiêu");
+                channel.enableVibration(true);
+                channel.setVibrationPattern(new long[]{100,1000,200,340});
+                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+                manager.createNotificationChannel(channel);
+            }
+        }
+        Intent notificationIntent =new Intent(TodaySpendingActivity.this,NotificationActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent contentIntent =PendingIntent.getActivity(this,0,notificationIntent,0);
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(this,idHealth)
+                .setSmallIcon(R.drawable.health)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.health))
+                .setContentTitle("Cảnh báo")
+                .setContentText("Vượt mức chi tiêu")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setVibrate(new long[]{100,1000,200,340})
+                .setAutoCancel(true)
+                .setTicker("Notification");
+        builder.setContentIntent(contentIntent);
+        NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
+        m.notify(new Random().nextInt(),builder.build());
+    }
+    private void createNotificationHouse()
+    {
+        NotificationManager manager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            NotificationChannel channel=manager.getNotificationChannel(idHouse);
+            if(channel==null)
+            {
+                channel =new NotificationChannel(idHouse,"Cảnh báo",NotificationManager.IMPORTANCE_HIGH);
+                channel.setDescription("Vượt mức chi tiêu");
+                channel.enableVibration(true);
+                channel.setVibrationPattern(new long[]{100,1000,200,340});
+                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+                manager.createNotificationChannel(channel);
+            }
+        }
+        Intent notificationIntent =new Intent(TodaySpendingActivity.this,NotificationActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent contentIntent =PendingIntent.getActivity(this,0,notificationIntent,0);
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(this,idHouse)
+                .setSmallIcon(R.drawable.house)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.house))
+                .setContentTitle("Cảnh báo")
+                .setContentText("Vượt mức chi tiêu")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setVibrate(new long[]{100,1000,200,340})
+                .setAutoCancel(true)
+                .setTicker("Notification");
+        builder.setContentIntent(contentIntent);
+        NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
+        m.notify(new Random().nextInt(),builder.build());
+    }
+    private void createNotificationTransport()
+    {
+        NotificationManager manager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            NotificationChannel channel=manager.getNotificationChannel(idTransport);
+            if(channel==null)
+            {
+                channel =new NotificationChannel(idTransport,"Cảnh báo",NotificationManager.IMPORTANCE_HIGH);
+                channel.setDescription("Vượt mức chi tiêu");
+                channel.enableVibration(true);
+                channel.setVibrationPattern(new long[]{100,1000,200,340});
+                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+                manager.createNotificationChannel(channel);
+            }
+        }
+        Intent notificationIntent =new Intent(TodaySpendingActivity.this,NotificationActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent contentIntent =PendingIntent.getActivity(this,0,notificationIntent,0);
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(this,idTransport)
+                .setSmallIcon(R.drawable.transport)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.transport))
+                .setContentTitle("Cảnh báo")
+                .setContentText("Vượt mức chi tiêu")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setVibrate(new long[]{100,1000,200,340})
+                .setAutoCancel(true)
+                .setTicker("Notification");
+        builder.setContentIntent(contentIntent);
+        NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
+        m.notify(new Random().nextInt(),builder.build());
+    }
+    private void createNotificationPersonal()
+    {
+        NotificationManager manager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            NotificationChannel channel=manager.getNotificationChannel(idPersonal);
+            if(channel==null)
+            {
+                channel =new NotificationChannel(idPersonal,"Cảnh báo",NotificationManager.IMPORTANCE_HIGH);
+                channel.setDescription("Vượt mức chi tiêu");
+                channel.enableVibration(true);
+                channel.setVibrationPattern(new long[]{100,1000,200,340});
+                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+                manager.createNotificationChannel(channel);
+            }
+        }
+        Intent notificationIntent =new Intent(TodaySpendingActivity.this,NotificationActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent contentIntent =PendingIntent.getActivity(this,0,notificationIntent,0);
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(this,idPersonal)
+                .setSmallIcon(R.drawable.personal)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.personal))
+                .setContentTitle("Cảnh báo")
+                .setContentText("Vượt mức chi tiêu")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setVibrate(new long[]{100,1000,200,340})
+                .setAutoCancel(true)
+                .setTicker("Notification");
+        builder.setContentIntent(contentIntent);
+        NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
+        m.notify(new Random().nextInt(),builder.build());
+    }
+    private void createNotificationOther()
+    {
+        NotificationManager manager=(NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            NotificationChannel channel=manager.getNotificationChannel(idOther);
+            if(channel==null)
+            {
+                channel =new NotificationChannel(idOther,"Cảnh báo",NotificationManager.IMPORTANCE_HIGH);
+                channel.setDescription("Vượt mức chi tiêu");
+                channel.enableVibration(true);
+                channel.setVibrationPattern(new long[]{100,1000,200,340});
+                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+                manager.createNotificationChannel(channel);
+            }
+        }
+        Intent notificationIntent =new Intent(TodaySpendingActivity.this,NotificationActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent contentIntent =PendingIntent.getActivity(this,0,notificationIntent,0);
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(this,idOther)
+                .setSmallIcon(R.drawable.other)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.other))
+                .setContentTitle("Cảnh báo")
+                .setContentText("Vượt mức chi tiêu")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setVibrate(new long[]{100,1000,200,340})
+                .setAutoCancel(true)
+                .setTicker("Notification");
+        builder.setContentIntent(contentIntent);
+        NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
+        m.notify(new Random().nextInt(),builder.build());
     }
 
 }
