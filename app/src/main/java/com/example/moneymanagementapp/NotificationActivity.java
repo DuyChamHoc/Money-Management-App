@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,6 +63,7 @@ public class NotificationActivity extends AppCompatActivity {
         myDataList = new ArrayList<>();
         overSpendAdapter = new OverSpendAdapter(NotificationActivity.this, myDataList);
         recyclerView.setAdapter(overSpendAdapter);
+
         icon_arrow_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1020,6 +1022,8 @@ private void overHouse()
     protected void onStart() {
         tong=0;
         super.onStart();
+        myDataList.clear();
+        overSpendAdapter.notifyDataSetChanged();
         overOther();
         overTransport();
         overPersonal();
