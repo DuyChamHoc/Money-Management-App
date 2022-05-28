@@ -47,19 +47,19 @@
 
                 <ImageButton
                     android:id="@+id/bell"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="end"
                     android:layout_marginTop="-50dp"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/notifiaction" />
-                <!--        <com.nex3z.notificationbadge.NotificationBadge-->
-                <!--            android:layout_width="30dp"-->
-                <!--            android:layout_height="30dp"-->
-                <!--            android:layout_marginTop="-45dp"-->
-                <!--            app:nbMaxTextLength="2"-->
-                <!--            android:layout_marginLeft="360dp">-->
-                <!--        </com.nex3z.notificationbadge.NotificationBadge>-->
+               <com.nex3z.notificationbadge.NotificationBadge
+                   android:id="@+id/badge"
+                   android:layout_marginTop="-40dp"
+                   android:layout_marginLeft="185dp"
+                   android:layout_width="25dp"
+                   app:nbMaxTextLength="2"
+                   android:layout_height="25dp"></com.nex3z.notificationbadge.NotificationBadge>
             </LinearLayout>
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"

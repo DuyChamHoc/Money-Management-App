@@ -1,6 +1,8 @@
 package com.example.moneymanagementapp;
 
 
+import static com.example.moneymanagementapp.NotificationActivity.CountBadge;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,6 +38,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import org.joda.time.DateTime;
 import org.joda.time.Months;
@@ -51,7 +54,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
-
+public static int count;
     private ImageView image_hoso;
 private ImageButton bell;
     private LinearLayout linearNgansach;
@@ -78,12 +81,13 @@ private ImageButton bell;
     private int totalAmountBudgetB=0;
     private int totalAmountBudgetC=0;
     private int totalAmountBudgetD=0;
-
+private NotificationBadge notificationBadge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        notificationBadge=findViewById(R.id.badge);
         bell=findViewById(R.id.bell);
         tv_homnay = findViewById(R.id.tv_homnay);
         tv_week = findViewById(R.id.tv_week);
@@ -521,5 +525,11 @@ bell.setOnClickListener(new View.OnClickListener() {
 
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        notificationBadge.setNumber(CountBadge());
     }
 }

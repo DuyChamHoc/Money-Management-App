@@ -41,6 +41,7 @@ public class NotificationActivity extends AppCompatActivity {
     private DatabaseReference budgetRef;
     private OverSpendAdapter overSpendAdapter;
     private List<DataOverSpend> myDataList;
+    public static int count=0;
    private int tong;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1017,9 +1018,17 @@ private void overHouse()
             }
         },4000);
     }
-
+public static int CountBadge()
+{
+    return count;
+}
+public static void CountNotification()
+{
+    ++count;
+}
     @Override
     protected void onStart() {
+      count=0;
         tong=0;
         super.onStart();
         myDataList.clear();

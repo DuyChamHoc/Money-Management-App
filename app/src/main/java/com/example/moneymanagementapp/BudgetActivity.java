@@ -1,5 +1,7 @@
 package com.example.moneymanagementapp;
 
+import static com.example.moneymanagementapp.NotificationActivity.CountNotification;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -599,6 +601,7 @@ public class BudgetActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(BudgetActivity.this, "Budget item added successful", Toast.LENGTH_SHORT).show();
                                 check(budgetItem);
+                                CountNotification();
                             } else {
                                 Toast.makeText(BudgetActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }
@@ -1648,7 +1651,6 @@ public class BudgetActivity extends AppCompatActivity {
         }
         if(Item.equals("Food")&&getTotalWeekFoodExpenses()>getMonthFoodBudget()&&getMonthFoodBudget()>0)
         {
-
                     createNotificationFood();
         }
         if(Item.equals("Health")&&getTotalWeekHealthExpenses()>getMonthHealthBudget()&&getMonthHealthBudget()>0)
@@ -1699,7 +1701,7 @@ public class BudgetActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(new long[]{100,1000,200,340})
                 .setAutoCancel(true)
-                .setTicker("Notification");
+                .setTicker("NotificationApparelB");
         builder.setContentIntent(contentIntent);
         NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
         m.notify(new Random().nextInt(),builder.build());
@@ -1731,7 +1733,7 @@ public class BudgetActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(new long[]{100,1000,200,340})
                 .setAutoCancel(true)
-                .setTicker("Notification");
+                .setTicker("NotificationCharityB");
         builder.setContentIntent(contentIntent);
         NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
         m.notify(new Random().nextInt(),builder.build());
@@ -1763,7 +1765,7 @@ public class BudgetActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(new long[]{100,1000,200,340})
                 .setAutoCancel(true)
-                .setTicker("Notification");
+                .setTicker("NotificationEducationB");
         builder.setContentIntent(contentIntent);
         NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
         m.notify(new Random().nextInt(),builder.build());
@@ -1795,7 +1797,7 @@ public class BudgetActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(new long[]{100,1000,200,340})
                 .setAutoCancel(true)
-                .setTicker("Notification");
+                .setTicker("NotificationEntertainmentB");
         builder.setContentIntent(contentIntent);
         NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
         m.notify(new Random().nextInt(),builder.build());
@@ -1827,7 +1829,7 @@ public class BudgetActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(new long[]{100,1000,200,340})
                 .setAutoCancel(true)
-                .setTicker("Notification");
+                .setTicker("NotificationFoodB");
         builder.setContentIntent(contentIntent);
         NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
         m.notify(new Random().nextInt(),builder.build());
@@ -1859,7 +1861,7 @@ public class BudgetActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(new long[]{100,1000,200,340})
                 .setAutoCancel(true)
-                .setTicker("Notification");
+                .setTicker("NotificationHealthB");
         builder.setContentIntent(contentIntent);
         NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
         m.notify(new Random().nextInt(),builder.build());
@@ -1891,7 +1893,7 @@ public class BudgetActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(new long[]{100,1000,200,340})
                 .setAutoCancel(true)
-                .setTicker("Notification");
+                .setTicker("NotificationHouseB");
         builder.setContentIntent(contentIntent);
         NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
         m.notify(new Random().nextInt(),builder.build());
@@ -1923,7 +1925,7 @@ public class BudgetActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(new long[]{100,1000,200,340})
                 .setAutoCancel(true)
-                .setTicker("Notification");
+                .setTicker("NotificationTransportB");
         builder.setContentIntent(contentIntent);
         NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
         m.notify(new Random().nextInt(),builder.build());
@@ -1955,7 +1957,7 @@ public class BudgetActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(new long[]{100,1000,200,340})
                 .setAutoCancel(true)
-                .setTicker("Notification");
+                .setTicker("NotificationPersonalB");
         builder.setContentIntent(contentIntent);
         NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
         m.notify(new Random().nextInt(),builder.build());
@@ -1987,7 +1989,7 @@ public class BudgetActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(new long[]{100,1000,200,340})
                 .setAutoCancel(true)
-                .setTicker("Notification");
+                .setTicker("NotificationOtherB");
         builder.setContentIntent(contentIntent);
         NotificationManagerCompat m =NotificationManagerCompat.from(getApplicationContext());
         m.notify(new Random().nextInt(),builder.build());
