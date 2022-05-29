@@ -418,7 +418,7 @@ public class TodaySpendingActivity extends AppCompatActivity {
         return totalAmount1;
     }
 
-    public int total1;
+    public int totalPersonal;
 
     private int getMonthPersonalBudgetRatio() {
         MutableDateTime epoch = new MutableDateTime();
@@ -433,16 +433,16 @@ public class TodaySpendingActivity extends AppCompatActivity {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int total1 = 0;
+                int totalx = 0;
                 if (snapshot.exists()) {
 
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object total = map.get("amount");
                         int pTotal = Integer.parseInt(String.valueOf(total));
-                        total1 += pTotal;
+                        totalx += pTotal;
                     }
-                    total1 = total1;
+                    totalPersonal = totalx;
                 }
 
             }
@@ -453,7 +453,7 @@ public class TodaySpendingActivity extends AppCompatActivity {
             }
 
         });
-        return total1;
+        return totalPersonal;
     }
 
     public int totalAmount2;

@@ -189,7 +189,7 @@ public class NotificationActivity extends AppCompatActivity {
         return totalAmount1;
     }
 
-    public int total1;
+    public int totalPersonal;
 
     private int getMonthPersonalBudgetRatio() {
         MutableDateTime epoch = new MutableDateTime();
@@ -213,7 +213,7 @@ public class NotificationActivity extends AppCompatActivity {
                         int pTotal = Integer.parseInt(String.valueOf(total));
                         totalx += pTotal;
                     }
-                    total1 = totalx;
+                    totalPersonal = totalx;
                 }
 
             }
@@ -224,7 +224,7 @@ public class NotificationActivity extends AppCompatActivity {
             }
 
         });
-        return total1;
+        return totalPersonal;
     }
 
     public int totalAmount2;
