@@ -601,7 +601,7 @@ public class BudgetActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(BudgetActivity.this, "Budget item added successful", Toast.LENGTH_SHORT).show();
                                 check(budgetItem);
-                                CountNotification();
+
                             } else {
                                 Toast.makeText(BudgetActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                             }
@@ -1636,42 +1636,52 @@ public class BudgetActivity extends AppCompatActivity {
         if(Item.equals("Apparel")&&getTotalWeekApparelExpenses()>getMonthApparelBudget()&&getMonthApparelBudget()>0)
         {
             createNotificationApparel();
+            CountNotification();
         }
         if(Item.equals("Charity")&&getTotalWeekCharityExpenses()>getMonthCharityBudget()&&getMonthCharityBudget()>0)
         {
             createNotificationCharity();
+            CountNotification();
         }
         if(Item.equals("Entertainment")&&getTotalWeekEntertainmentExpenses()>getMonthEntertainmentBudget()&&getMonthEntertainmentBudget()>0)
         {
             createNotificationEntertainment();
+            CountNotification();
         }
         if(Item.equals("Education")&&getTotalWeekEducationExpenses()>getMonthEducationBudget()&&getMonthEducationBudget()>0)
         {
             createNotificationEducation();
+            CountNotification();
         }
         if(Item.equals("Food")&&getTotalWeekFoodExpenses()>getMonthFoodBudget()&&getMonthFoodBudget()>0)
         {
                     createNotificationFood();
+            CountNotification();
         }
         if(Item.equals("Health")&&getTotalWeekHealthExpenses()>getMonthHealthBudget()&&getMonthHealthBudget()>0)
         {
             createNotificationHealth();
+            CountNotification();
         }
         if(Item.equals("House")&&getTotalWeekHouseExpenses()>getMonthHouseBudget()&&getMonthHouseBudget()>0)
         {
             createNotificationHouse();
+            CountNotification();
         }
         if(Item.equals("Personal")&&getTotalWeekPersonalExpenses()>getMonthPersonalBudget()&&getMonthPersonalBudget()>0)
         {
             createNotificationPersonal();
+            CountNotification();
         }
-        if(Item.equals("Transport")&&getTotalWeekTransportExpenses()>getMonthApparelBudget()&&getMonthTransportBudget()>0)
+        if(Item.equals("Transport")&&getTotalWeekTransportExpenses()>getMonthTransportBudget()&&getMonthTransportBudget()>0)
         {
             createNotificationTransport();
+            CountNotification();
         }
         if(Item.equals("Other")&&getTotalWeekOtherExpenses()>getMonthOtherBudget()&&getMonthOtherBudget()>0)
         {
             createNotificationOther();
+            CountNotification();
         }
     }
     private void createNotificationApparel()

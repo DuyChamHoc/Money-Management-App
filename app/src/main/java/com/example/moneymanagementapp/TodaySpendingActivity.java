@@ -284,7 +284,6 @@ public class TodaySpendingActivity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 Toast.makeText(TodaySpendingActivity.this, "Budget item added successful", Toast.LENGTH_SHORT).show();
                                 check(Item);
-                                CountNotification();
                             }
                             else {
                                 Toast.makeText(TodaySpendingActivity.this,task.getException().toString(), Toast.LENGTH_SHORT).show();
@@ -1109,10 +1108,12 @@ public class TodaySpendingActivity extends AppCompatActivity {
         if(Item.equals("Apparel")&&getTotalWeekApparelExpenses()>getMonthApparelBudgetRatio()&&getMonthApparelBudgetRatio()>0)
         {
             createNotificationApparel();
+            CountNotification();
         }
         if(Item.equals("Charity")&&getTotalWeekCharityExpenses()>getMonthCharityBudgetRatio()&&getMonthCharityBudgetRatio()>0)
         {
             createNotificationCharity();
+            CountNotification();
         }
         if(Item.equals("Entertainment")&&getTotalWeekEntertainmentExpenses()>getMonthEntertainmentBudgetRatio()&&getMonthEntertainmentBudgetRatio()>0)
         {
@@ -1121,30 +1122,37 @@ public class TodaySpendingActivity extends AppCompatActivity {
         if(Item.equals("Education")&&getTotalWeekEducationExpenses()>getMonthEducationBudgetRatio()&&getMonthEducationBudgetRatio()>0)
         {
                   createNotificationEducation();
+            CountNotification();
         }
         if(Item.equals("Food")&&getTotalWeekFoodExpenses()>getMonthFoodBudgetRatio()&&getMonthFoodBudgetRatio()>0)
         {
                   createNotificationFood();
+            CountNotification();
         }
         if(Item.equals("Health")&&getTotalWeekHealthExpenses()>getMonthHealthBudgetRatio()&&getMonthHealthBudgetRatio()>0)
         {
                   createNotificationHealth();
+            CountNotification();
         }
         if(Item.equals("House")&&getTotalWeekHouseExpenses()>getMonthHouseBudgetRatio()&&getMonthHouseBudgetRatio()>0)
         {
                   createNotificationHouse();
+            CountNotification();
         }
         if(Item.equals("Personal")&&getTotalWeekPersonalExpenses()>getMonthPersonalBudgetRatio()&&getMonthPersonalBudgetRatio()>0)
         {
                  createNotificationPersonal();
+            CountNotification();
         }
-        if(Item.equals("Transport")&&getTotalWeekTransportExpenses()>getMonthApparelBudgetRatio()&&getMonthTransportBudgetRatio()>0)
+        if(Item.equals("Transport")&&getTotalWeekTransportExpenses()>getMonthTransportBudgetRatio()&&getMonthTransportBudgetRatio()>0)
         {
                createNotificationTransport();
+            CountNotification();
         }
         if(Item.equals("Other")&&getTotalWeekOtherExpenses()>getMonthOtherBudgetRatio()&&getMonthOtherBudgetRatio()>0)
         {
              createNotificationOther();
+            CountNotification();
         }
     }
 private void createNotificationApparel()
