@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(new Photo(R.drawable.welcome1));
         list.add(new Photo(R.drawable.welcome2));
         list.add(new Photo(R.drawable.welcome3));
+        list.add(new Photo(R.drawable.welcome4));
         return list;
     }
     private void autoSlideImage(){

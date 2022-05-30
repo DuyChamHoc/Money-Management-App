@@ -190,6 +190,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:menu="@menu/bottom_bar_nav"
+                app:itemTextColor="@color/black"
+                app:itemIconTint="@color/button"
                 android:background="@color/white"/>
         </com.google.android.material.bottomappbar.BottomAppBar>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -197,7 +199,9 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_add"
             app:maxImageSize="30dp"
-            app:layout_anchor="@id/bottomAppBar"/>
+            app:layout_anchor="@id/bottomAppBar"
+            android:backgroundTint="@color/purple"
+            />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </RelativeLayout>
