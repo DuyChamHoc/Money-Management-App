@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MoneyManagementApp">
         <activity
+            android:name=".mainscreen"
+            android:exported="false" />
+        <activity
+            android:name=".screenguide"
+            android:exported="false" />
+        <activity
             android:name=".help"
             android:exported="false" />
         <activity

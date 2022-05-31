@@ -67,6 +67,7 @@
             android:textSize="15dp" />
     </RelativeLayout>
     <LinearLayout
+        android:id="@+id/guide"
         android:layout_width="185dp"
         android:layout_height="130dp"
         android:orientation="vertical"
@@ -91,6 +92,7 @@
             />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/help"
         android:layout_width="185dp"
         android:layout_height="130dp"
         android:orientation="vertical"

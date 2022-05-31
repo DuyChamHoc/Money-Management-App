@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 
 
 public class guide extends AppCompatActivity {
-    private LinearLayout facebook,instagram,twitter,group;
+    private LinearLayout facebook,instagram,twitter,group,guide,help;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +20,8 @@ public class guide extends AppCompatActivity {
         instagram=findViewById(R.id.instagram);
         twitter=findViewById(R.id.twitter);
         group=findViewById(R.id.group);
-
+        guide=findViewById(R.id.guide);
+        help=findViewById(R.id.help);
         facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,5 +58,21 @@ public class guide extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        guide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(guide.this,screenguide.class);
+                startActivity(intent);
+            }
+        });
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(guide.this,help.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
