@@ -41,6 +41,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AccountActivity extends AppCompatActivity {
 
@@ -175,11 +177,25 @@ public class AccountActivity extends AppCompatActivity {
 
 
     private void onClickUpdateProfile() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         progressDialog.show();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String name = user.getDisplayName();
         if(user==null){
             return;
         }
+        if(name.equals("")){
+            String key = budgetRef.child("Users").push().getKey();
+            String fullName=edtFullName.getText().toString().trim();
+            String phone=phonenumber.getText().toString().trim();
+            String date=birthday.getText().toString().trim();
+            String email=tv_email.getText().toString().trim();
+            User users=new User(fullName,date,email,phone);
+            Map<String,Object> uservalues=users.toMap();
+            Map<String,Object> childupdates=new HashMap<>();
+            childupdates.put("Users",uservalues);
+            budgetRef.updateChildren(childupdates);
+        }
+        else{
         String strFullName=edtFullName.getText().toString().trim();
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(strFullName)
@@ -199,6 +215,7 @@ public class AccountActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+        }
     }
 
     private void onClickRequestPermission() {

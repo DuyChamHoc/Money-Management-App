@@ -1,6 +1,11 @@
 package com.example.moneymanagementapp;
 
+import com.google.firebase.database.Exclude;
+
 import org.joda.time.DateTime;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class User {
     public String fullname,email,phone;
@@ -47,14 +52,13 @@ public class User {
         this.phone = phone;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "fullname='" + fullname + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("birthday", birthday);
+        result.put("fullname", fullname);
+        result.put("phone", phone);
+        return result;
     }
 }
 
