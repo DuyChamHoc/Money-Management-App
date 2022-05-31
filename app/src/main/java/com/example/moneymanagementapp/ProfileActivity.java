@@ -46,7 +46,7 @@ import java.util.BitSet;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView tv_name, logoutBtn, tv_account, tv_changepass,tv_setting;
+    private TextView tv_name, logoutBtn, tv_account, tv_changepass,tv_setting,tv_help,tv_guide;
     private ImageView img_avatar;
     private BottomNavigationView bottomNavigationView;
     GoogleApiClient mGoogleApiClient;
@@ -65,6 +65,8 @@ public class ProfileActivity extends AppCompatActivity {
         tv_account = findViewById(R.id.tv_account);
         tv_changepass = findViewById(R.id.tv_changepass);
         tv_setting = findViewById(R.id.tv_setting);
+        tv_help=findViewById(R.id.tv_help);
+        tv_guide=findViewById(R.id.tv_guide);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.action_profile);
@@ -114,6 +116,20 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this, ChangePassActivity.class);
+                startActivity(intent);
+            }
+        });
+        tv_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(ProfileActivity.this,help.class);
+                startActivity(intent);
+            }
+        });
+        tv_guide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(ProfileActivity.this,guide.class);
                 startActivity(intent);
             }
         });
