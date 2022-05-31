@@ -58,117 +58,170 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="350dp"
             android:layout_height="450dp"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="55dp"
+            android:background="@drawable/layout_bg_setting"
             android:gravity="center"
-            android:background="@drawable/layout_bg_setting">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/linear_tai_khoan"
                 android:layout_width="360dp"
-                android:layout_height="100dp">
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
+
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
                     android:background="@drawable/avt" />
 
                 <TextView
-                    android:layout_marginTop="12dp"
                     android:id="@+id/tv_account"
                     android:layout_width="240dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="18dp"
+                    android:layout_marginTop="8dp"
                     android:paddingRight="100dp"
                     android:text="@string/My_Account"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="19dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linear_cai_dat"
                 android:layout_width="360dp"
-                android:layout_height="100dp"
-                android:layout_below="@+id/linear_tai_khoan">
+                android:layout_height="50dp"
+                android:layout_below="@+id/linear_tai_khoan"
+                android:layout_marginTop="20dp">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
                     android:background="@drawable/setting" />
 
                 <TextView
-                    android:layout_marginTop="12dp"
                     android:id="@+id/tv_setting"
                     android:layout_width="240dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="18dp"
+                    android:layout_marginTop="10dp"
                     android:paddingRight="100dp"
                     android:text="@string/Setting"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="19dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linear_xuat"
                 android:layout_width="360dp"
-                android:layout_height="100dp"
-                android:layout_below="@+id/linear_cai_dat">
+                android:layout_height="50dp"
+                android:layout_below="@+id/linear_cai_dat"
+                android:layout_marginTop="20dp">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="40dp"
                     android:background="@drawable/change_password" />
 
                 <TextView
-                    android:layout_marginTop="12dp"
                     android:id="@+id/tv_changepass"
-                    android:layout_width="330dp"
-                    android:layout_height="60dp"
+                    android:layout_width="260dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="18dp"
                     android:paddingRight="100dp"
                     android:text="@string/Change_Pass"
-                    android:layout_marginLeft="18dp"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="19dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_help"
+                android:layout_width="360dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/linear_cai_dat"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="40dp"
+                    android:background="@drawable/help" />
+
+                <TextView
+                    android:id="@+id/tv_help"
+                    android:layout_width="250dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="18dp"
+                    android:paddingRight="100dp"
+                    android:text="Help"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_guide"
+                android:layout_width="360dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/linear_cai_dat"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="40dp"
+                    android:background="@drawable/guidepf" />
+
+                <TextView
+                    android:id="@+id/tv_guide"
+                    android:layout_width="250dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="18dp"
+                    android:paddingRight="100dp"
+                    android:text="Guide"
+                    android:textColor="@color/black"
+                    android:textSize="19dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linear_dang_xuat"
                 android:layout_width="360dp"
-                android:layout_height="100dp"
-                android:layout_below="@+id/linear_xuat">
+                android:layout_height="50dp"
+                android:layout_below="@+id/linear_xuat"
+                android:layout_marginTop="20dp">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="40dp"
                     android:background="@drawable/logout" />
 
                 <TextView
-                    android:layout_marginTop="12dp"
                     android:id="@+id/logoutBtn"
                     android:layout_width="240dp"
-                    android:layout_height="60dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="18dp"
                     android:paddingRight="100dp"
                     android:text="@string/Log_out"
                     android:textColor="@color/black"
-                    android:layout_marginLeft="18dp"
-                    android:textSize="20dp" />
+                    android:textSize="19dp" />
             </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
