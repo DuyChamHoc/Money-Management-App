@@ -36,6 +36,24 @@ public class ViewPagerAdapter extends PagerAdapter {
             R.string.desc_two,
             R.string.desc_three,
     };
+    int description1[] = {
+
+            R.string.desc_one1,
+            R.string.desc_two1,
+            R.string.desc_three1,
+    };
+    int description2[] = {
+
+            R.string.desc_one2,
+            R.string.desc_two2,
+            R.string.desc_three2,
+    };
+    int description3[] = {
+
+            R.string.desc_one3,
+            R.string.desc_two3,
+            R.string.desc_three3,
+    };
 
     public ViewPagerAdapter(Context context){
 
@@ -63,10 +81,16 @@ public class ViewPagerAdapter extends PagerAdapter {
         ImageView slidetitleimage = (ImageView) view.findViewById(R.id.titleImage);
         TextView slideHeading = (TextView) view.findViewById(R.id.texttitle);
         TextView slideDesciption = (TextView) view.findViewById(R.id.textdeccription);
+        TextView slideDesciption1 = (TextView) view.findViewById(R.id.textdeccription1);
+        TextView slideDesciption2 = (TextView) view.findViewById(R.id.textdeccription2);
+        TextView slideDesciption3 = (TextView) view.findViewById(R.id.textdeccription3);
 
         slidetitleimage.setImageResource(images[position]);
         slideHeading.setText(headings[position]);
         slideDesciption.setText(description[position]);
+        slideDesciption1.setText(description1[position]);
+        slideDesciption2.setText(description2[position]);
+        slideDesciption3.setText(description3[position]);
 
         container.addView(view);
 

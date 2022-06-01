@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 
 public class guide extends AppCompatActivity {
     private LinearLayout facebook,instagram,twitter,group,guide,help;
+    private ImageView arrow_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,15 @@ public class guide extends AppCompatActivity {
         group=findViewById(R.id.group);
         guide=findViewById(R.id.guide);
         help=findViewById(R.id.help);
+        arrow_back=findViewById(R.id.arrow_back);
+
+        arrow_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

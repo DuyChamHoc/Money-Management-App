@@ -77,8 +77,18 @@
     <string name="heading_three" translatable="false">Chi tiêu thông minh với tính năng Ngân sách</string>
 
     <string name="desc_one" translatable="false">Có cái nhìn tổng quan về số tiền bạn thu và chi hàng tháng</string>
+    <string name="desc_one1" translatable="false">Cắt giảm những chi tiêu không cần thiết</string>
+    <string name="desc_one2" translatable="false">Tiết kiệm nhiều hơn</string>
+    <string name="desc_one3" translatable="false">Giảm các khoản nợ</string>
     <string name="desc_two" translatable="false">Bạn chi tiêu nhiều nhất cho khoản mục nào ?</string>
+    <string name="desc_two1" translatable="false">Chi phí cố định hàng tháng của bạn là bao nhiêu ?</string>
+    <string name="desc_two2" translatable="false">Khoản chi nào đang bị lãng phí</string>
+    <string name="desc_two3" translatable="false">Bạn sẽ tiết kiệm được bao nhiêu sau khi cắt giảm những khoản chi không cần thiết? Và nhiều hơn nữa.</string>
+
+    <string name="desc_three1" translatable="false">Ngân sách cho phép bạn chia thu nhập thành nhiều nhóm và xác định số tiền bạn sẽ chi tiêu cho mỗi nhóm trong một khoảng thời gian nhất định</string>
     <string name="desc_three" translatable="false">Thông báo về số tiền còn lại hoặc đã bội chi, mỗi khi bạn sắp sửa vượt quá ngân sách.</string>
+    <string name="desc_three2" translatable="false"></string>
+    <string name="desc_three3" translatable="false"></string>
     <string-array name="items">
         <item>Transport</item>
         <item>Food</item>

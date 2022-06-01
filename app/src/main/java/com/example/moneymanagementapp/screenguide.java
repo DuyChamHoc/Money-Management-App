@@ -63,12 +63,7 @@ public class screenguide extends AppCompatActivity {
         skipbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                Intent i = new Intent(screenguide.this,mainscreen.class);
-                startActivity(i);
                 finish();
-
             }
         });
 
