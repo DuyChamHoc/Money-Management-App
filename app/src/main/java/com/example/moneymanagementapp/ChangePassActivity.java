@@ -105,8 +105,7 @@ public class ChangePassActivity extends AppCompatActivity {
         icon_arrow_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(ChangePassActivity.this,ProfileActivity.class);
-                startActivity(intent);
+               finish();
             }}
         );
     }

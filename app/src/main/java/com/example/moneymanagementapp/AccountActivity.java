@@ -147,8 +147,7 @@ public class AccountActivity extends AppCompatActivity {
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AccountActivity.this,ProfileActivity.class);
-                startActivity(intent);
+               finish();
             }
         });
 
