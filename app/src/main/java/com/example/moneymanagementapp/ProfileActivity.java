@@ -67,7 +67,6 @@ public class ProfileActivity extends AppCompatActivity {
         tv_setting = findViewById(R.id.tv_setting);
         tv_help=findViewById(R.id.tv_help);
         tv_guide=findViewById(R.id.tv_guide);
-
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.action_profile);
         bottomNavigationView.setBackground(null);
@@ -155,7 +154,6 @@ public class ProfileActivity extends AppCompatActivity {
                         .show();
             }
         });
-
         showUserInformation();
     }
 

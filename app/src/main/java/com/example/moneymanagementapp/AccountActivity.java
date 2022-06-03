@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
@@ -40,6 +42,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.Console;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -82,7 +85,6 @@ public class AccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
-
         img_avatar = findViewById(R.id.img_avatar);
         img_camera = findViewById(R.id.img_camera);
         edtFullName = findViewById(R.id.edtFullName);
@@ -116,7 +118,6 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-
         progressDialog=new ProgressDialog(this);
         FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
         if(user==null){
@@ -124,14 +125,23 @@ public class AccountActivity extends AppCompatActivity {
         }
         String email=user.getEmail();
         String name = user.getDisplayName();
-        if(name.equals("")){
-        budgetRef.child("fullname").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        if(name.equals("")) {
+            budgetRef.child("fullname").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        edtFullName.setText(String.valueOf(task.getResult().getValue()));
+                    } else {
+                        Toast.makeText(AccountActivity.this, "return data false", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        budgetRef.child("email").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
-                    edtFullName.setText(String.valueOf(task.getResult().getValue()));
-                }
-                else {
+                    tv_email.setText(String.valueOf(task.getResult().getValue()));
+                } else {
                     Toast.makeText(AccountActivity.this, "return data false", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -142,8 +152,8 @@ public class AccountActivity extends AppCompatActivity {
             Uri photoUrl = user.getPhotoUrl();
             Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);
             muri = photoUrl;
-            initListener();
-            showUserInformation();
+            showUserInformation();}
+        initListener();
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,7 +161,7 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-    }}
+    }
 
     private void initListener() {
         img_camera.setOnClickListener(new View.OnClickListener() {
@@ -176,23 +186,18 @@ public class AccountActivity extends AppCompatActivity {
 
 
     private void onClickUpdateProfile() {
-        progressDialog.show();
+        //progressDialog.show();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String name = user.getDisplayName();
         if(user==null){
             return;
         }
         if(name.equals("")){
-            String key = budgetRef.child("Users").push().getKey();
-            String fullName=edtFullName.getText().toString().trim();
-            String phone=phonenumber.getText().toString().trim();
-            String date=birthday.getText().toString().trim();
-            String email=tv_email.getText().toString().trim();
-            User users=new User(fullName,date,email,phone);
-            Map<String,Object> uservalues=users.toMap();
-            Map<String,Object> childupdates=new HashMap<>();
-            childupdates.put("Users",uservalues);
-            budgetRef.updateChildren(childupdates);
+            budgetRef.child("fullname").setValue(edtFullName.getText().toString().trim());
+            budgetRef.child("phone").setValue(phonenumber.getText().toString().trim());
+            budgetRef.child("birthday").setValue(birthday.getText().toString().trim());
+            Intent intent=new Intent(AccountActivity.this,ProfileActivity.class);
+            startActivity(intent);
         }
         else{
         String strFullName=edtFullName.getText().toString().trim();
