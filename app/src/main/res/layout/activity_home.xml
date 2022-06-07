@@ -80,7 +80,6 @@
                 android:textColor="@color/black"
                 android:textSize="40dp"
                 android:textStyle="bold" />
-
             <LinearLayout
                 android:id="@+id/linearNgansach"
                 android:layout_width="170dp"
