@@ -856,44 +856,35 @@
 
         </LinearLayout>
     </ScrollView>
-    <RelativeLayout
-        android:visibility="gone"
+    <LinearLayout
         android:id="@+id/daily_analytics_container"
         android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="100dp"
         android:layout_height="match_parent">
-
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="110dp"
-            android:layout_marginEnd="100dp"
+            android:layout_gravity="center"
             android:src="@drawable/chart_img" />
-
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="-2dp"
-            android:layout_marginBottom="300dp"
             android:gravity="center"
-            android:text="You've not spent any money today"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:text="@string/spent_today"
             android:textColor="#000000"
             android:textSize="20sp" />
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="53dp"
-            android:layout_marginBottom="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
             android:id="@+id/btn_back"
             android:background="@drawable/layout_botron"
-            android:text="Home Screen"
+            android:text="@string/home_screen"
             app:backgroundTint="@color/teal_200" />
-    </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>
