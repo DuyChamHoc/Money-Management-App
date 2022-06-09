@@ -60,9 +60,9 @@
 
         <LinearLayout
             android:layout_width="350dp"
-            android:layout_height="450dp"
+            android:layout_height="495dp"
             android:layout_gravity="center"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="46dp"
             android:background="@drawable/layout_bg_setting"
             android:gravity="center"
             android:orientation="vertical">
@@ -194,6 +194,34 @@
                     android:text="Guide"
                     android:textColor="@color/black"
                     android:textSize="19dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_loan"
+                android:layout_width="360dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/linear_cai_dat"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="40dp"
+                    android:background="@drawable/guidepf" />
+
+                <TextView
+                    android:id="@+id/tv_loan"
+                    android:layout_width="250dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="18dp"
+                    android:paddingRight="100dp"
+                    android:text="Loan"
+                    android:textColor="@color/black"
+                    android:textSize="19dp" />
+
             </LinearLayout>
 
             <LinearLayout

@@ -46,7 +46,7 @@ import java.util.BitSet;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView tv_name, logoutBtn, tv_account, tv_changepass,tv_setting,tv_help,tv_guide;
+    private TextView tv_name, logoutBtn, tv_account, tv_changepass,tv_setting,tv_help,tv_guide,tv_loan;
     private ImageView img_avatar;
     private BottomNavigationView bottomNavigationView;
     GoogleApiClient mGoogleApiClient;
@@ -61,6 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         logoutBtn = findViewById(R.id.logoutBtn);
         tv_name = findViewById(R.id.tv_name);
+        tv_loan=findViewById(R.id.tv_loan);
         img_avatar = findViewById(R.id.img_avatar);
         tv_account = findViewById(R.id.tv_account);
         tv_changepass = findViewById(R.id.tv_changepass);
@@ -115,6 +116,13 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this, ChangePassActivity.class);
+                startActivity(intent);
+            }
+        });
+        tv_loan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, LoanActivity.class);
                 startActivity(intent);
             }
         });
@@ -179,10 +187,10 @@ public class ProfileActivity extends AppCompatActivity {
             Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);
         }
         else{
-        Uri photoUrl = user.getPhotoUrl();
-        tv_name.setText(name);
-        //tv_name.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);}
+            Uri photoUrl = user.getPhotoUrl();
+            tv_name.setText(name);
+            //tv_name.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+            Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);}
     }
 }
 
