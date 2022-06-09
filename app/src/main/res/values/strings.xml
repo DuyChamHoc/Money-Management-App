@@ -67,6 +67,22 @@
     <string name="month_title">This month you have spend</string>
     <string name="sign_gg">Sign in with Google</string>
     <string name="sign_fb">Sign in with Facebook</string>
+    <string name="ver">Version: 1.0.0</string>
+    <string name="instru">Guide</string>
+    <string name="help">Support</string>
+    <string name="follow_fb">Follow us on Facebook</string>
+    <string name="follow_ins">Follow us on Instagram</string>
+    <string name="follow_twitter">Follow us on Twitter</string>
+    <string name="jo_us">Join us</string>
+    <string name="we_help">How can we help you?</string>
+    <string name="we_guide">It looks like you are experiencing problems with our sign up process. We are here to help so please get in touch with us.</string>
+    <string name="em_help">Contact email: app@gmail.com</string>
+    <string name="hotline">Hotline 19009999</string>
+    <string name="Help">Help</string>
+    <string name="home_screen">Home Screen</string>
+    <string name="spent_today">You haven\'t spent anything today</string>
+    <string name="spent_week">You haven\'t spent anything this week</string>
+    <string name="spent_month">You haven\'t spent anything this month</string>
 
     <string name="facebook_app_id" translatable="false">565104708298189</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>

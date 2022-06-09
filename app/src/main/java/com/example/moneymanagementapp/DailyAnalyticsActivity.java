@@ -49,11 +49,11 @@ public class DailyAnalyticsActivity extends AppCompatActivity {
 
     private Button btn_back;
 
-    private LinearLayout detail_color;
+    private LinearLayout detail_color,daily_analytics_container;
 
     private TextView txt_total,totalBudgetAmountTextView, analyticsTransportAmount, analyticsFoodAmount, analyticsHouseExpensesAmount, analyticsEntertainmentAmount, analyticsEducationAmount, analyticsCharityAmount, analyticsApparelAmount, analyticsHealthAmount, analyticsPersonalExpensesAmount, analyticsOtherAmount;
 
-    private RelativeLayout daily_analytics_header, daily_analytics_container, linearLayoutTransport, linearLayoutFood, linearLayoutFoodHouse, linearLayoutEntertainment, linearLayoutEducation, linearLayoutCharity, linearLayoutApparel, linearLayoutHealth, linearLayoutPersonalExp, linearLayoutOther;
+    private RelativeLayout daily_analytics_header, linearLayoutTransport, linearLayoutFood, linearLayoutFoodHouse, linearLayoutEntertainment, linearLayoutEducation, linearLayoutCharity, linearLayoutApparel, linearLayoutHealth, linearLayoutPersonalExp, linearLayoutOther;
 
     private AnyChartView anyChartView;
 

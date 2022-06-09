@@ -164,6 +164,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
         String name = user.getDisplayName();
         if(name.equals("")){
+            Uri photoUrl = user.getPhotoUrl();
             budgetRef.child("fullname").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -175,10 +176,10 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 }
             });
+            Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);
         }
         else{
         Uri photoUrl = user.getPhotoUrl();
-
         tv_name.setText(name);
         //tv_name.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
         Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);}

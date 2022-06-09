@@ -145,7 +145,13 @@ public class AccountActivity extends AppCompatActivity {
                     Toast.makeText(AccountActivity.this, "return data false", Toast.LENGTH_SHORT).show();
                 }
             }
-        });}
+
+        });
+        Uri photoUrl = user.getPhotoUrl();
+        Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);
+        muri = photoUrl;
+        showUserInformation1();
+        }
         else{
         tv_email.setText(email);
             edtFullName.setText(name);
@@ -186,7 +192,7 @@ public class AccountActivity extends AppCompatActivity {
 
 
     private void onClickUpdateProfile() {
-        //progressDialog.show();
+        progressDialog.show();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String name = user.getDisplayName();
         if(user==null){
@@ -196,8 +202,23 @@ public class AccountActivity extends AppCompatActivity {
             budgetRef.child("fullname").setValue(edtFullName.getText().toString().trim());
             budgetRef.child("phone").setValue(phonenumber.getText().toString().trim());
             budgetRef.child("birthday").setValue(birthday.getText().toString().trim());
-            Intent intent=new Intent(AccountActivity.this,ProfileActivity.class);
-            startActivity(intent);
+            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                    .setDisplayName("")
+                    .setPhotoUri(muri)
+                    .build();
+            user.updateProfile(profileUpdates)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            progressDialog.dismiss();
+                            if (task.isSuccessful()) {
+                                Toast.makeText(AccountActivity.this, "Update profile success", Toast.LENGTH_SHORT).show();
+                                showUserInformation1();
+                            }
+                            Intent intent=new Intent(AccountActivity.this,ProfileActivity.class);
+                            startActivity(intent);
+                        }
+                    });
         }
         else{
         String strFullName=edtFullName.getText().toString().trim();
@@ -220,6 +241,7 @@ public class AccountActivity extends AppCompatActivity {
                     }
                 });
         }
+
     }
 
     private void onClickRequestPermission() {
@@ -245,6 +267,14 @@ public class AccountActivity extends AppCompatActivity {
         String name = user.getDisplayName();
         Uri photoUrl = user.getPhotoUrl();
         edtFullName.setText(name);
+        Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);
+    }
+    private void showUserInformation1(){
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        if(user==null){
+            return;
+        }
+        Uri photoUrl = user.getPhotoUrl();
         Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);
     }
 }

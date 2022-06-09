@@ -68,5 +68,20 @@
     <string name="month_title">Tháng này bạn đã chi</string>
     <string name="sign_gg">Tiếp tục với Google</string>
     <string name="sign_fb">Tiếp tục với Facebook</string>
-
+    <string name="ver">Phiên bản: 1.0.0</string>
+    <string name="instru">Hướng dẫn</string>
+    <string name="help">Hỗ trợ</string>
+    <string name="follow_fb">Theo dõi chúng tôi trên Facebook</string>
+    <string name="follow_ins">Theo dõi chúng tôi trên Instagram</string>
+    <string name="follow_twitter">Theo dõi chúng tôi trên Twitter</string>
+    <string name="jo_us">Tham gia với chúng tôi</string>
+    <string name="we_help">Chúng tôi có thể giúp gì cho bạn?</string>
+    <string name="we_guide">Có vẻ như bạn đang gặp sự cố với quy trình đăng ký của chúng tôi. Chúng tôi ở đây để trợ giúp vì vậy vui lòng liên hệ với chúng tôi.</string>
+    <string name="em_help">Liên hệ email: app@gmail.com</string>
+    <string name="hotline">Đường dây nóng 19009999</string>
+    <string name="Help">Trợ giúp</string>
+    <string name="home_screen">Màn hình chính</string>
+    <string name="spent_today">Bạn chưa chi tiêu gì hôm nay</string>
+    <string name="spent_week">Bạn chưa chi tiêu gì tuần này</string>
+    <string name="spent_month">Bạn chưa chi tiêu gì tháng này</string>
 </resources>

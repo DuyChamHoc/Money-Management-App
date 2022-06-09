@@ -8,7 +8,9 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,7 +45,7 @@ public class WeeklyAnalyticActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String onlineUserId="";
     private DatabaseReference expensesRef,personalRef;
-
+    private Button btn_back1;
     private TextView totalBudgetAmountTextView,analyticsTransportAmount,analyticsFoodAmount,analyticsHouseExpensesAmount,analyticsEntertainmentAmount,analyticsEducationAmount,analyticsCharityAmount,analyticsApparelAmount,analyticsHealthAmount,analyticsPersonalExpensesAmount,analyticsOtherAmount;
 
     private RelativeLayout linearLayoutTransport,linearLayoutFood,linearLayoutFoodHouse,linearLayoutEntertainment,linearLayoutEducation,linearLayoutCharity,linearLayoutApparel,linearLayoutHealth,linearLayoutPersonalExp,linearLayoutOther;
@@ -53,7 +55,7 @@ public class WeeklyAnalyticActivity extends AppCompatActivity {
     private TextView progress_ratio_transport,progress_ratio_food,progress_ratio_house,progress_ratio_ent,progress_ratio_edu,progress_ratio_cha,progress_ratio_app,progress_ratio_hea,progress_ratio_per,progress_ratio_oth;
 
     private ImageView btn_back,status_Image_transport,status_Image_food,status_Image_house,status_Image_ent,status_Image_edu,status_Image_cha,status_Image_app,status_Image_hea,status_Image_per,status_Image_oth;
-
+    private LinearLayout detail_color,txt_total,week_analytics_container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +67,19 @@ public class WeeklyAnalyticActivity extends AppCompatActivity {
         expensesRef= FirebaseDatabase.getInstance().getReference("expenses").child(onlineUserId);
         personalRef=FirebaseDatabase.getInstance().getReference("personal").child(onlineUserId);
 
-        totalBudgetAmountTextView=findViewById(R.id.totalBudgetAmountTextView);
+        btn_back1 = findViewById(R.id.btn_back);
+        btn_back1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(WeeklyAnalyticActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        totalBudgetAmountTextView=findViewById(R.id.totalBudgetAmountTextView);
+        week_analytics_container = findViewById(R.id.week_analytics_container);
+        txt_total = findViewById(R.id.txt_total);
+        detail_color = findViewById(R.id.detail_color);
 
 
         analyticsTransportAmount=findViewById(R.id.analyticsTransportAmount);
@@ -167,10 +180,17 @@ public class WeeklyAnalyticActivity extends AppCompatActivity {
                         int pTotal=Integer.parseInt(String.valueOf(total));
                         totalAmount +=pTotal;
                     }
+
                     totalBudgetAmountTextView.setText(totalAmount+"$");
+                    week_analytics_container.setVisibility(View.GONE);
+                    txt_total.setVisibility(View.VISIBLE);
+                    detail_color.setVisibility(View.VISIBLE);
                 }
                 else {
                     anyChartView.setVisibility(View.GONE);
+                    week_analytics_container.setVisibility(View.VISIBLE);
+                    detail_color.setVisibility(View.GONE);
+                    txt_total.setVisibility(View.GONE);
                 }
             }
 
