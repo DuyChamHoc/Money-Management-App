@@ -87,6 +87,7 @@ private NotificationBadge notificationBadge;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         notificationBadge=findViewById(R.id.badge);
         bell=findViewById(R.id.bell);
         tv_homnay = findViewById(R.id.tv_homnay);
