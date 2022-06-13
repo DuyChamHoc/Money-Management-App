@@ -3,19 +3,25 @@ package com.example.moneymanagementapp;
 public class DataLoan {
     String companion,date,id,notes;
     int amount,moneyLeft;
-    public DataLoan(String companion, String date, String id, String notes, int amount,int moneyLeft) {
+
+    public DataLoan() {
+
+    }
+
+    public DataLoan(String companion, String date, String id, String notes, int amount, int moneyLeft) {
         this.companion = companion;
         this.date = date;
         this.id = id;
         this.notes = notes;
-        this.amount=amount;
-        this.moneyLeft=moneyLeft;
+        this.amount = amount;
+        this.moneyLeft = moneyLeft;
     }
+
     public String getCompanion() {
         return companion;
     }
 
-    public void setCompanion(String item) {
+    public void setCompanion(String companion) {
         this.companion = companion;
     }
 
@@ -42,6 +48,7 @@ public class DataLoan {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
     public int getAmount() {
         return amount;
     }
@@ -49,11 +56,12 @@ public class DataLoan {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
     public int getMoneyLeft() {
         return moneyLeft;
     }
 
-    public void setMoneyLeft(int amount) {
-        this.amount = moneyLeft;
+    public void setMoneyLeft(int moneyLeft) {
+        this.moneyLeft = moneyLeft;
     }
 }

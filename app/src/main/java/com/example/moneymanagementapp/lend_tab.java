@@ -116,7 +116,7 @@ public class lend_tab extends Fragment {
         loader = new ProgressDialog(getContext());
 
         totalBudgetAmountTextView = (TextView) view.findViewById(R.id.totalLend);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewloan);
         onlineUserId=mAuth.getCurrentUser().getUid();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setStackFromEnd(true);
@@ -164,17 +164,12 @@ public class lend_tab extends Fragment {
         return view;
     }
     private void readItems() {
-        DateFormat dateFormat =new SimpleDateFormat("dd-MM-yyyy");
-        Calendar cal=Calendar.getInstance();
-        String date=dateFormat.format(cal.getTime());
-
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Lend").child(onlineUserId);
-        Query query=reference.orderByChild("date");
-        query.addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 myDataList.clear();
-                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
                     DataLoan data=dataSnapshot.getValue(DataLoan.class);
                     myDataList.add(data);
                 }

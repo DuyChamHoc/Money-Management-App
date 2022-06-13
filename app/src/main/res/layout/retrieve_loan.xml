@@ -72,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/On"/>
                     <TextView
-                        android:id="@+id/note"
+                        android:id="@+id/date"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:text="date"

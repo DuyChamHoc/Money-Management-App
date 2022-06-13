@@ -35,9 +35,8 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
     private String post_key = "";
     private String companion = "";
     private String note = "";
-
     private int amount = 0;
-    int moneyLeft=0;
+    private int moneyLeft=0;
     public LendAdapter(Context mContext, List<DataLoan> myDataList) {
         this.mContext = mContext;
         this.myDataList = myDataList;
@@ -52,10 +51,11 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final DataLoan data=myDataList.get(position);
-        holder.companion.setText(data.getCompanion());
+        holder.companion.setText(" "+data.getCompanion());
         holder.amount.setText(data.getAmount()+"$");
         holder.date.setText(" "+data.getDate());
-        holder.notes.setText(" "+data.getNotes());
+        //holder.notes.setText(" "+data.getNotes());
+        holder.moneyLeft.setText(" "+data.getMoneyLeft());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +63,7 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
                 companion=data.getCompanion();
                 amount=data.getAmount();
                 note=data.getNotes();
+                moneyLeft=data.getMoneyLeft();
                 updateData(data);
             }
         });
@@ -150,7 +151,7 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
         return myDataList.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView companion, amount, date, notes;
+        public TextView companion, amount, date, notes,moneyLeft;
         public ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -159,6 +160,7 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
             amount = itemView.findViewById(R.id.amount);
             date = itemView.findViewById(R.id.date);
             notes = itemView.findViewById(R.id.note);
+            moneyLeft=itemView.findViewById(R.id.moneyLeft);
             imageView = itemView.findViewById(R.id.imageView);
         }
     }
