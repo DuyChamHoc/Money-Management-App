@@ -209,7 +209,7 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="40dp"
-                    android:background="@drawable/guidepf" />
+                    android:background="@drawable/loan1" />
 
                 <TextView
                     android:id="@+id/tv_loan"

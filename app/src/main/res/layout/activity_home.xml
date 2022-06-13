@@ -397,7 +397,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                app:itemIconTint="#8F71FF"
+                app:itemIconTint="@color/button"
                 app:itemTextColor="@color/black"
                 app:menu="@menu/bottom_bar_nav" />
         </com.google.android.material.bottomappbar.BottomAppBar>
