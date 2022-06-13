@@ -35,6 +35,7 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
     private String post_key = "";
     private String companion = "";
     private String note = "";
+
     private int amount = 0;
     int moneyLeft=0;
     public LendAdapter(Context mContext, List<DataLoan> myDataList) {
@@ -108,7 +109,7 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
                 epoch.setDate(0);
                 DataLoan data=new DataLoan(companion,date,post_key,note,amount,moneyLeft);
 
-                DatabaseReference reference= FirebaseDatabase.getInstance().getReference("lend").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Lend").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                 reference.child(post_key).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -126,7 +127,7 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
         delBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference reference= FirebaseDatabase.getInstance().getReference("lend").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                DatabaseReference reference= FirebaseDatabase.getInstance().getReference("Lend").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                 reference.child(post_key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
