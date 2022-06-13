@@ -134,9 +134,9 @@ public class lend_tab extends Fragment {
                 if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
                     int totalamount = 0;
                     for (DataSnapshot snap : snapshot.getChildren()) {
-                        Data data = snap.getValue(Data.class);
+                        DataLoan data = snap.getValue(DataLoan.class);
 
-                        totalamount += data.getAmount();
+                        totalamount += data.getMoneyLeft();
 
                         String sttotal = String.valueOf("$ " + totalamount);
 
@@ -180,7 +180,7 @@ public class lend_tab extends Fragment {
                 if(snapshot.exists() && snapshot.getChildrenCount()>0) {
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
-                        Object total = map.get("amount");
+                        Object total = map.get("moneyLeft");
                         int pTotal = Integer.parseInt(String.valueOf(total));
                         totalAmount += pTotal;
                         totalBudgetAmountTextView.setText("$ " + totalAmount);
@@ -231,7 +231,7 @@ public class lend_tab extends Fragment {
                 }
                 String notes = note.getText().toString();
                 String companionname = companion.getText().toString();
-                loader.setMessage("adding a budget item");
+                loader.setMessage("adding a Lend item");
                 loader.setCanceledOnTouchOutside(false);
                 loader.show();
 
@@ -254,7 +254,7 @@ public class lend_tab extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), "Budget item added successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Lend item added successful", Toast.LENGTH_SHORT).show();
 
                         } else {
                             Toast.makeText(getContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();

@@ -44,7 +44,7 @@
                     android:layout_marginTop="5dp"
                     android:text="item name"
                     android:textColor="#292B2D"
-                    android:textSize="20sp"
+                    android:textSize="17dp"
                     android:textStyle="bold" />
 
                 <TextView

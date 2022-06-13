@@ -48,8 +48,8 @@
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:gravity="center"
-            android:text="Companion Name"
-            android:textSize="30dp" />
+            android:hint="Companion Name"
+            android:textSize="26dp" />
     </LinearLayout>
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/amount"
@@ -77,7 +77,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/note"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:hint="Notes"
             android:textSize="17sp"
             android:layout_marginLeft="20dp" />
