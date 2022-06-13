@@ -37,13 +37,12 @@
 
                 <com.nex3z.notificationbadge.NotificationBadge
                     android:id="@+id/badge"
-                    android:layout_width="40dp"
-                    android:layout_height="0dp"
-                    android:layout_alignParentEnd="true"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="185dp"
-                    android:layout_marginEnd="14dp"
-                    android:layout_marginBottom="42dp"
+                    android:layout_marginLeft="370dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="60dp"
                     app:nbMaxTextLength="2">
 
                 </com.nex3z.notificationbadge.NotificationBadge>
