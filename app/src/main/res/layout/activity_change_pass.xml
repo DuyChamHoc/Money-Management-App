@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ChangePassActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/teal_200"
+        android:background="#8F71FF "
         android:padding="16dp">
 
         <ImageView
@@ -104,28 +105,30 @@
         android:layout_marginTop="-40dp"
         />
     </LinearLayout>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_change_password"
         android:layout_width="200dp"
         android:layout_height="55dp"
-        android:backgroundTint="@color/button"
+        android:layout_gravity="center"
         android:layout_marginTop="15dp"
+        android:backgroundTint="#8F71FF"
         android:text="@string/update"
-        android:textSize="17dp"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:layout_gravity="center"
+        android:textSize="17dp"
         app:cornerRadius="5dp" />
+
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="200dp"
         android:layout_height="30dp"
-        android:text="@string/forgot_password"
-        android:textStyle="bold"
-        android:textColor="@color/button"
-        android:textAlignment="center"
-        android:gravity="center"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:textSize="18dp"/>
+        android:gravity="center"
+        android:text="@string/forgot_password"
+        android:textAlignment="center"
+        android:textColor="#8F71FF "
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
 </LinearLayout>

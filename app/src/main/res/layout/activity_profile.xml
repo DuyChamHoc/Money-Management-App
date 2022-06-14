@@ -238,14 +238,15 @@
             app:fabCradleRoundedCornerRadius="50dp"
             app:fabCradleMargin="14dp"
             >
+
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:menu="@menu/bottom_bar_nav"
-                app:itemIconTint="@color/button"
+                android:background="@color/white"
+                app:itemIconTint="#8F71FF"
                 app:itemTextColor="@color/black"
-                android:background="@color/white"/>
+                app:menu="@menu/bottom_bar_nav" />
         </com.google.android.material.bottomappbar.BottomAppBar>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"

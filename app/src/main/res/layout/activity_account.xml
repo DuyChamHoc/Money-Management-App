@@ -173,6 +173,7 @@
             android:layout_marginLeft="180dp"
             android:layout_marginTop="20dp"
             android:layout_height="50dp">
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_cancel"
                 android:layout_width="wrap_content"
@@ -180,14 +181,15 @@
                 android:backgroundTint="@color/button1"
                 android:text="@string/cancel"
                 android:textAllCaps="false"
-                android:textColor="@color/button"
+                android:textColor="#8F71FF"
                 app:cornerRadius="15dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_update"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/button"
                 android:layout_marginLeft="15dp"
+                android:backgroundTint="#8F71FF"
                 android:text="@string/update"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

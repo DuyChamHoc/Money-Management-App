@@ -7,10 +7,11 @@
     android:orientation="vertical"
     android:background="@color/colorBackground"
     tools:context=".SettingActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/teal_200"
+        android:background=" #8F71FF "
         android:padding="16dp">
 
         <ImageView

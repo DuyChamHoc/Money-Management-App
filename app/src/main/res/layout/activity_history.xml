@@ -83,6 +83,7 @@
                         android:gravity="center"
                         android:scrollbarSize="100dp" />
                 </LinearLayout>
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/search"
                     android:layout_width="100dp"
@@ -96,7 +97,7 @@
                     android:backgroundTint="@color/button1"
                     android:text="@string/Date"
                     android:textAllCaps="false"
-                    android:textColor="@color/button"
+                    android:textColor=" #8F71FF "
                     app:cornerRadius="15dp" />
             </RelativeLayout>
             <LinearLayout
@@ -271,14 +272,15 @@
             app:fabCradleRoundedCornerRadius="50dp"
             app:fabCradleMargin="14dp"
             >
+
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigationView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:menu="@menu/bottom_bar_nav"
+                android:background="@color/white"
+                app:itemIconTint="#8F71FF"
                 app:itemTextColor="@color/black"
-                app:itemIconTint="@color/button"
-                android:background="@color/white"/>
+                app:menu="@menu/bottom_bar_nav" />
         </com.google.android.material.bottomappbar.BottomAppBar>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"

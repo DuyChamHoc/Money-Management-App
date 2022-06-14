@@ -76,22 +76,22 @@
         android:layout_height="65dp"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
-        android:backgroundTint="#50C2C9"
-        android:text="@string/login"
         android:layout_marginRight="4dp"
+        android:backgroundTint=" #8F71FF "
+        android:text="@string/login"
         app:cornerRadius="20dp" />
+
     <Button
         android:id="@+id/btn_forgotpass"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="75dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/white"
         android:text="@string/forgot_password"
-        android:textColor="#50C2C9"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="75dp"
-        android:layout_gravity="center"
-        />
+        android:textColor=" #8F71FF " />
     <TextView
         android:layout_width="60dp"
         android:layout_height="35dp"

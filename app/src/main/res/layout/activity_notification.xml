@@ -60,7 +60,7 @@
             android:layout_marginBottom="30dp"
             android:gravity="center"
             android:text="$ 0"
-            android:textColor="@color/red"
+            android:textColor="@color/white"
             android:textSize="30dp"
             android:textStyle="bold" />
 

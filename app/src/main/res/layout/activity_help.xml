@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/button"
+        android:background="#8F71FF "
         android:padding="16dp">
 
         <ImageView

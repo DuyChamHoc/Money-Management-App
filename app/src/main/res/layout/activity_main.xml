@@ -69,26 +69,26 @@
         android:textColor="#91919F"
         />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogin"
-        android:layout_width="340dp"
-        android:layout_height="65dp"
-        app:cornerRadius="16dp"
-        android:backgroundTint="#50C2C9"
-        android:text="@string/login"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="7dp"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            android:layout_width="340dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="7dp"
+            android:backgroundTint=" #8F71FF "
+            android:text="@string/login"
+            app:cornerRadius="16dp"
 
-        />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnRegister"
-        android:layout_width="340dp"
-        android:layout_height="65dp"
-        app:cornerRadius="16dp"
-        android:backgroundTint="@color/white"
-        android:textColor="#50C2C9"
-        android:text="@string/register"
-        android:layout_marginBottom="16dp"
-        />
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRegister"
+            android:layout_width="340dp"
+            android:layout_height="65dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/white"
+            android:text="@string/register"
+            android:textColor=" #8F71FF "
+            app:cornerRadius="16dp" />
     </LinearLayout>
 </LinearLayout>

@@ -66,15 +66,16 @@
         android:textSize="18dp"
         android:textColor="@color/black"
         android:layout_marginLeft="20dp"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/date"
         android:layout_width="100dp"
         android:layout_height="45dp"
         android:layout_marginLeft="190dp"
+        android:layout_marginTop="-38dp"
+        android:backgroundTint="#8F71FF"
         android:text="Date"
-        android:backgroundTint="@color/button"
-        app:cornerRadius="15dp"
-        android:layout_marginTop="-38dp"/>
+        app:cornerRadius="15dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -90,15 +91,16 @@
         android:text="@string/service">
 
     </TextView>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/registerBtn"
-        android:layout_marginTop="18dp"
         android:layout_width="300dp"
-        android:layout_marginLeft="50dp"
-        android:text="@string/register"
-        app:cornerRadius="15dp"
         android:layout_height="55dp"
-        android:backgroundTint="@color/button"/>
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="18dp"
+        android:backgroundTint="#8F71FF"
+        android:text="@string/register"
+        app:cornerRadius="15dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
