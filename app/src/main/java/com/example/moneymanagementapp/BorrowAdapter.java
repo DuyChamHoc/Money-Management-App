@@ -1,6 +1,10 @@
 package com.example.moneymanagementapp;
 
 import android.content.Context;
+import android.graphics.Paint;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,11 +55,21 @@ public class BorrowAdapter extends RecyclerView.Adapter<BorrowAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final DataLoan data=myDataList.get(position);
+        if(data.getMoneyLeft()==0)
+        {
+            holder.moneyLeft.setText(" Already Paid");
+            holder.amount.setText(data.getAmount()+"$");
+            holder.amount.setPaintFlags(holder.amount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }
+        else
+        {
+            holder.amount.setText(data.getAmount()+"$");
+            holder.moneyLeft.setText(" "+data.getMoneyLeft());
+        }
         holder.companion.setText(" "+data.getCompanion());
-        holder.amount.setText(data.getAmount()+"$");
+
         holder.date.setText(" "+data.getDate());
         //holder.notes.setText(" "+data.getNotes());
-        holder.moneyLeft.setText(" "+data.getMoneyLeft());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,6 +115,12 @@ public class BorrowAdapter extends RecyclerView.Adapter<BorrowAdapter.ViewHolder
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int money=data.getMoneyLeft();
+                if(Integer.parseInt(mAmount.getText().toString())>money)
+                {
+                    mAmount.setError("Money left is just only "+Integer.toString(money));
+                    return;
+                }
                 moneyLeft=moneyLeft-Integer.parseInt(mAmount.getText().toString());
                 note=mNotes.getText().toString();
                 DateFormat dateFormat =new SimpleDateFormat("dd-MM-yyyy");

@@ -225,12 +225,22 @@ public class lend_tab extends Fragment {
             @Override
             public void onClick(View view) {
                 String budgetAmount = amount.getText().toString();
+                String notes = note.getText().toString();
+                String companionname = companion.getText().toString();
                 if (TextUtils.isEmpty(budgetAmount)) {
                     amount.setError("Amount is required");
                     return;
                 }
-                String notes = note.getText().toString();
-                String companionname = companion.getText().toString();
+                if(TextUtils.isEmpty(companionname))
+                {
+                    companion.setError("Name is required");
+                    return;
+                }
+                if(TextUtils.isEmpty(notes))
+                {
+                    notes="Collect from "+companionname;
+                }
+
                 loader.setMessage("adding a Lend item");
                 loader.setCanceledOnTouchOutside(false);
                 loader.show();
@@ -262,9 +272,10 @@ public class lend_tab extends Fragment {
                         loader.dismiss();
                     }
                 });
+                dialog.dismiss();
             }
         });
-        dialog.dismiss();
+
         dialog.show();
     }
 }
