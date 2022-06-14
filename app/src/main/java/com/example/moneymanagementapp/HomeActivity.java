@@ -57,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
 public static int count;
     private ImageView image_hoso;
 private ImageButton bell;
-    private LinearLayout linearNgansach;
+    private LinearLayout linearNgansach,linearChiPhi;
     private RelativeLayout bigestlayout;
 
     private TextView tv_homnay,tv_thunhap,tv_week,tv_month,tv_chiphi,moneytoday,moneyweek,moneymonth,tv_sodu;
@@ -112,6 +112,14 @@ private NotificationBadge notificationBadge;
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this,BudgetActivity.class);
+                startActivity(intent);
+            }
+        });
+        linearChiPhi=findViewById(R.id.linear_chiphi);
+        linearChiPhi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,TodaySpendingActivity.class);
                 startActivity(intent);
             }
         });

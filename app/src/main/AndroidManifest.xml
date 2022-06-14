@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MoneyManagementApp">
         <activity
+            android:name=".LoanActivity"
+            android:exported="false" />
+        <activity
             android:name=".mainscreen"
             android:exported="false" />
         <activity

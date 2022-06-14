@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Money Management</string>
-    <string name="Balance">Số Dư</string>
+    <string name="Balance">Tổng số dư</string>
     <string name="Budget">Ngân Sách</string>
     <string name="Expense">Chi phí</string>
     <string name="Spending_frequency">Tần suất chi tiêu</string>
@@ -84,4 +84,6 @@
     <string name="spent_today">Bạn chưa chi tiêu gì hôm nay</string>
     <string name="spent_week">Bạn chưa chi tiêu gì tuần này</string>
     <string name="spent_month">Bạn chưa chi tiêu gì tháng này</string>
+    <string name="add_tran">Thêm giao dịch</string>
+    <string name="add_bug">Thêm ngân sách</string>
 </resources>

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Money Management</string>
-    <string name="Balance">Balance</string>
+    <string name="Balance">Total Balance</string>
     <string name="Budget">Budget</string>
     <string name="Expense">Expense</string>
     <string name="Spending_frequency">Spending frequency</string>
@@ -83,6 +83,8 @@
     <string name="spent_today">You haven\'t spent anything today</string>
     <string name="spent_week">You haven\'t spent anything this week</string>
     <string name="spent_month">You haven\'t spent anything this month</string>
+    <string name="add_tran">Add Transaction</string>
+    <string name="add_bug">Add Budget</string>
 
     <string name="facebook_app_id" translatable="false">565104708298189</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>
@@ -117,6 +119,8 @@
         <item>Personal</item>
         <item>Other</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

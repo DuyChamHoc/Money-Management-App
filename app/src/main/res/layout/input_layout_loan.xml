@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Expense">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,24 +17,16 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_close" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="95dp"
-            android:gravity="center"
-            android:text="@string/add_bug"
-            android:textColor="@color/black"
-            android:textSize="19dp"
-            android:textStyle="bold" />
-
         <ImageView
-            android:id="@+id/save"
+            android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="20dp"
             android:src="@drawable/ic_save" />
+
+
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,13 +40,16 @@
             android:src="@drawable/transport"
             android:layout_marginLeft="15dp"
             />
-        <Spinner
-            android:scrollbarSize="100dp"
-            android:id="@+id/itemsspinner"
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/companionName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center" />
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:hint="Companion Name"
+            android:textSize="26dp" />
     </LinearLayout>
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/amount"
@@ -67,7 +61,26 @@
         android:textColor="@color/blue"
         android:inputType="numberDecimal"
         />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <ImageView
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:src="@drawable/ic_notes"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center"
+            />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/note"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:hint="Notes"
+            android:textSize="17sp"
+            android:layout_marginLeft="20dp" />
+    </LinearLayout>
+
 </LinearLayout>
