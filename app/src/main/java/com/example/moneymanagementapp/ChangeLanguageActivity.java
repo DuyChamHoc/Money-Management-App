@@ -33,7 +33,7 @@ public class ChangeLanguageActivity extends AppCompatActivity {
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = Mylocale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-        Intent intent = new Intent(ChangeLanguageActivity.this, ProfileActivity.class);
+        Intent intent = new Intent(ChangeLanguageActivity.this, SettingActivity.class);
         startActivity(intent);
     }
     private void OnChangeLanguageVN(){
@@ -43,7 +43,7 @@ public class ChangeLanguageActivity extends AppCompatActivity {
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = Mylocale;
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-        Intent intent = new Intent(ChangeLanguageActivity.this, ProfileActivity.class);
+        Intent intent = new Intent(ChangeLanguageActivity.this, SettingActivity.class);
         startActivity(intent);
     }
 

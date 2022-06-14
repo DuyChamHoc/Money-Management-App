@@ -27,7 +27,7 @@
             android:layout_marginEnd="80dp"
             android:layout_marginBottom="90dp"
             android:gravity="center"
-            android:text="Tổng số tiền cần thu"
+            android:text="@string/tt"
             android:textColor="@color/black"
             android:textSize="16dp" />
 

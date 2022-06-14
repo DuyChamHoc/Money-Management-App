@@ -86,4 +86,11 @@
     <string name="spent_month">Bạn chưa chi tiêu gì tháng này</string>
     <string name="add_tran">Thêm giao dịch</string>
     <string name="add_bug">Thêm ngân sách</string>
+    <string name="Guide">Hướng dẫn</string>
+    <string name="Loan">Sổ nợ</string>
+    <string name="Borrow">Cần trả</string>
+    <string name="Lend">Cần thu</string>
+    <string name="ttt">Tổng số tiền cần trả</string>
+    <string name="tt">Tổng số tiền cần thu</string>
+    <string name="Left">Còn lại</string>
 </resources>

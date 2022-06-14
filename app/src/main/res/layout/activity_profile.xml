@@ -165,7 +165,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="18dp"
                     android:paddingRight="100dp"
-                    android:text="Help"
+                    android:text="@string/Help"
                     android:textColor="@color/black"
                     android:textSize="18dp" />
             </LinearLayout>
@@ -191,7 +191,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="18dp"
                     android:paddingRight="100dp"
-                    android:text="Guide"
+                    android:text="@string/Guide"
                     android:textColor="@color/black"
                     android:textSize="19dp" />
 
@@ -218,7 +218,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="18dp"
                     android:paddingRight="100dp"
-                    android:text="Loan"
+                    android:text="@string/Loan"
                     android:textColor="@color/black"
                     android:textSize="19dp" />
 

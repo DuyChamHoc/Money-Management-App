@@ -16,6 +16,7 @@
         android:layout_marginTop="0dp"
 
         >
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,7 +27,7 @@
             android:layout_marginEnd="80dp"
             android:layout_marginBottom="90dp"
             android:gravity="center"
-            android:text="Tổng số tiền cần trả"
+            android:text="@string/ttt"
             android:textColor="@color/black"
             android:textSize="16dp" />
 

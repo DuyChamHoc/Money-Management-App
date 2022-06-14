@@ -85,7 +85,13 @@
     <string name="spent_month">You haven\'t spent anything this month</string>
     <string name="add_tran">Add Transaction</string>
     <string name="add_bug">Add Budget</string>
-
+    <string name="Guide">Guide</string>
+    <string name="Loan">Loan</string>
+    <string name="Borrow">Borrow</string>
+    <string name="Lend">Lend</string>
+    <string name="ttt">Total amount to pay</string>
+    <string name="tt">Total amount to be collected</string>
+    <string name="Left">Left</string>
     <string name="facebook_app_id" translatable="false">565104708298189</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>
     <string name="facebook_client_token" translatable="false">74e5c94fa747cfd9f15239d8327f17cc</string>

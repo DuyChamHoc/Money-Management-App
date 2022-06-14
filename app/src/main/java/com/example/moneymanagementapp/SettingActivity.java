@@ -28,7 +28,8 @@ public class SettingActivity extends AppCompatActivity {
         arrow_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(SettingActivity.this, ProfileActivity.class);
+                startActivity(intent);
             }
         });
     }

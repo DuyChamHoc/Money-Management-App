@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Loan">
+    android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_toEndOf="@id/arrow_back"
-            android:text="Sổ nợ"
+            android:text="@string/Loan"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </RelativeLayout>
@@ -37,12 +36,12 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Cần trả">
+            android:text="@string/Borrow">
         </com.google.android.material.tabs.TabItem>
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Cần thu">
+            android:text="@string/Lend">
         </com.google.android.material.tabs.TabItem>
     </com.google.android.material.tabs.TabLayout>
 
