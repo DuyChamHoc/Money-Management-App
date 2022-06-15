@@ -98,8 +98,8 @@ public class BorrowAdapter extends RecyclerView.Adapter<BorrowAdapter.ViewHolder
         mCompanion.setText(companion);
         mDate.setText(" "+data.getDate());
 
-        mAmount.setText(String.valueOf(amount));
-        mAmount.setSelection(String.valueOf(amount).length());
+        mAmount.setText(String.valueOf(moneyLeft));
+        mAmount.setSelection(String.valueOf(moneyLeft).length());
 
         mNotes.setText(note);
         mNotes.setSelection(note.length());
@@ -134,6 +134,7 @@ public class BorrowAdapter extends RecyclerView.Adapter<BorrowAdapter.ViewHolder
                 }
                 moneyLeft=moneyLeft-Integer.parseInt(mAmount.getText().toString());
                 note=mNotes.getText().toString();
+                companion=mCompanion.getText().toString();
                 DateFormat dateFormat =new SimpleDateFormat("dd-MM-yyyy");
                 Calendar cal=Calendar.getInstance();
                 String date=dateFormat.format(cal.getTime());
@@ -189,6 +190,7 @@ public class BorrowAdapter extends RecyclerView.Adapter<BorrowAdapter.ViewHolder
             super(itemView);
             companion = itemView.findViewById(R.id.companion);
             amount = itemView.findViewById(R.id.amount);
+
             date = itemView.findViewById(R.id.date);
             notes = itemView.findViewById(R.id.note);
             moneyLeft=itemView.findViewById(R.id.moneyLeft);

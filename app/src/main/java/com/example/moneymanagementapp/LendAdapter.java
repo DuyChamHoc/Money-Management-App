@@ -95,8 +95,8 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
         mCompanion.setText(companion);
         mDate.setText(" "+data.getDate());
 
-        mAmount.setText(String.valueOf(amount));
-        mAmount.setSelection(String.valueOf(amount).length());
+        mAmount.setText(String.valueOf(moneyLeft));
+        mAmount.setSelection(String.valueOf(moneyLeft).length());
 
         mNotes.setText(note);
         mNotes.setSelection(note.length());
@@ -130,6 +130,7 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
                     return;
                 }
                 moneyLeft=moneyLeft-Integer.parseInt(mAmount.getText().toString());
+                companion=mCompanion.getText().toString();
                 note=mNotes.getText().toString();
                 DateFormat dateFormat =new SimpleDateFormat("dd-MM-yyyy");
                 Calendar cal=Calendar.getInstance();

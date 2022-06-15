@@ -152,8 +152,9 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="50dp"
+                    android:textAlignment="center"
+                    android:layout_marginTop="23dp"
                     android:text="@string/Expense"
                     android:textColor="@color/white" />
 
@@ -161,8 +162,9 @@
                     android:id="@+id/tv_chiphi"
                     android:layout_width="80dp"
                     android:layout_height="45dp"
-                    android:layout_marginLeft="80dp"
+                    android:layout_marginLeft="70dp"
                     android:text="0$"
+                    android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="17dp"
                     android:textStyle="bold" />
@@ -172,7 +174,7 @@
                     android:layout_width="43dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="-60dp"
+                    android:layout_marginTop="-67dp"
                     android:background="@drawable/layout_botron"
                     android:src="@drawable/chiphi" />
             </LinearLayout>
@@ -192,8 +194,9 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="70dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="40dp"
+                    android:textAlignment="center"
+                    android:layout_marginTop="23dp"
                     android:text="@string/Budget"
                     android:textColor="@color/white" />
 
@@ -201,8 +204,9 @@
                     android:id="@+id/tv_thunhap"
                     android:layout_width="80dp"
                     android:layout_height="45dp"
-                    android:layout_marginLeft="69dp"
+                    android:layout_marginLeft="70dp"
                     android:text="0$"
+                    android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="17dp"
                     android:textStyle="bold" />
@@ -212,7 +216,7 @@
                     android:layout_width="43dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="15dp"
-                    android:layout_marginTop="-60dp"
+                    android:layout_marginTop="-67dp"
                     android:background="@drawable/layout_botron"
                     android:src="@drawable/thunhap" />
             </LinearLayout>

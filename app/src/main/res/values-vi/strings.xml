@@ -93,4 +93,5 @@
     <string name="ttt">Tổng số tiền cần trả</string>
     <string name="tt">Tổng số tiền cần thu</string>
     <string name="Left">Còn lại</string>
+    <string name="announce">Thông báo</string>
 </resources>

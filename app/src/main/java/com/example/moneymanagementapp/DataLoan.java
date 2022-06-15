@@ -2,7 +2,7 @@ package com.example.moneymanagementapp;
 
 public class DataLoan {
     String companion,date,id,notes;
-    int amount,moneyLeft;
+    int amount,moneyLeft = -1;
 
     public DataLoan() {
 

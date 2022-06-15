@@ -87,6 +87,7 @@
         <entry key="..\:/Project/Ikuiku/Money-Management-App/app/src/main/res/layout/activity_home.xml" value="0.264" />
         <entry key="..\:/Project/Ikuiku/Money-Management-App/app/src/main/res/layout/activity_loan.xml" value="0.24615384615384617" />
         <entry key="..\:/Project/Ikuiku/Money-Management-App/app/src/main/res/layout/activity_monthly_analytic.xml" value="0.264" />
+        <entry key="..\:/Project/Ikuiku/Money-Management-App/app/src/main/res/layout/activity_notification.xml" value="0.22407407407407406" />
         <entry key="..\:/Project/Ikuiku/Money-Management-App/app/src/main/res/layout/activity_profile.xml" value="0.24615384615384617" />
         <entry key="..\:/Project/Ikuiku/Money-Management-App/app/src/main/res/layout/activity_screenguide.xml" value="0.24615384615384617" />
         <entry key="..\:/Project/Ikuiku/Money-Management-App/app/src/main/res/layout/activity_setting.xml" value="0.24615384615384617" />
@@ -99,6 +100,7 @@
         <entry key="..\:/Project/Ikuiku/Money-Management-App/app/src/main/res/layout/input_layout_loan.xml" value="0.24351851851851852" />
         <entry key="..\:/Project/Ikuiku/Money-Management-App/app/src/main/res/layout/retrieve1.xml" value="0.24351851851851852" />
         <entry key="..\:/Project/Ikuiku/Money-Management-App/app/src/main/res/layout/retrieve_loan.xml" value="0.24615384615384617" />
+        <entry key="..\:/Project/Ikuiku/Money-Management-App/app/src/main/res/layout/update_loan.xml" value="0.2" />
         <entry key="..\:/Project/Money-Management-App/app/src/main/res/drawable-v24/edit_round.xml" value="0.306" />
         <entry key="..\:/Project/Money-Management-App/app/src/main/res/drawable-v24/edit_round1.xml" value="0.2275" />
         <entry key="..\:/Project/Money-Management-App/app/src/main/res/drawable-v24/header_background.xml" value="0.1835" />
@@ -160,8 +162,7 @@
         <entry key="..\:/Project/Test/Money-Management-App/app/src/main/res/layout/toolbar.xml" value="0.20697463768115942" />
         <entry key="..\:/Project/Test/Money-Management-App/app/src/main/res/layout/update_layout.xml" value="0.2988679352838745" />
         <entry key="..\:/Project/Test/Money-Management-App/app/src/main/res/layout/update_layout1.xml" value="0.2988679352838745" />
-        <entry key="..\:/Users/DELL/AndroidStudioProjects/Money-Management-App/app/src/main/res/layout/activity_budget.xml" value="0.2" />
-        <entry key="..\:/Users/DELL/AndroidStudioProjects/Money-Management-App/app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/Money-Management-App/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/Money-Management-App/app/src/main/res/layout/activity_notification.xml" value="0.1921875" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/Money-Management-App/app/src/main/res/layout/activity_today_spending.xml" value="0.25" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/Money-Management-App/app/src/main/res/layout/retrieve2.xml" value="0.25" />

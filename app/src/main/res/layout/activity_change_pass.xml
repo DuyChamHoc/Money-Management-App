@@ -44,7 +44,7 @@
         android:textSize="15sp" />
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edt_old_password"
-        android:layout_width="360dp"
+        android:layout_width="380dp"
         android:layout_height="55dp"
         android:inputType="textPassword"
         android:paddingLeft="10dp"
@@ -54,8 +54,8 @@
         android:id="@+id/tv_show"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="365dp"
-        android:layout_marginTop="-40dp"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="-45dp"
         />
 </LinearLayout>
     <LinearLayout
@@ -73,7 +73,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_marginTop="10dp"
             android:id="@+id/edt_new_password"
-            android:layout_width="360dp"
+            android:layout_width="380dp"
             android:layout_height="55dp"
             android:paddingLeft="10dp"
             android:inputType="textPassword"
@@ -84,13 +84,13 @@
         android:id="@+id/tv_show1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="365dp"
-        android:layout_marginTop="-40dp"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="-45dp"
         />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_confirm_new_password"
-            android:layout_width="match_parent"
+            android:layout_width="380dp"
             android:layout_height="55dp"
             android:layout_marginTop="10dp"
             android:hint="@string/confirm_pass"
@@ -101,8 +101,8 @@
         android:id="@+id/tv_show2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="365dp"
-        android:layout_marginTop="-40dp"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="-45dp"
         />
     </LinearLayout>
 

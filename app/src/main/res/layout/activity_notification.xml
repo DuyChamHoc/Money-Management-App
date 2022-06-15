@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_toEndOf="@id/arrow_back"
-            android:text="@string/Today_spending"
+            android:text="@string/announce"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </RelativeLayout>
