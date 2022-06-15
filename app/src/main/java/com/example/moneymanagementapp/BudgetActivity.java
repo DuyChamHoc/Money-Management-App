@@ -717,6 +717,7 @@ public class BudgetActivity extends AppCompatActivity {
     }
 
     private void updateData(@NonNull Data model) {
+        checkIn();
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
         View mView = inflater.inflate(R.layout.update_layout, null);
@@ -779,6 +780,7 @@ public class BudgetActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                checkIn();
                 if(TextUtils.isEmpty(mAmount.getText().toString()))
                 {
                     mAmount.setError("Amount is required");
@@ -800,7 +802,7 @@ public class BudgetActivity extends AppCompatActivity {
                 String itemNday = item + date;
                 String itemNweek = item + weeks.getWeeks();
                 String itemNmonth = item + months.getMonths();
-                checkIn();
+
                 Data data = new Data(item, date, post_key, null, itemNday, itemNweek, itemNmonth, amount, months.getMonths(), weeks.getWeeks());
                 budgetRef.child(post_key).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -815,10 +817,13 @@ public class BudgetActivity extends AppCompatActivity {
                 });
                 dialog.dismiss();
             }
+
         });
         delBut.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view) {
+                checkIn();
                 budgetRef.child(post_key).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
