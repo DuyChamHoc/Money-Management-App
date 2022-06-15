@@ -501,7 +501,7 @@ public class BudgetActivity extends AppCompatActivity {
     private void additem() {
         AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
-        View myView = inflater.inflate(R.layout.input_layout, null);
+        View myView = inflater.inflate(R.layout.input_layout1, null);
         myDialog.setView(myView);
 
         final AlertDialog dialog = myDialog.create();

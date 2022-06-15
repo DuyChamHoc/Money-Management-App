@@ -96,4 +96,6 @@
     <string name="announce">Thông báo</string>
     <string name="title_app">Quản lý chi tiêu</string>
     <string name="wel">Chào mừng trở lại,</string>
+    <string name="st">Số Tiền</string>
+    <string name="br">Tên</string>
 </resources>

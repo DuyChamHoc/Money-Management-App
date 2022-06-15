@@ -95,6 +95,8 @@
     <string name="announce">Announce</string>
     <string name="title_app">Expend Management</string>
     <string name="wel">Welcome Back,</string>
+    <string name="st">Money</string>
+    <string name="br">Name</string>
     <string name="facebook_app_id" translatable="false">565104708298189</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb1234</string>
     <string name="facebook_client_token" translatable="false">74e5c94fa747cfd9f15239d8327f17cc</string>
