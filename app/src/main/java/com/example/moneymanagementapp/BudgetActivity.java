@@ -621,7 +621,6 @@ public class BudgetActivity extends AppCompatActivity {
         FirebaseRecyclerOptions<Data> options = new FirebaseRecyclerOptions.Builder<Data>()
                 .setQuery(budgetRef, Data.class)
                 .build();
-
         FirebaseRecyclerAdapter<Data, MyViewHolder> adapter = new FirebaseRecyclerAdapter<Data, MyViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Data model) {
@@ -801,12 +800,13 @@ public class BudgetActivity extends AppCompatActivity {
                 String itemNday = item + date;
                 String itemNweek = item + weeks.getWeeks();
                 String itemNmonth = item + months.getMonths();
-
+                checkIn();
                 Data data = new Data(item, date, post_key, null, itemNday, itemNweek, itemNmonth, amount, months.getMonths(), weeks.getWeeks());
                 budgetRef.child(post_key).setValue(data).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+                            check(item);
                             Toast.makeText(BudgetActivity.this, "Updated successfully", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(BudgetActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
@@ -823,6 +823,7 @@ public class BudgetActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
+                            check(item);
                             Toast.makeText(BudgetActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(BudgetActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
