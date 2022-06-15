@@ -154,6 +154,8 @@ public class RegistrationActivity extends AppCompatActivity implements DatePicke
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(RegistrationActivity.this, "Add account successful", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                                startActivity(intent);
                             }
                             else {
                                 Toast.makeText(RegistrationActivity.this, "Add account failed", Toast.LENGTH_SHORT).show();
