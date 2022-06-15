@@ -2,6 +2,7 @@ package com.example.moneymanagementapp;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,7 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
         final DataLoan data=myDataList.get(position);
         if(data.getMoneyLeft()==0)
         {
-            holder.moneyLeft.setText(" Already Paid");
+            holder.moneyLeft.setText(" Already Collected");
             holder.amount.setText(data.getAmount()+"$");
             holder.amount.setPaintFlags(holder.amount.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
@@ -116,6 +117,16 @@ public class LendAdapter extends RecyclerView.Adapter<LendAdapter.ViewHolder> {
                 if(Integer.parseInt(mAmount.getText().toString())>money)
                 {
                     mAmount.setError("Money left is just only "+Integer.toString(money));
+                    return;
+                }
+                if(TextUtils.isEmpty(mAmount.getText().toString()))
+                {
+                    mAmount.setError("Amount is required");
+                    return;
+                }
+                if(TextUtils.isEmpty(mCompanion.getText().toString()))
+                {
+                    mCompanion.setError("Name is required");
                     return;
                 }
                 moneyLeft=moneyLeft-Integer.parseInt(mAmount.getText().toString());

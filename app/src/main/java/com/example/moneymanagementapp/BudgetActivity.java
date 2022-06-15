@@ -780,6 +780,11 @@ public class BudgetActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(TextUtils.isEmpty(mAmount.getText().toString()))
+                {
+                    mAmount.setError("Amount is required");
+                    return;
+                }
                 amount = Integer.parseInt(mAmount.getText().toString());
 
                 DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");

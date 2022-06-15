@@ -2,6 +2,7 @@ package com.example.moneymanagementapp;
 
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -172,6 +173,11 @@ public class TodayItemAdapter extends RecyclerView.Adapter<TodayItemAdapter.View
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(TextUtils.isEmpty(mAmount.getText().toString()))
+                {
+                    mAmount.setError("Amount is required");
+                    return;
+                }
                 amount=Integer.parseInt(mAmount.getText().toString());
                 note=mNotes.getText().toString();
 

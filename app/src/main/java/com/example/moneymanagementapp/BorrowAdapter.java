@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -119,6 +120,16 @@ public class BorrowAdapter extends RecyclerView.Adapter<BorrowAdapter.ViewHolder
                 if(Integer.parseInt(mAmount.getText().toString())>money)
                 {
                     mAmount.setError("Money left is just only "+Integer.toString(money));
+                    return;
+                }
+                if(TextUtils.isEmpty(mAmount.getText().toString()))
+                {
+                    mAmount.setError("Amount is required");
+                    return;
+                }
+                if(TextUtils.isEmpty(mCompanion.getText().toString()))
+                {
+                    mCompanion.setError("Name is required");
                     return;
                 }
                 moneyLeft=moneyLeft-Integer.parseInt(mAmount.getText().toString());

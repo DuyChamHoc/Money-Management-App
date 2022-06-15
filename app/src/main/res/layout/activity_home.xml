@@ -164,7 +164,7 @@
                     android:layout_marginLeft="80dp"
                     android:text="0$"
                     android:textColor="@color/white"
-                    android:textSize="25dp"
+                    android:textSize="17dp"
                     android:textStyle="bold" />
 
                 <ImageButton
@@ -204,7 +204,7 @@
                     android:layout_marginLeft="69dp"
                     android:text="0$"
                     android:textColor="@color/white"
-                    android:textSize="25dp"
+                    android:textSize="17dp"
                     android:textStyle="bold" />
 
                 <ImageButton
