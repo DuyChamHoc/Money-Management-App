@@ -10,14 +10,13 @@
         android:id="@+id/titleImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:src="@drawable/image1"/>
 
     <TextView
         android:id="@+id/texttitle"
-        android:layout_width="380dp"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/heading_one"
@@ -27,7 +26,7 @@
     <TextView
         android:layout_marginTop="5dp"
         android:id="@+id/textdeccription"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:fontFamily="@font/poppins_light"
