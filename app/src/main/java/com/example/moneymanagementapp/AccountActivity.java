@@ -124,8 +124,7 @@ public class AccountActivity extends AppCompatActivity {
             return;
         }
         String email=user.getEmail();
-        String name = user.getDisplayName();
-        if(name.equals("")) {
+        if(user.getDisplayName()==null||user.getDisplayName().equals("")) {
             budgetRef.child("fullname").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -154,7 +153,7 @@ public class AccountActivity extends AppCompatActivity {
         }
         else{
         tv_email.setText(email);
-            edtFullName.setText(name);
+            edtFullName.setText(user.getDisplayName());
             Uri photoUrl = user.getPhotoUrl();
             Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);
             muri = photoUrl;
@@ -194,11 +193,10 @@ public class AccountActivity extends AppCompatActivity {
     private void onClickUpdateProfile() {
         progressDialog.show();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String name = user.getDisplayName();
         if(user==null){
             return;
         }
-        if(name.equals("")){
+        if(user.getDisplayName()==null||user.getDisplayName().equals("")){
             budgetRef.child("fullname").setValue(edtFullName.getText().toString().trim());
             budgetRef.child("phone").setValue(phonenumber.getText().toString().trim());
             budgetRef.child("birthday").setValue(birthday.getText().toString().trim());
@@ -264,9 +262,8 @@ public class AccountActivity extends AppCompatActivity {
         if(user==null){
             return;
         }
-        String name = user.getDisplayName();
         Uri photoUrl = user.getPhotoUrl();
-        edtFullName.setText(name);
+        edtFullName.setText(user.getDisplayName());
         Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);
     }
     private void showUserInformation1(){

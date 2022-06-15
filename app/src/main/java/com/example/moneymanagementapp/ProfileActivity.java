@@ -170,8 +170,7 @@ public class ProfileActivity extends AppCompatActivity {
         if (user == null) {
             return;
         }
-        String name = user.getDisplayName();
-        if(name.equals("")){
+        if(user.getDisplayName()==null||user.getDisplayName().equals("")){
             Uri photoUrl = user.getPhotoUrl();
             budgetRef.child("fullname").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
@@ -188,8 +187,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
         else{
             Uri photoUrl = user.getPhotoUrl();
-            tv_name.setText(name);
-            //tv_name.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+            tv_name.setText(user.getDisplayName());
             Glide.with(this).load(photoUrl).error(R.drawable.ic_person_24).into(img_avatar);}
     }
 }
